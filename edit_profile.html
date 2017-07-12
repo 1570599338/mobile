@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <title>汽车调查</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/iconfont/myfont.css" />
+
+    <link rel="stylesheet" type="text/css" href="js/mdatetimer/zepto.mdatetimer.css">
+    <link rel="stylesheet" href="js/LArea-master/css/LArea.css">
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/person.css" />
+</head>
+
+<body style="background:#fff">
+    <!-- header -->
+    <header>
+        <ul>
+            <li id="back" class="iconfont">&#xe662;确定<i>|</i></li>
+            <li>个人信息</li>
+            <li></li>
+        </ul>
+    </header>
+    <!-- shortname -->
+    <div class="shortname field-section" style="display: none;">
+        <input type="text" id="shortname" class="change-info-input font-size-14" />
+        <p class="change-tip">好名字更有范，还能结识更多朋友哦！</p>
+    </div>
+    <!-- gender -->
+    <div class="gender edit-gender field-section" style="display: none;">
+        <div class="gender-box">
+            <input type="text" id="gender" class="change-info-input font-size-14" readonly="readonly" style="display:none" />
+            <div class="option fl" data-value="1" data-sex="男">
+                <i class="iconfont" style="color:#FFF;">&#xe62b;</i>
+                <div class="select-true"></div>
+                <em></em>
+            </div>
+            <div class="option fr" data-value="2" data-sex="女">
+                <i class="iconfont" style="color:#FFF;">&#xe64d;</i>
+                <div class="select-true"> </div>
+                <em></em>
+            </div>
+            <p class="change-tip"></p>
+        </div>
+    </div>
+    <!-- birthdate -->
+    <div class="birthdate field-section" style="display: none;">
+        <input type="text" id="birthdate" class="change-info-input font-size-14 date-picker" value="" readonly="readonly" />
+        <p class="change-tip"></p>
+    </div>
+    <!-- mobilenumber1 -->
+    <div class="mobilenumber1 field-section" style="display: none;">
+        <input type="phone" id="mobilenumber1" class="change-info-input font-size-14" />
+        <p class="change-tip"></p>
+    </div>
+    <!-- mobilenumber2 -->
+    <div class="mobilenumber2 field-section" style="display: none;">
+        <input type="phone" id="mobilenumber2" class="change-info-input font-size-14" />
+        <p class="change-tip"></p>
+    </div>
+    <!--refererphonenumber-->
+    <div class="refererphonenumber field-section" style="display: none;">
+        <input type="phone" id="refererphonenumber" class="change-info-input font-size-14" />
+        <p class="change-tip"></p>
+    </div>
+    <!-- email -->
+    <div class="email field-section" style="display: none;">
+        <input type="text" id="email" class="change-info-input font-size-14" />
+        <p class="change-tip"></p>
+    </div>
+    <!-- location -->
+    <div class="location field-section" style="display: none;">
+        <input type="text" id="location" class="change-info-input font-size-14" style="display: none;" />
+        <input type="text" id="location_name" class="change-info-input" readonly="readonly" />
+        <p class="change-tip"></p>
+    </div>
+    <!--kidsnumber-->
+    <div class="kidsnumber field-section" style="display: none;">
+        <select id="kidsnumber">
+            <option value="0">无子女</option>
+            <option value="1">1个子女</option>
+            <option value="2">2个子女</option>
+            <option value="3">3个子女</option>
+            <option value="4">4个子女</option>
+            <option value="5">5个子女</option>
+             <option value="6">5个以上子女</option>
+        </select>
+    </div>
+    <!--income-->
+    <div class="income field-section" style="display: none;">
+        <!--<input type="text" id="income" class='change-info-input font-size-14' />-->
+        <select id="income">
+            <option value="1000~2000">1000~2000</option>
+            <option value="2000~3000">2000~3000</option>
+            <option value="3000~4000">3000~4000</option>
+            <option value="4000~5000">4000~5000</option>
+            <option value="5000~6000">5000~6000</option>
+            <option value="6000~7000">6000~7000</option>
+            <option value="7000~8000">7000~8000</option>
+            <option value="8000~9000">8000~9000</option>
+            <option value="9000~10000">9000~10000</option>
+            <option value="10000~20000">10000~20000</option>
+            <option value="20000~30000">20000~30000</option>
+            <option value="30000~-1">30000及以上</option>
+        </select>
+    </div>
+    <!--marriage-->
+    <div class="marriage field-section" style="display: none;">
+        <div class="marriage-box">
+            <input type="text" id="marriage" class="change-info-input font-size-14" readonly="readonly" style="display:none" />
+            <div class="marriage-status" data-value="1" data-marriage="未婚">
+                未婚
+            </div>
+            <div class="marriage-status" data-value="2" data-marriage="已婚">
+                已婚
+            </div>
+            <p class="change-tip"></p>
+        </div>
+    </div>
+    <!--remark-->
+    <div class="remark field-section" style="display: none;">
+        <!--<input type="text" id="remark" class='change-info-input font-size-14' />
+        <p class="change-tip"></p>-->
+        <textarea id="remark" rows="6" cols="6"></textarea>
+    </div>
+    <!--industry-->
+    <div class="industry field-section" style="display: none;">
+        <ul class="industry-list"></ul>
+        <p class="change-tip"></p>
+    </div>
+    <!--profession-->
+    <div class="profession field-section" style="display: none;">
+        <ul class="profession-list"></ul>
+        <p class="change-tip"></p>
+    </div>
+
+    <!-- zepto  -->
+    <script type="text/javascript" src="js/zepto/zepto_1.1.6.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/mdatetimer/zepto.mdatetimer.js"></script>
+    <script type="text/javascript" src="js/LArea-master/js/LArea.js"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            var fieldMap = [];
+            fieldMap['shortname'] = 'shortName'; //shortName
+            fieldMap['gender'] = 'gender';
+            fieldMap['birthdate'] = 'birthDate'; //birthDate
+            fieldMap['mobilenumber1'] = 'mobileNumber1'; //mobileNumber1
+            fieldMap['mobilenumber2'] = 'mobileNumber2'; //mobileNumber2
+            fieldMap['refererphonenumber'] = 'refererphonenumber'; //refererphonenumber
+            fieldMap['email'] = 'email';
+            fieldMap['industry'] = 'industry';
+            fieldMap['profession'] = 'profession';
+            fieldMap['kidsnumber'] = 'kidsnumber';
+            fieldMap['income'] = 'income';
+            fieldMap['marriage'] = 'marriage';
+            fieldMap['remark'] = 'remark';
+
+            var memberid = getParamByName("memberid", window.location);
+            var vehicleid = getParamByName("vehicleid", window.location)
+            var field = getParamByName('field', window.location);
+            var title = getParamByName('title', window.location);
+            var error = '',
+                value = '';
+
+            //验证输入合法性
+            var validate = function() {
+                if (field == "shortname") {
+                    value = $('#' + field).val();
+                } else if (field == "birthdate") {
+                    value = $('#' + field).val();
+                    if (value == "") {
+                        $('#' + field).siblings(".change-tip").html("出生日期不能为空");
+                        return false;
+                    }
+                } else if (field == "gender") {
+                    value = $('#' + field).val();
+                    if (value == "") {
+                        $('#' + field).siblings(".change-tip").html("性别不能为空");
+                        return false;
+                    }
+                } else if (field == "mobilenumber1") {
+                    value = $('#' + field).val();
+                    if (value != "" && !(/^1[3|4|5|8][0-9]\d{8}$/.test(value))) {
+                        $('#' + field).siblings(".change-tip").html("请输入正确手机号");
+                        return false;
+                    }
+                } else if (field == "mobilenumber2") {
+                    value = $('#' + field).val();
+                    if (value != "" && !(/^1[3|4|7|5|8][0-9]\d{8}$/.test(value))) {
+                        $('#' + field).siblings(".change-tip").html("请输入正确手机号");
+                        return false;
+                    }
+                } else if (field == "refererphonenumber") {
+                    value = $('#' + field).val();
+                    if (value != "" && !(/^1[3|4|7|5|8][0-9]\d{8}$/.test(value))) {
+                        $('#' + field).siblings(".change-tip").html("请输入正确手机号");
+                        return false;
+                    }
+                } else if (field == "email") {
+                    value = $('#' + field).val();
+                    if (value != "" && !(/^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g.test(value))) {
+                        $('#' + field).siblings(".change-tip").html("请输入正确邮箱地址");
+                        return false;
+                    }
+                } else {
+                    value = $('#' + field).val();
+                }
+                return true;
+            }
+
+            //回退按钮点击事件
+            $("#back").on('click', function() {
+                //验证数据
+                if (validate() == false) {
+                    return;
+                }
+                //提交数据
+                if (value != "" || $(".active").length > 0) {
+                    var data = {};
+                    if (field == "location") {
+                        data['cityCode'] = $('#location').val().split(",")[1];
+                    } else if (field == "gender") {
+                        data[field] = $(".gender .active").attr("data-value");
+                    } else if (field == "industry") {
+                        data[field] = $(".industry .active").attr("data-value");
+                    } else if (field == "profession") {
+                        data[field] = $(".profession .active").attr("data-value");
+                    } else if (field == "marriage") {
+                        data[field] = $(".marriage .active").attr("data-value");
+                    } else if (field == "income") {
+                        var incomes = $("#income").val().split("~");
+                        data['incomeMin'] = incomes[0];
+                        data['incomeMax'] = incomes[1];
+                    } else {
+                        data[field] = value;
+                    }
+                    ajax2('wesurvey.member.do?op=' + field + '&id=' + memberid, 'json', 'post', data, function(datas) {
+                        var intact = datas.objs[0].intact;
+                        window.location = 'profile.html?memberid=' + memberid + '&vehicleid=' + vehicleid + '&intact=' + intact;
+                    }, function(error) {
+                        window.location = 'profile.html?memberid=' + memberid + '&vehicleid=' + vehicleid + '&intact=false';
+                    });
+                } else {
+                    window.location = 'profile.html?memberid=' + memberid + '&vehicleid=' + vehicleid;
+                }
+            });
+
+            //隐藏/显示编辑区域
+            //$('.field-section').hide();
+            $('.' + field).show();
+            //更新title
+            $('.title').text('修改' + title);
+
+            //查询条件
+            var data = {
+                subSys: 'wesurvey',
+                repID: '39',
+                isQuery: '1',
+                dispType: '12',
+                perRows: '2000',
+                selCndID: "id"
+            };
+            data.cnd_id = memberid;
+            //请求会员详细信息
+            ajax2('sysmng.jsonreport.do?', 'json', 'get', data, function(data) {
+                if (data.objs && data.objs.length > 0) {
+                    //member对象
+                    var member = data.objs[0];
+                    //更新界面
+                    if (field == 'location') {
+                        $('#location').val(member.provinceCode + "," + member.cityCode);
+                        $('#location_name').val(member.provinceName + " " + member.cityName);
+                    } else if (field == 'gender') {
+                        $(".gender [data-value = '" + member.genderCode + "']").addClass("active");
+                        $('#' + field).val(member.genderName);
+                    } else if (field == 'industry') {
+                        $(".industry [data-value = '" + member.industryCode + "']").addClass("active");
+                        $('#' + field).val(member.industryName);
+                    } else if (field == 'profession') {
+                        $(".profession [data-value = '" + member.professionCode + "']").addClass("active");
+                        $('#' + field).val(member.professionName);
+                    } else if (field == 'marriage') {
+                        $(".marriage [data-value = '" + member.marriageCode + "']").addClass("active");
+                        $('#' + field).val(member.professionName);
+                    } else if (field == 'income') {
+                        $('#' + field).val(member.incomeMin + "~" + member.incomeMax);
+                    } else if (field == 'kidsnumber') {
+                        $('#' + field).val(member.kidsNumber);
+                    } else {
+                        $('#' + field).val(member[fieldMap[field]]);
+                    }
+                }
+            }, function(error) {
+                //
+            });
+
+            //请求行业列表
+            var color = ["#FFBC1C", "#9EEE1F", "#1ED9ED", "#9E21FF", "#FB7832", "#FFDF20", "#53C2AE", "#FF9120", "#EF5652", "#FFBD20"]
+            if (field == "industry") {
+                ajax2('sysmng.initTemplate.do?subSys=wesurvey&tplID=117', 'json', 'post', null, function(data) {
+                    var industries = data.objs;
+                    var html = "";
+                    for (var i = 0; i < industries.length - 1; i++) {
+                        html += '<li data-value=' + industries[i].id + '><i style="background-color:' + color[i] + '">' + industries[i].alias + '</i><span>' + industries[i].nameCn + '</span></li>'
+                    }
+                    $(".industry").html("").append(html)
+                }, function(error) {
+                    //
+                });
+            }
+            //请求职业列表
+            else if (field == "profession") {
+                ajax2('sysmng.initTemplate.do?subSys=wesurvey&tplID=118', 'json', 'post', null, function(data) {
+                    var profession = data.objs;
+                    var html = "";
+                    for (var i = 0; i < profession.length - 1; i++) {
+                        html += "<li data-value=" + profession[i].id + "><i style=background-color:" + color[i] + ">" + profession[i].alias + "</i><span>" + profession[i].nameCn + "</span></li>"
+                    }
+                    $(".profession").html("").append(html)
+                }, function(error) {
+                    //
+                });
+
+            }
+            //请求省份/城市列表
+            else if (field == "location") {
+                ajax2('sysmng.initTemplate.do?subSys=wesurvey&tplID=121', 'json', 'post', null, function(data) {
+                    if (data) {
+                        var location = data.objs;
+                        var area = new LArea();
+                        area.init({
+                            'trigger': '#location_name', //触发选择控件的文本框，同时选择完毕后name属性输出到该位置
+                            'valueTo': '#location', //选择完毕后id属性输出到该位置
+                            'keys': {
+                                id: 'code',
+                                name: 'name'
+                            }, //绑定数据源相关字段 id对应valueTo的value属性输出 name对应trigger的value属性输出
+                            'type': 1, //数据源类型
+                            'data': location //数据源
+                        });
+                    }
+                }, function(error) {
+                    //
+                });
+            }
+            //初始化日期控件
+            else if (field == "birthdate") {
+                //出生日期
+                var date = new Date;
+                var nowYear = date.getFullYear()
+                var years = [];
+                for (var i = 1950; i < (nowYear + 1); i++) {
+                    years.push(i);
+                }
+                $('.date-picker').mdatetimer({
+                    mode: 1, //时间选择器模式：1：年月日，2：年月日时分（24小时），3：年月日时分（12小时），4：年月日时分秒。默认：1
+                    format: 2, //时间格式化方式：1：2015年06月10日 17时30分46秒，2：2015-05-10  17:30:46。默认：2
+                    years: years, //年份数组
+                    nowbtn: true, //是否显示现在按钮
+                    onOk: function() {
+                        //alert('OK');
+                    }, //点击确定时添加额外的执行函数 默认null
+                    onCancel: function() {
+                        //alert('A');
+                    }, //点击取消时添加额外的执行函数 默认null
+                });
+            }
+        });
+
+        //性别选择
+        $(".gender .option").click(function() {
+            $(this).addClass("active").siblings().removeClass("active");
+            $("#gender").val($(this).attr("data-sex"))
+        })
+
+        //婚姻状况
+        $('.marriage-status').click(function() {
+            $(this).addClass('active').siblings().removeClass("active");
+            $("#marriage").val($(this).attr("data-sex"))
+        })
+
+        //行业选择
+        $(".industry").on('touchstart', '.industry li', function(e) {
+            $(this).addClass("active").siblings().removeClass("active");
+            $("#industry").val($(this).find("span").html())
+        })
+
+        //职业选择
+        $(".profession").on('touchstart', '.profession li', function(e) {
+            $(this).addClass("active").siblings().removeClass("active");
+            $("#profession").val($(this).find("span").html())
+        })
+
+        //@ sourceURL=dynamicScript-edit-profile.js
+    </script>
+
+</body>
+
+</html>

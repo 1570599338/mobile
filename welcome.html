@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>汽车调查</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/iconfont/myfont.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/welcome.css"/>
+</head>
+<body>
+<header class='header'>
+    <ul>
+        <li id="back" class="iconfont">&#xe662;返回<i>|</i></li>
+        <li>问卷协议</li>
+        <li></li>
+    </ul>
+</header>
+<div class="container">
+    <div class="content">
+        <div class="img"></div>
+        <p class="welcome"></p>
+        <div class="wel-btn">
+            <i class=" go" style="display:none;"></i>
+            <i class="sign agreen" style="display:none;">同意</i>
+            <i class="sign disagreen" style="display:none;">不同意</i>
+        </div>
+        <p class="intro" style="font-weight: 700;">开始</p>
+    </div>
+</div>
+</body>
+</html>
+<script src="js/zepto/zepto_1.1.6.min.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script>
+    $(function(){
+        var memberid = getParamByName("memberid", window.location);
+        var projectid = getParamByName("projectid", window.location);
+        var templateid = getParamByName("templateid", window.location);
+        var signAgreement = getParamByName("signAgreement", window.location);
+        var tmpName = getParamByName("tmpName", window.location);
+
+        var permissions = function(projectid, memberid){
+            ajaxGet('sample/getByProjectid?projectid='+projectid+'&memberid='+memberid, function (data){
+                var data = data.objs;
+                if(data.length > 0){
+                    $('.welcome').html('您已经答过此卷或答卷次数超过限定，不能再次作答！');
+                    $('.wel-btn').css('display','none');
+                    $('.intro').css('display','none');
+                }else{
+                    welcome();
+                }
+            });
+        }
+        if(!projectid || !signAgreement || !tmpName){
+            ajaxGet('template/get?id=' + templateid, function(data){
+                var data = data.objs[0];
+                projectid = data.projectID;
+                signAgreement = data.signAgreement;
+                tmpName = data.name;
+                permissions(projectid, memberid);
+            });
+        }else{
+            permissions(projectid, memberid);
+        }
+        //
+
+        //welcome();
+        //查询欢迎语
+        function welcome(){
+            ajaxGet('statement/search?templateid=' + templateid, function (data) {
+                var statements = data.objs;
+                for (var i = 0; i < statements.length; i++) {
+                    var statement = statements[i];
+                    if (statement.type == 1) {
+                        $('.welcome').html(statement.title);
+                        break;
+                    }
+                }
+                //是否同意协议的跳转
+                if(signAgreement == "true") {
+                    $('.agreen').css('display','block').on('click', function(){
+                        window.location = "questions.html?memberid=" + memberid + "&projectid=" + projectid + "&templateid=" + templateid + '&tmpName=' + tmpName;
+                    });
+                    $('.disagreen').css('display','block').on('click', function(){
+                        window.location = "member.html?memberid=" + memberid;
+                    });
+                    $('.wel-btn .sign').css('display','block');
+                    $('.intro').html('');
+                } else {
+                    $('.agreen').css('display','none');
+                    $('.disagreen').css('display','none');
+                    $('.go').css('display','block').on('click', function(){
+                        window.location = "questions.html?memberid=" + memberid + "&projectid=" + projectid + "&templateid=" + templateid + '&tmpName=' + tmpName;
+                    });
+                    $('.intro').html('开始');
+                }
+            }, function (err) {
+                //alert(err);
+            });
+        }
+        //回退
+        $('#back').on('click', function () {
+            window.location = "surveys.html?memberid=" + memberid;
+        });
+        //背景图大小
+        $('.container').css({ 'width': $(window).width(), 'height': $(window).height()-44 });
+    });
+    //@ sourceURL=welcome.js
+</script>

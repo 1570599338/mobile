@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+    <title>汽车调查</title>
+    <link rel="stylesheet" href="css/weui-master/dist/style/weui.css" />
+    <link rel="stylesheet" href="css/iconfont/myfont.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/home.css" />
+    <script src="js/template.js"></script>
+</head>
+
+<body>
+    <header>
+        <ul>
+            <li id="back" class="iconfont">&#xe662;<i>|</i></li>
+            <li class='seconde-li'>首页</li>
+            <li></li>
+        </ul>
+    </header>
+    <div class="dBody">
+        <div class="swipper">
+            <ul class="clearfix" id="ul">
+            </ul>
+        </div>
+        <div class="bd">
+            <div class="weui_grids">
+                <a href="surveys.html" class="weui_grid surveys">
+                    <div class="weui_grid_icon">
+                        <!-- <i class="icon icon_button"></i>-->
+                        <div class="circle c1">
+                            <i class="iconfont">&#xe623;</i>
+                        </div>
+                    </div>
+                    <p class="font-size-12">
+                        答卷机会
+                    </p>
+                </a>
+                <a href="member.html" class="weui_grid member">
+                    <div class="weui_grid_icon">
+                        <div class="circle c2">
+                            <i class="iconfont">&#xe622;</i>
+                        </div>
+                    </div>
+                    <p class="font-size-12">
+                        个人中心
+                    </p>
+                </a>
+                <a href="contact.html" class="weui_grid contact">
+                    <div class="weui_grid_icon">
+                        <div class="circle c3">
+                            <i class="iconfont">&#xe624;</i>
+                        </div>
+                    </div>
+                    <p class="font-size-12">
+                        企业调研
+                    </p>
+                </a>
+                <a href="news_maintain.html" class="weui_grid maintain">
+                    <div class="weui_grid_icon">
+                        <div class="circle c4">
+                            <i class="iconfont" style="font-size:32px;">&#xe62d;</i>
+                        </div>
+                    </div>
+                    <p class="font-size-12">
+                        驯养坐骑
+                    </p>
+                </a>
+                <a href="news_newcar.html" class="weui_grid newcar">
+                    <div class="weui_grid_icon">
+                        <div class="circle c5">
+                            <i class="iconfont">&#xe64b;</i>
+                        </div>
+                    </div>
+                    <p class="font-size-12">
+                        精选坐骑
+                    </p>
+                </a>
+                <a href="news_usedcar.html" class="weui_grid usedcar">
+                    <div class="weui_grid_icon">
+                        <div class="circle c6">
+                            <i class="iconfont">&#xe613;</i>
+                        </div>
+                    </div>
+                    <p class="font-size-12">
+                        坐骑易主
+                    </p>
+                </a>
+                <a href="disclaimer.html" class="weui_grid disclaimer">
+                    <div class="weui_grid_icon">
+                        <div class="circle c7">
+                            <i class="iconfont">&#xe625;</i>
+                        </div>
+                    </div>
+                    <p class="font-size-12">
+                        游戏规则
+                    </p>
+                </a>
+                <a href="about_us.html" class="weui_grid about-us">
+                    <div class="weui_grid_icon">
+                        <div class="circle c8">
+                            <i class="iconfont">&#xe621;</i>
+                        </div>
+                    </div>
+                    <p class="font-size-12">
+                        关于我们
+                    </p>
+                </a>
+                <a href="javascript:;" class="weui_grid">
+                    <div class="weui_grid_icon">
+                        <div class="circle c9">
+                            <i class="iconfont">&#xe62c;</i>
+                        </div>
+                    </div>
+                    <p class="font-size-12">
+                        更多
+                    </p>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!--<footer>
+        <ul>
+            <li><a href="home.html" class='active'><p><i class="fa footer-icon fa-home"></i></p><p>首页</p></a></li>
+            <li><a href="opportunities.html"><p><i class="fa footer-icon fa-pencil-square-o"></i></p><p>答卷机会</p></a></li>
+            <li><a href="contact.html"><p><i class="fa footer-icon fa-file-text-o"></i></p><p>发布调研</p></a></li>
+            <li><a href="personal-center.html"><p><i class="fa footer-icon fa-user"></i></p><p>个人中心</p></a></li>
+            <li><a href="javascript:;"><p><i class="fa footer-icon fa-ellipsis-h"></i></p><p>更多</p></a></li>
+        </ul>
+    </footer>-->
+</body>
+
+<!-- zepto  -->
+<script type="text/javascript" src="js/zepto/zepto_1.1.6.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script src="js/home.js"></script>
+
+<script id="art_swipper" type="text/html">
+    {{each list as value i}}
+    <li>
+        <a href='news/maintain_article{{i}}.html'><img src="{{value}}" alt="" /></a>
+    </li>
+    {{/each}}
+</script>
+
+<script type="text/javascript">
+    $(function() {
+        var memberid = getParamByName("memberid", window.location);
+        $('.surveys').attr('href', 'surveys.html?memberid=' + memberid);
+        $('.newcar').attr('href', 'news_newcar.html?memberid=' + memberid);
+        $('.maintain').attr('href', 'news_maintain.html?memberid=' + memberid);
+        $('.member').attr('href', 'member.html?memberid=' + memberid);
+        $('.contact').attr('href', 'contact.html?memberid=' + memberid);
+        $('.usedcar').attr('href', 'news_usedcar.html?memberid=' + memberid);
+        $('.disclaimer').attr('href', 'disclaimer.html?memberid=' + memberid);
+        $('.about-us').attr('href', 'about_us.html?memberid=' + memberid);
+
+
+        var data = {
+            list: ["img/sp3.jpg", "img/sp1.jpg", "img/sp2.jpg", "img/sp3.jpg", "img/sp1.jpg"]
+        }; //3
+        var html = template("art_swipper", data);
+        $('#ul').html(html);
+
+    });
+
+    //@ sourceURL=dynamicScript-home.js
+</script>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
+    <title></title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../css/weui-master/dist/style/weui.css"/>
+    <link rel="stylesheet" href="../css/base.css"/>
+    <link rel="stylesheet" href="../css/emoney_withdraw.css"/>
+</head>
+<body>
+<header>
+    <ul>
+        <li id="back">&lt;<i>|</i></li>
+        <li>礼金提现</li>
+        <li>. . .</li>
+    </ul>
+</header>
+<div class="exchange">
+    <div class="exchange-top">
+        <div class="weui_cells">
+            <div class="weui_cell">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="top-font"><i class="fa fa-money" style="color:#FF7F00;padding-right:7px;font-size:14px;"></i>您当前的礼金100元</p>
+                </div>
+                <div class="weui_cell_ft top-right-font" style='font-size: 30px;'><i style="font-family: 'Corbel';">¥</i>100</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="exchange">
+    <div class="exchange-top">
+        <div class="weui_cells">
+            <div class="weui_cell">
+                <p class="money">
+                <i class="fa fa-rmb"></i>
+                <i style="padding-left:0;">|</i>
+                <input type="text" placeholder="请输入提现金额"/></p>
+            </div>
+            <p style="padding:0px 4% 23px;color:#999;">注：申请提现后，礼金会以微信红包的形式发到您的微信上，未绑定微信的用户不可提现！</p>
+            <div class="immediately">提现</div>
+        </div>
+    </div>
+</div>
+
+    <!-- zepto  -->
+    <script type="text/javascript" src="../js/zepto/zepto_1.1.6.js"></script>
+    <script type="text/javascript" src="../js/main.js"></script>
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            //回退
+            $('#back').on('click', function () {
+                window.location = "member.html?memberid=" + memberid;
+            });
+
+        });
+
+        //@ sourceURL=dynamicScript-statistical.js
+    </script>
+
+</body>
+</html>

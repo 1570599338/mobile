@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>答卷机会</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/weui-master/dist/style/weui.css" />
+    <link rel="stylesheet" href="css/iconfont/myfont.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/surveys.css" />
+</head>
+<body>
+    <header>
+        <ul>
+            <li id="back" class="iconfont">&#xe666;<i>|</i></li>
+            <li>汽车调查－答卷机会</li>
+            <li class="iconfont">&#xe62c;</li>
+        </ul>
+    </header>
+    <div class="content-wraper">
+        <div id="survey_box" class="answer-box">
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/zepto/zepto_1.1.6.js"></script>
+    <script type="text/javascript" src="js/template-debug.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+    <script id="surveys" type="text/html">
+        <!---->
+        {{each surveys as survey i}}
+            <div class="content-box">
+                <div class="img-left">
+                    {{if survey.reward.typeName === "礼金"}}
+                    <div class="img amounts">
+                        <p class="font-size-12">{{survey.reward.typeName}}</p>
+                        <p class="font-size-14">{{survey.reward.amount}}</p>
+                    </div>
+                    {{else}}
+                    <div class="img integral">
+                        <p class="font-size-12">{{survey.reward.typeName}}</p>
+                        <p class="font-size-14">{{survey.reward.amount}}</p>
+                    </div>
+                    {{/if}}
+                </div>
+                <div class="intro-right">
+                    <p><i class="iconfont" style="color: #FE9121;">&#xe623;</i>&nbsp;<span class="title font-size-17">{{survey.template.name}}</span></p>
+                    <p><i class="iconfont" style="color: #FEBC21;">&#xe60f;</i>&nbsp;<span class="begin font-size-12">{{survey.project.beginDate}}－</span><span class="end font-size-12">{{survey.project.endDate}}</span></p>
+                    <p><i class="iconfont" style="color: #EF5752;">&#xe60b;</i>&nbsp;<span class="num font-size-12">{{survey.involverCount}}</span><span class="join font-size-12">人参与</span></p>
+                    <div class="bottom-box">
+                        <a class="font-size-12" href="questions.html?memberid={{memberid}}&projectid={{survey.project.id}}&templateid={{survey.template.id}}">我要答卷</a>
+                        <a class="font-size-12" href="survey_detail.html?memberid={{memberid}}&projectid={{survey.project.id}}&templateid={{survey.template.id}}">简介</a>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </script>
+
+    <script>
+
+        $(function () {
+
+            var memberid = getParamByName("memberid", window.location);
+
+            //回退
+            $('#back').on('click', function () {
+                window.location = "home.html?memberid=" + memberid;
+            });
+
+            //获取可答卷列表
+            ajaxGet(app.apiHost + 'survey/search?memberid=' + memberid, function (data) {
+                var html = template("surveys", { memberid: memberid, surveys: data.objs });
+                $('#survey_box').html(html);
+            }, function (error) {
+                alert(error)
+            });
+
+        });
+
+        //@ sourceURL=dynamicScript-surveys.js
+    </script>
+
+</body>
+</html>

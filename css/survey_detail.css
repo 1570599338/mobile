@@ -1,0 +1,94 @@
+body{font-size:12px;
+    background-color: #eee;}
+/*背景图*/
+.bg{
+    width: 100%;
+    height: 110px;
+    background: url(../img/question_bg.png) no-repeat center center;
+    background-size: cover;
+}
+@media (min-width:767px){
+    .bg{
+        height:420px;
+    }
+}
+/*内容*/
+.content-box{
+    margin:7px 9px;
+    background-color: #fff;
+    padding:10px 6px;
+}
+.title-title{
+    color:#FEBC21;
+}
+.content-box p span.title-label{
+    font-size:14px;
+    font-style:italic;
+    margin-left:6px;
+    line-height: 34px;
+}
+.content-box .title{
+    font-family: "方正正中黑简体", "Microsoft YaHei", "sans-serif";
+    font-size:17px;
+    color:#FEBB20;
+    text-align: center;
+    line-height: 36px;
+}
+.guide-box .guide{
+    line-height: 25px;
+    font-size: 12px;
+    margin-left: 16px;
+    /*超过3行显示省略号*/
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+.guide-box .look{
+    text-align: right;
+    margin-top:10px;
+}
+.guide-box p.look a{
+    color:#FE9121;
+    font-size:12px;
+}
+.detail-box .detail-title{
+    color:#FE9121;
+}
+
+.content-box .guide-box{
+    border-top:1px solid #eee;
+    border-bottom:1px solid #eee;
+    padding:10px 0;
+}
+.content-box .guide-title{
+    color:#EF5752;
+}
+/*问卷明细下面的*/
+.detail-box .detail-p{
+    padding:0 15px;
+    line-height: 18px;
+}
+.detail-box .detail-p .begin{
+    color:#999;
+}
+.detail-box .detail-p .end{
+    color:#ED5752;
+}
+.detail-box .detail-p span b{
+    font-weight: normal;
+}
+/*开始答卷*/
+.start{
+    height: 40px;
+    margin:24px auto 20px;
+    color:#fff;
+    font-size:14px;
+    text-align: center;
+    line-height: 40px;
+    background-color: #FEBC21;
+}
+
+
+

@@ -1,0 +1,183 @@
+html,body{
+    width: 100%;
+    height: 100%;
+    background: url(../img/about_us_bg.png) no-repeat center center fixed;
+    background-color: #eee;
+    background-size: cover;
+    background-attachment:fixed;
+}
+.title{
+    height: 64px;
+}
+.line{
+    width: 90%;
+    height: 1px;
+    margin:auto;
+    background-image: linear-gradient(to right,#F9F4E8,#FAD889,#FEBC21,#FAD889,#F9F4E8);
+    position: relative;
+}
+.line .dot{
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background-color: #FEBC21;
+    margin:auto;
+    box-shadow: 0px 0px 8px 4px #fff;
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+}
+/*圆角矩形*/
+.ellipse{
+    padding:0 25px;
+    margin:38px auto;
+    height: 30px;
+    width: 128px;
+    background-color: #FEBC21;
+    -webkit-border-radius: 30px;
+    position: relative;
+    box-shadow:0 2px 2px rgba(0,0,0,.1)
+}
+/*关于我们*/
+.ellipse .about{
+    position: absolute;
+    top:1px;
+    left:13px;
+    font:17px/30px '方正正中黑简体';
+    color:#fff;
+    line-height: 30px;
+}
+.ellipse .us{
+    position: absolute;
+    top:1px;
+    right:12px;
+    font:17px/30px '方正正中黑简体';
+    color:#fff;
+    line-height: 30px;
+}
+.ellipse .circle{
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: #f9f9f9;
+    transition: width 2s;
+    position: relative;
+    margin:auto;
+    top:-18px;
+    left:0;
+    right:0;
+    left:0;
+}
+.ellipse .circle .big{
+    width: 52px;
+    height: 52px;
+    background-color: #BFD7D8;
+    border-radius:50%;
+    margin:auto;
+    position: absolute;
+    z-index: 2;
+    top:1px;
+    left:0;
+    right:0;
+    bottom:0;
+}
+.ellipse .circle .small{
+    width: 45px;
+    height: 45px;
+    background-color: #FEBC21;
+    border-radius: 50%;
+    margin:auto;
+    position: absolute;
+    z-index: 2;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    text-align: center;
+}
+.ellipse .circle .small i{
+    line-height: 45px;
+    color:#fff;
+    font-size:45px;
+    text-align: center;
+}
+/*简介*/
+.content{
+    width: 86%;
+    margin-top:15px;
+    margin-bottom:20px;
+}
+.content .content-square{
+    margin:0 -11% 0 6%;
+    border-left:1px solid rgba(238,238,238,.2);
+}
+.content .intro-title{
+    padding-left:30px;
+    width: 78px;
+    margin-bottom:6px;
+    height: 25px;
+    line-height: 27px;
+    border:1px solid #FB7832;
+    border-radius:30px;
+    -webkit-border-radius: 30px;
+    position: relative;
+    font-size:14px;
+    font-style:italic;
+}
+.content .title-circle {
+    width: 25px;
+    height: 25px;
+    color:#fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: -1px;
+    background-color: #FB7832;
+    line-height: 25px;
+    text-align: center;
+    font-family: '方正粗倩_GBK','Microsoft YaHei','sans-serif';
+    box-shadow:0 2px 2px rgba(0,0,0,.1);
+}
+.content .title-circle .white-circle{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    position: absolute;
+    top:0;
+    left:0;
+    background-color: #fff;
+    text-align: center;
+    line-height: 24px;
+    font-family: '方正粗倩_GBK', "Microsoft YaHei", sans-serif;
+}
+.content .content-box{
+    padding-left:30px;
+    padding-top:1px;
+    padding-bottom:2px;
+}
+.content .content-box p{
+    font-size:12px;
+    line-height: 18px;
+}
+.content .content-box .see-more{
+    text-align: right;
+    color:#FE9121;
+    font-size:12px;
+    display: block;
+    text-decoration: underline;
+    font-weight:600;
+}
+.content .content-box p a{
+    color:#333;
+    font-size:12px;
+    line-height: 16px;
+}
+.more-box{
+    display: none;
+}
+.content-box p i{
+    color:#fff;
+    padding-right:10px;
+}

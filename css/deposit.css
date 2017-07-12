@@ -1,0 +1,265 @@
+    body {
+        background: #eee;
+    }
+    
+    .emoney-top,
+    .point-top {
+        height: 100px;
+        background: url(../img/point/emoney-deposit.png) no-repeat;
+        background-size: 100% 100%;
+        overflow: hidden;
+    }
+    
+    .point-top {
+        background: url(../img/point/point-deposit.png) no-repeat;
+        background-size: 100% 100%;
+    }
+    
+    .point-top .deposit-amount-box {
+        height: 85px;
+        width: 85px;
+        background: #FFE758;
+        margin: 11px auto 0;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+    
+    .deposit-amount-box {
+        height: 77px;
+        width: 100px;
+        background: #FFE758;
+        margin: 11px auto 0;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+    
+    .deposit-amount-box .round {
+        height: 5px;
+        width: 5px;
+        background: #fff;
+        border-radius: 100%;
+        margin: 2px auto 0;
+    }
+    
+    .deposit-amount-box .title,
+    .deposit-amount-box .number {
+        float: left;
+        width: 100%;
+        text-align: center;
+        font-weight: 700;
+        color: #fff;
+        text-shadow: 0 1px 1px #333;
+        font-family: '方正粗谭黑简体', 'Microsoft YaHei', sans-serif;
+        margin-top: 7px;
+    }
+    
+    .deposit-amount-box .number {
+        color: #FE9120;
+        font-weight: normal;
+        margin-top: -7px;
+        text-align: center;
+    }
+    
+    .deposit-number-box {
+        width: 95%;
+        margin: auto;
+        background: #fff;
+        margin-top: 40px;
+        padding: 14px 0;
+    }
+    
+    .input-money ,.code{
+        border-bottom: 1px solid #FEBC21;
+        width: 95%;
+        margin: auto;
+    }
+    
+    .input-money i,.code i {
+        font-size: 24px;
+        color: #FEBC21;
+        padding-bottom: 5px;
+    }
+    
+    .input-money span ,.code span{
+        padding: 4px 0 3px 2px;
+        border-left: 1px solid #FEBC21;
+        margin-left: 2%;
+    }
+    
+    .input-money span input ,.code span input{
+        margin-left: 10px;
+        height: 20px;
+        /*font-size: 18px;*/
+        margin-top: -4px;
+        font-family: '方正正纤黑简体', "Microsoft YaHei", sans-serif;
+    }
+    /*验证码*/
+    .code {
+        margin-top:8px;
+        display: none;
+    }
+    .code .getcode{
+        background: transparent;
+        text-decoration: underline;
+        color: #FE9121;
+        margin: 15px auto;
+        cursor: pointer;
+    }
+    .deposit-number-box .annotation,
+    .deposit-number-box .deposit-btn {
+        width: 95%;
+        margin: auto;
+        color: #999;
+        padding: 5px 0 20px 0;
+    }
+    
+    .deposit-number-box .deposit-btn {
+        display: block;
+        text-align: center;
+        background: #FFDA85;
+        padding: 5px 0;
+        font-weight: 700;
+        font-family: "方正正中黑简体", "Microsoft YaHei", "sans-serif";
+        height: 30px;
+        line-height: 30px;
+    }
+    /*积分*/
+    
+    .deposit-exchange-box {
+        width: 94%;
+        margin: auto;
+    }
+    
+    .exchange-icon i {
+        color: #9DED1D;
+        font-size: 20px;
+        padding-right: 10px;
+        vertical-align: middle;
+    }
+    
+    .gift-box ul li {
+        width: 49%;
+        height: 240px;
+        float: left;
+        background: #fff;
+        margin-bottom: 4px;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .gift-box ul li:nth-child(even) {
+        margin-left: 4px;
+    }
+    
+    .gift-description {
+        margin-top: 30px;
+    }
+    
+    .gift-description span {
+        display: block;
+        text-align: center;
+    }
+    
+    .gift-description span:nth-child(1) {
+        color: #333;
+    }
+    
+    .gift-description span:nth-child(2) {
+        color: #999;
+    }
+    
+    .gift-description span:nth-child(3) i:first-child {
+        color: #EE5752;
+    }
+    
+    .gift-point {
+        text-align: center;
+        color: #ED5752;
+        margin-top:4px;
+    }
+    
+    .gift-point i {
+        font-size: 20px;
+        color: #FB7832;
+        padding-right: 5px;
+        vertical-align: initial;
+    }
+    
+    .gift-img {
+        text-align: center;
+        margin-top:10px;
+    }
+    
+    .gift-img img {
+        width: 50%;
+    }
+    
+    .gift-btn {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+    }
+    
+    .gift-btn .convert {
+        width: 32px;
+        height: 32px;
+        display: block;
+        border-radius: 50%;
+        background-color: #FEBC21;
+        color: #fff;
+        font-size:18px;
+        text-align: center;
+        line-height: 32px;
+        font-weight: 700;
+    }
+    /*弹出层*/
+    
+    .mask {
+        width: 98%;
+        height: 100%;
+        padding: 0 2%;
+        background: rgba(0, 0, 0, .8);
+        position: fixed;
+        z-index: 99;
+        top: 0;
+        display: none;
+    }
+    
+    .mask .car {
+        width: 100px;
+        height: 80px;
+        /*background: url(../img/sucess_car.png) no-repeat center;*/
+        background-size: cover;
+        margin: 60% auto 30px;
+    }
+    
+    .mask .tip-box {
+        margin-bottom: 20px;
+    }
+    
+    .mask .car .car-icon {
+        font-size: 100px;
+        color: #FE9121;
+    }
+    
+    .mask .tip-box p:first-child {
+        color: #fff;
+        font-size: 16px;
+        font-family: "方正正中黑简体", "Microsoft YaHei", "sans-serif";
+        text-align: center;
+        font-weight: 700;
+        margin: 20px 0 25px 0;
+    }
+    
+    .mask .close {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #fff;
+        border-radius: 50%;
+        margin: auto;
+        color: #fff;
+        cursor: pointer;
+        text-align: center;
+        line-height: 31px;
+        margin-top: 20px;
+    }

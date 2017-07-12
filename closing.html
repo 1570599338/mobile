@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/iconfont/myfont.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/closing.css" />
+</head>
+
+<body>
+    <header>
+        <ul>
+            <!--<li id="back" class="iconfont">&#xe662;<i>|</i></li>-->
+            <li>完成问卷</li>
+            <li></li>
+        </ul>
+    </header>
+    <div class="container">
+        <div class="mask-box">
+            <div class="congratulations">
+                <p class="complete"></p>
+                <p>您将获得</p>
+            </div>
+            <div class="red-envelope">
+                <div class="red-body">
+                    <p class="reward-type"></p>
+                    <p><i class=".reward-icon">¥</i><i class="money reward-amount"></i></p>
+                </div>
+                <div class="success-tip">我要领取</div>
+            </div>
+            <div class="intro">点击<span>“我要领取”</span>后，自动存入您的<span><i class="reward-type"></i>账户</span></div>
+            <div class="btn-box">
+                <div class="left">
+                    <p>
+                        我的<br>
+                        <span class="reward-type"></span>
+                    </p>
+                </div>
+                <div class="middle">
+                    <p>
+                        问卷<br> 统计
+                    </p>
+                </div>
+                <div class="close">退出</div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="js/zepto/zepto_1.1.6.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+    <script type="text/javascript">
+        var memberid = getParamByName("memberid", window.location);
+        var templateid = getParamByName("templateid", window.location);
+        var rewardAmount = getParamByName("amount", window.location);
+        var rewardTypeCode = getParamByName("typecode", window.location);
+        var rewardTypeName = getParamByName("typename", window.location);
+        var projectid = '';
+
+        $(function() {
+
+            /*蒙板*/
+            $('.container').css('height', $(window).height() - 44, 'width', $(window).width());
+
+            //我要领取
+            $('.success-tip').on('click', function() {
+                $('.success-tip').html('领取成功');
+            });
+
+            //退出
+            $('.close').on('click', function() {
+                window.location = 'surveys.html?memberid=' + memberid;
+            });
+
+            //我的礼金/积分跳转/礼品卡
+            $('.left').on('click', function() {
+                if (rewardTypeCode == REWARD_TYPE_EMONEY) { //礼金
+                    window.location = 'emoney.html?memberid=' + memberid;
+                } else if (rewardTypeCode == REWARD_TYPE_POINT) {
+                    window.location = 'point.html?memberid=' + memberid;
+                } else if (rewardTypeCode == REWARD_TYPE_GIFTCARD) {
+                    window.location = 'giftcard.html?memberid=' + memberid;
+                }
+            });
+
+            //问卷统计
+            $('.middle').on('click', function() {
+                window.location = 'history.html?memberid=' + memberid;
+            });
+            //获得项目ID
+            /*ajaxGet('template/get?id=' + templateid, function(data){
+                var data = data.objs[0];
+                projectid = data.projectID;
+                //判断是否可重复答卷
+                ajaxGet('sample/getByProjectid?projectid='+projectid+'&memberid='+memberid, function (data){
+                    //不可重复答卷
+                    if(data.objs.length > 0){
+                        $('.complete').html("不可重复答卷或您答卷次数超过限定！");
+                    }else{
+
+                    }
+                },function(error){
+                    console.log(error);
+                });
+            });*/
+            //
+            //获奖赋值
+            if (rewardTypeCode == REWARD_TYPE_POINT || rewardTypeCode == REWARD_TYPE_GIFTCARD)
+                $('reward-icon').html('');
+            $('.reward-amount').html(rewardAmount);
+            $('.reward-type').html(rewardTypeName);
+            //查询结束语
+            ajaxGet('statement/search?templateid=' + templateid, function(data) {
+                var statements = data.objs;
+                for (var i = 0; i < statements.length; i++) {
+                    var statement = statements[i];
+                    if (statement.type == 2 && statement.number == 'complete') {
+                        $('.complete').html(statement.title);
+                        break;
+                    }
+                }
+            }, function(err) {
+                //alert(err);
+            });
+        });
+
+        //@ sourceURL=closing.js
+    </script>
+
+</body>
+
+</html>

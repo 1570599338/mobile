@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
+    <title></title>
+    <!--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>-->
+    <link rel="stylesheet" href="../css/weui-master/dist/style/weui.css"/>
+    <link rel="stylesheet" href="../css/base.css"/>
+    <link rel="stylesheet" href="../css/questions-cold.css"/>
+    <link href="//vjs.zencdn.net/5.8/video-js.min.css" rel="stylesheet">
+    <script src="//vjs.zencdn.net/5.8/video.min.js"></script>
+    <script src="../js/jquery-1.11.3.min.js"></script>
+    <script src="../js/jquery-raty/lib/jquery.raty.min.js"></script>
+    <script src="../js/question-cold.js"></script>
+</head>
+<body>
+<header class='header'>
+    <ul>
+        <li id="back">&lt;<i>|</i></li>
+        <li>问卷答题</li>
+        <li>. . .</li>
+    </ul>
+</header>
+<div class="weui_cell title-box">
+    <div class="title">
+        <div class="img-left"><i class="fa fa-file-text-o" style="font-size: 20px;color:#06AFD8;"></i></div>
+        <div class="question-title">奥迪a4舒适度调查问卷</div>
+    </div>
+</div>
+<div class="questions-box">
+    <p style="font-size:14px;">1、您对奥迪a4正驾座的可调范围满意度？</p>
+    <div class="options">
+        <div class="weui_cells weui_cells_radio" id='options'>
+            <a href="javascript:;" class='option-style'>
+                <label class="weui_cell weui_check_label label-border active" for="x11">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>很满意</p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="radio" class="weui_check" name="radio1" id="x11">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="x12">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>较为满意</p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="radio" name="radio1" class="weui_check" id="x12" checked="checked">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="x13">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>一般</p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="radio" name="radio1" class="weui_check" id="x13" checked="checked">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="x14">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>不太满意</p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="radio" name="radio1" class="weui_check" id="x14" checked="checked">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="x15">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>很不满意</p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="radio" name="radio1" class="weui_check" id="x15" checked="checked">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="questions-box" >
+    <p style="font-size:14px;">2、您的兴趣爱好？</p>
+    <div class="options">
+        <div class="weui_cells weui_cells_radio">
+            <a href="javascript:;" class='option-style'>
+                <label class="weui_cell weui_check_label label-border active" for="x21">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>旅游</p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="checkbox" class="weui_check" name="check" id="x21">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="x22">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>摄影</p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="checkbox" name="check" class="weui_check" id="x22" checked="checked">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="x23">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>垂钓</p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="checkbox" name="check" class="weui_check" id="x23" checked="checked">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="x24">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>冲浪</p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="checkbox" name="check" class="weui_check" id="x24" checked="checked">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="x25">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>唱歌</p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="checkbox" name="check" class="weui_check" id="x25" checked="checked">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="questions-box">
+    <p style="font-size:14px;">3、您喜欢的车牌子标志？</p>
+    <div class="options">
+        <div class="weui_cells weui_cells_radio" id='options2'>
+            <a href="javascript:;" class='option-style'>
+                <label class="weui_cell weui_check_label label-border active" for="x31">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p><i class="weui_icon_warn"></i></p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="radio" class="weui_check" name="radio1" id="x31">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="x32">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p><i class="weui_icon_waiting"></i></p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="radio" name="radio1" class="weui_check" id="x32" checked="checked">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="x33">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p><i class="weui_icon_download"></i></p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="radio" name="radio1" class="weui_check" id="x33" checked="checked">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="x34">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p><i class="weui_icon_success"></i></p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="radio" name="radio1" class="weui_check" id="x34" checked="checked">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="x35">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p><i class="weui_icon_info"></i></p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="radio" name="radio1" class="weui_check" id="x35" checked="checked">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="questions-box">
+    <p style="font-size:14px;">4、您喜欢的车的类型？<i style="color:red;font-size:12px;">*</i></p>
+    <div class="options">
+        <div class="weui_cells weui_cells_radio">
+            <a href="javascript:;" class='option-style'>
+                <label class="weui_cell weui_check_label label-border active" for="x41">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p><i class="fa fa-bus" style="color:darkslategrey;"></i></p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="checkbox" class="weui_check" name="check" id="x41">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="x42">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p><i class="fa fa-bus" style="color:red;"></i></p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="checkbox" name="check" class="weui_check" id="x42" checked="checked">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="x43">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p><i class="fa fa-bus" style="color:blue;"></i></p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="checkbox" name="check" class="weui_check" id="x43" checked="checked">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="questions-box">
+    <p style="font-size:14px;">5、您拥有的优惠项</p>
+    <div class="options">
+        <div class="weui_cells weui_cells_checkbox">
+            <a href="javascript:;" class="option-style">
+                <label class="weui_cell weui_check_label label-border" for="t1">
+                    <label for="t1" style="color:#333;font-size:12px;">洗车卡：</label><input type="text" placeholder="请输入..." id='t1'/>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="t2">
+                    <label for="t2" style="color:#333;font-size:12px;">美容卡：</label><input type="text" placeholder="请输入..." id='t2'/>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="t3">
+                    <label for="t3" style="color:#333;font-size:12px;">维修卡：</label><input type="text" placeholder="请输入..." id='t3'/>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="t4">
+                    <label for="t4" style="color:#333;font-size:12px;">保险卡：</label><input type="text" placeholder="请输入..." id='t4'/>
+                </label>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="questions-box">
+    <p style="font-size:14px;">6、您对我们的建议？<i style="color:red;font-size:12px;">*</i></p>
+    <div class="options">
+        <textarea name="subject" id="sub" cols="30" rows="10" style="margin:20px 0 0 4px;padding:4px; "></textarea>
+    </div>
+</div>
+<div class="questions-box">
+    <p style="font-size:14px;">7、您对我们的评价？</p>
+    <div class="weui_cells weui_cells_radio">
+        <a href="javascript:;" class='option-style'>
+            <label class="weui_cell weui_check_label label-border" >
+                <div class="weui_cell_bd weui_cell_primary">
+                    <div class="demo">
+                        <label style="color:#333;font-size: 12px;">服务：</label><div class="half-demo" style='font-size:12px;display: inline-block;'></div>
+                    </div>
+                </div>
+            </label>
+            <label class="weui_cell weui_check_label label-border">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <div class="demo">
+                        <label style="color:#333;font-size: 12px;">专业：</label><div class="half-demo" style='font-size:12px;display: inline-block;'></div>
+                    </div>
+                </div>
+            </label>
+            <label class="weui_cell weui_check_label label-border" >
+                <div class="weui_cell_bd weui_cell_primary">
+                    <div class="demo">
+                        <label style="color:#333;font-size: 12px;">态度：</label><div class="half-demo" style='font-size:12px;display: inline-block;'></div>
+                    </div>
+                </div>
+            </label>
+            <label class="weui_cell weui_check_label label-border" >
+                <div class="weui_cell_bd weui_cell_primary">
+                    <div class="demo">
+                        <label style="color:#333;font-size: 12px;">产品：</label><div class="half-demo" style='font-size:12px;display: inline-block;'></div>
+                    </div>
+                </div>
+            </label>
+            <label class="weui_cell weui_check_label label-border" >
+                <div class="weui_cell_bd weui_cell_primary">
+                    <div class="demo">
+                        <label style="color:#333;font-size: 12px;">质量：</label><div class="half-demo" style='font-size:12px;display: inline-block;'></div>
+                    </div>
+                </div>
+            </label>
+        </a>
+    </div>
+</div>
+<div class="questions-box">
+    <p style="font-size:14px;">8、看视频回答问题</p>
+    <video id="really-cool-video" class="video-js vjs-default-skin vjs-big-play-centered" controls
+           preload="auto" width="280" height="200" poster="video/car.jpg"
+           data-setup='{techOrder:["flash","html5"]}'>
+        <source src="video/fun.mp4" type="video/mp4">
+        <source src="video/fun.mp4" type="video/webm">
+        <p class="vjs-no-js">
+            To view this video please enable JavaScript, and consider upgrading to a web browser
+            that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+        </p>
+    </video>
+</div>
+<div class="questions-box">
+    <p style="font-size:14px;">9、请选出奥迪a4形象大使中您认为漂亮的</p>
+    <!--第一排-->
+    <div class="imgs">
+        <div class="img-box">
+            <div class="img-circle">
+                <div class="img-mask"></div>
+                <div class="checked-circle">√</div>
+            </div>
+        </div>
+        <div class="img-box">
+            <div class="img-circle">
+                <div class="img-mask"></div>
+                <div class="checked-circle">√</div>
+            </div>
+        </div>
+        <div class="img-box">
+            <div class="img-circle">
+                <div class="img-mask"></div>
+                <div class="checked-circle">√</div>
+            </div>
+        </div>
+    </div>
+    <div class="imgs">
+        <div class="img-box">
+            <div class="img-circle">
+                <div class="img-mask"></div>
+                <div class="checked-circle">√</div>
+            </div>
+        </div>
+        <div class="img-box">
+            <div class="img-circle">
+                <div class="img-mask"></div>
+                <div class="checked-circle">√</div>
+            </div>
+        </div>
+        <div class="img-box">
+            <div class="img-circle">
+                <div class="img-mask"></div>
+                <div class="checked-circle">√</div>
+            </div>
+        </div>
+    </div>
+    <div class="imgs">
+        <div class="img-box">
+            <div class="img-circle">
+                <div class="img-mask"></div>
+                <div class="checked-circle">√</div>
+            </div>
+        </div>
+        <div class="img-box">
+            <div class="img-circle">
+                <div class="img-mask"></div>
+                <div class="checked-circle">√</div>
+            </div>
+        </div>
+        <div class="img-box">
+            <div class="img-circle">
+                <div class="img-mask"></div>
+                <div class="checked-circle">√</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--PC端-->
+<div class="questions-pc">
+    <!--<p style="font-size:14px;">1、您对奥迪a4正驾座的可调范围满意度？</p>
+    <div class="options">
+        <div class="weui_cells weui_cells_radio" id='pc1'>
+            <a href="javascript:;" class='option-style'>
+                <label class="weui_cell weui_check_label label-border active" for="pc11">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>很满意</p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="radio" class="weui_check" name="radio1" id="pc11">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="pc12">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>较为满意</p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="radio" name="radio1" class="weui_check" id="pc12" checked="checked">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="pc13">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>一般</p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="radio" name="radio1" class="weui_check" id="pc13" checked="checked">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="pc14">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>不太满意</p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="radio" name="radio1" class="weui_check" id="pc14" checked="checked">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="pc15">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>很不满意</p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="radio" name="radio1" class="weui_check" id="pc15" checked="checked">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+            </a>
+        </div>
+    </div>-->
+    <p style="font-size:14px;">2、您的兴趣爱好？</p>
+    <div class="options">
+        <div class="weui_cells weui_cells_radio">
+            <a href="javascript:;" class='option-style'>
+                <label class="weui_cell weui_check_label label-border active" for="pc21">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>旅游</p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="checkbox" class="weui_check" name="check" id="pc21">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="pc22">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>摄影</p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="checkbox" name="check" class="weui_check" id="pc22" checked="checked">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="pc23">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>垂钓</p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="checkbox" name="check" class="weui_check" id="pc23" checked="checked">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="pc24">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>冲浪</p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="checkbox" name="check" class="weui_check" id="pc24" checked="checked">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="pc25">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>唱歌</p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="checkbox" name="check" class="weui_check" id="pc25" checked="checked">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+            </a>
+        </div>
+    </div>
+    <p style="font-size:14px;">3、您喜欢的车牌子标志？</p>
+    <div class="options">
+        <div class="weui_cells weui_cells_radio" id='pc3'>
+            <a href="javascript:;" class='option-style'>
+                <label class="weui_cell weui_check_label label-border active" for="pc31">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p><i class="weui_icon_warn"></i></p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="radio" class="weui_check" name="radio1" id="pc31">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="pc32">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p><i class="weui_icon_waiting"></i></p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="radio" name="radio1" class="weui_check" id="pc32" checked="checked">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="pc33">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p><i class="weui_icon_download"></i></p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="radio" name="radio1" class="weui_check" id="pc33" checked="checked">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="pc34">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p><i class="weui_icon_success"></i></p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="radio" name="radio1" class="weui_check" id="pc34" checked="checked">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="pc35">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p><i class="weui_icon_info"></i></p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="radio" name="radio1" class="weui_check" id="pc35" checked="checked">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+            </a>
+        </div>
+    </div>
+    <p style="font-size:14px;">4、您喜欢的车的类型？<i style="color:red;font-size:12px;">*</i></p>
+    <div class="options">
+        <div class="weui_cells weui_cells_radio">
+            <a href="javascript:;" class='option-style'>
+                <label class="weui_cell weui_check_label label-border active" for="pc41">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p><i class="fa fa-bus" style="color:darkslategrey;"></i></p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="checkbox" class="weui_check" name="check" id="pc41">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="pc42">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p><i class="fa fa-bus" style="color:red;"></i></p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="checkbox" name="check" class="weui_check" id="pc42" checked="checked">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="pc43">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p><i class="fa fa-bus" style="color:blue;"></i></p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <input type="checkbox" name="check" class="weui_check" id="pc43" checked="checked">
+                        <span class="weui_icon_checked"></span>
+                    </div>
+                </label>
+            </a>
+        </div>
+    </div>
+    <p style="font-size:14px;">5、您拥有的优惠项</p>
+    <div class="options">
+        <div class="weui_cells weui_cells_checkbox">
+            <a href="javascript:;" class="option-style">
+                <label class="weui_cell weui_check_label label-border" for="pc51">
+                    <label for="t1" style="color:#333;font-size:12px;">洗车卡：</label><input type="text" placeholder="请输入..." id='pc51'/>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="pc52">
+                    <label for="t2" style="color:#333;font-size:12px;">美容卡：</label><input type="text" placeholder="请输入..." id='pc52'/>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="pc53">
+                    <label for="t3" style="color:#333;font-size:12px;">维修卡：</label><input type="text" placeholder="请输入..." id='pc53'/>
+                </label>
+                <label class="weui_cell weui_check_label label-border" for="pc54">
+                    <label for="t4" style="color:#333;font-size:12px;">保险卡：</label><input type="text" placeholder="请输入..." id='pc54'/>
+                </label>
+            </a>
+        </div>
+    </div>
+    <p style="font-size:14px;">6、您对我们的建议？<i style="color:red;font-size:12px;">*</i></p>
+    <div class="options">
+        <textarea name="subject"  cols="30" rows="10" style="margin:20px 0 0 4px;padding:4px; "></textarea>
+    </div>
+    <p style="font-size:14px;">7、您对我们的评价？</p>
+    <div class="weui_cells weui_cells_radio">
+        <a href="javascript:;" class='option-style'>
+            <label class="weui_cell weui_check_label label-border" >
+                <div class="weui_cell_bd weui_cell_primary">
+                    <div class="demo">
+                        <label style="color:#333;font-size: 12px;">服务：</label><div class="half-demo" style='font-size:12px;display: inline-block;'></div>
+                    </div>
+                </div>
+            </label>
+            <label class="weui_cell weui_check_label label-border">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <div class="demo">
+                        <label style="color:#333;font-size: 12px;">专业：</label><div class="half-demo" style='font-size:12px;display: inline-block;'></div>
+                    </div>
+                </div>
+            </label>
+            <label class="weui_cell weui_check_label label-border" >
+                <div class="weui_cell_bd weui_cell_primary">
+                    <div class="demo">
+                        <label style="color:#333;font-size: 12px;">态度：</label><div class="half-demo" style='font-size:12px;display: inline-block;'></div>
+                    </div>
+                </div>
+            </label>
+            <label class="weui_cell weui_check_label label-border" >
+                <div class="weui_cell_bd weui_cell_primary">
+                    <div class="demo">
+                        <label style="color:#333;font-size: 12px;">产品：</label><div class="half-demo" style='font-size:12px;display: inline-block;'></div>
+                    </div>
+                </div>
+            </label>
+            <label class="weui_cell weui_check_label label-border" >
+                <div class="weui_cell_bd weui_cell_primary">
+                    <div class="demo">
+                        <label style="color:#333;font-size: 12px;">质量：</label><div class="half-demo" style='font-size:12px;display: inline-block;'></div>
+                    </div>
+                </div>
+            </label>
+        </a>
+    </div>
+    <p style="font-size:14px;">8、看视频回答问题</p>
+    <video id="really-cool-video2" class="video-js vjs-default-skin vjs-big-play-centered" controls
+           preload="auto" width="280" height="200" poster="video/car.jpg"
+           data-setup='{techOrder:["flash","html5"]}'>
+        <source src="video/fun.mp4" type="video/mp4">
+        <source src="video/fun.mp4" type="video/webm">
+        <p class="vjs-no-js">
+            To view this video please enable JavaScript, and consider upgrading to a web browser
+            that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+        </p>
+    </video>
+</div>
+<button class="next" style="margin-left:4%;">下一题</button>
+<input type="submit"  class="next next-pc" value="提交" style="margin-left:4%;"/>
+<p style="font-size:12px;text-align: right;color:#999;padding-right:23px;">已答卷：<i id='complete'>3/20</i></p>
+<div class="line">
+    <div class="tip"></div>
+    <div class="mask"></div>
+</div>
+<!--整个蒙板-->
+<div class="whole-mask">
+    <div class="mask-close">×</div>
+    <div class="congratulate">
+        <p>恭喜您完成此份问卷</p>
+        <p style="color:#fff;font-size:17px;margin-top:18px;">您将获得</p>
+    </div>
+    <div class="myscore">
+        <div class="yellow-circle">
+            <div class="yellow-out-circle"></div>
+            <div class="score">
+                <div class="dot"></div>
+                <p class="varieties">积分</p>
+                <p class="count">1000</p>
+            </div>
+        </div>
+        <!--<div class="yellow-1">
+            <div class="score-small">
+                <div class="orange-circle">
+                    <div class="small-dot">
+                        <p>积</p>
+                        <p>1000</p>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+    </div>
+</div>
+<!--
+<div class="whole-mask">
+    <div class="mask-close">×</div>
+    <div class="congratulate">
+        <p>恭喜您完成此份问卷</p>
+        <p style="color:#fff;font-size:17px;">您将获得</p>
+    </div>
+    <div class="yellow-circle">
+        <div class="yellow-out-circle"></div>
+        <div class="score">
+            <div class="dot"></div>
+            <p class="varieties">积分</p>
+            <p class="count">1000</p>
+        </div>
+    </div>
+</div>
+-->
+</body>
+</html>
+<script>
+    /*星星评价*/
+    $(function(){
+        $.fn.raty.defaults.path="js/jquery-raty/lib/img";
+        $('.half-demo').raty({half:true});
+    })
+</script>

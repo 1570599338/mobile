@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>汽车调查</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/iconfont/myfont.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <style>
+        /*蒙板*/
+
+        body {
+            width: 320px;
+            height: 480px;
+            background-image: -webkit-linear-gradient(#FEBC21,#EF5951);
+            background: -moz-linear-gradient(#FEBC21,#EF5951); /*Mozilla*/
+            background: -webkit-gradient(linear,left top,left bottom,from(#FEBC21),to(#EF5951)); /*Old gradient for webkit*/
+            background: -webkit-linear-gradient(#FEBC21,#EF5951); /*new gradient for Webkit*/
+            background: -o-linear-gradient(#FEBC21,#EF5951); /*Opera11*/
+        }
+
+        .paper-box {
+            width: 200px;
+            height: 238px;
+            margin: auto;
+            position: absolute;
+            top: 47%;
+            margin-top: -129px;
+            left: 50%;
+            margin-left: -100px;
+            background-size: cover;
+            text-align: center;
+        }
+
+        .paper-one {
+            height: 232px;
+            width: 192px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: rgba(255,255,255,.8);
+            -webkit-transform: rotate(4deg);
+            -moz-transform: rotate(4deg);
+            -ms-transform: rotate(4deg);
+            -o-transform: rotate(4deg);
+            transform: rotate(4deg);
+        }
+
+        .paper-two {
+            height: 232px;
+            width: 192px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: rgba(255,255,255,.8);
+            -webkit-transform: rotate(-4deg);
+            -moz-transform: rotate(-4deg);
+            -ms-transform: rotate(-4deg);
+            -o-transform: rotate(-4deg);
+            transform: rotate(-4deg);
+        }
+
+        .paper-box .paper-two i, p {
+            -webkit-transform: rotate(4deg);
+            -moz-transform: rotate(4deg);
+            -ms-transform: rotate(4deg);
+            -o-transform: rotate(4deg);
+            transform: rotate(4deg);
+        }
+
+        .paper-box .paper-two i {
+            font-size: 100px;
+            color: #FE9121;
+            text-align: center;
+        }
+
+        .paper-box .paper-two p.over {
+            color: #EE5752;
+            font-family: "方正正中黑简体", "Microsoft YaHei", "sans-serif";
+            font-weight: 700;
+        }
+
+        .paper-box .paper-two p:last-child {
+            text-align: center;
+            margin-top: 22px;
+            padding:0 8px;
+        }
+
+        .close {
+            font-size: 36px;
+            color: #fff;
+            text-align: center;
+            position: absolute;
+            bottom: 70px;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <header class='header'>
+        <ul>
+            <li id="back" class="iconfont">&#xe662;返回<i>|</i></li>
+            <li>完成问卷</li>
+            <li></li>
+        </ul>
+    </header>
+    <div class="paper-box">
+        <div class="paper-one"></div>
+        <div class="paper-two">
+            <i class="iconfont">&#xe666;</i>
+            <p class="font-size-17 over">谢谢您的参与！</p>
+            <p class="font-size-12 exception"></p>
+        </div>
+    </div>
+    <i class="iconfont close">&#xe663;</i>
+
+    <script src="js/zepto/zepto_1.1.6.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+    <script type="text/javascript">
+
+        var memberid = getParamByName("memberid", window.location);
+        var templateid = getParamByName("templateid", window.location);
+
+        $(function () {
+
+            $('body').css({ 'width': $(window).width(), 'height': $(window).height() });
+
+            //退出
+            $('.close').on('click', function () {
+                window.location = 'surveys.html?memberid=' + memberid;
+            });
+            //回退
+            $('#back').on('click', function () {
+                window.location = "surveys.html?memberid=" + memberid;
+            });
+            //查询结束语
+            ajaxGet('statement/search?templateid=' + templateid, function (data) {
+                var statements = data.objs;
+                for (var i = 0; i < statements.length; i++) {
+                    var statement = statements[i];
+                    if (statement.type == 2 && statement.number == 'exception') {
+                        $('.exception').html(statement.title);
+                        break;
+                    }
+                }
+            }, function (err) {
+                //alert(err);
+            });
+
+        });
+
+        //@ sourceURL=exception.js
+    </script>
+
+</body>
+</html>

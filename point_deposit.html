@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>汽车调查</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/iconfont/myfont.css" />
+    <link rel="stylesheet" href="css/weui-master/dist/style/weui.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/deposit.css" />
+</head>
+
+<body>
+    <header>
+        <ul>
+            <li class="iconfont" id="back">&#xe662;返回<i>|</i></li>
+            <li>积分兑换</li>
+            <li></li>
+        </ul>
+    </header>
+    <div class="deposit-box">
+        <div class="point-top">
+            <div class="deposit-amount-box" style="border-radius: 100%">
+                <p class="round"></p>
+                <span class="title font-size-14">总积分</span>
+                <span class="number"><span class="font-size-30"></span></span>
+            </div>
+        </div>
+
+        <div class="deposit-exchange-box">
+            <div class="exchange-icon">
+                <i class="iconfont ">&#xe64a;</i><span>您可以兑换</span>
+            </div>
+            <div class="gift-box">
+                <ul></ul>
+            </div>
+        </div>
+    </div>
+    <div class="weui_dialog_alert" style="display: none;">
+        <div class="weui_mask"></div>
+        <div class="weui_dialog">
+            <div class="weui_dialog_hd"><strong class="weui_dialog_title"></strong></div>
+            <div class="weui_dialog_bd"></div>
+            <div class="weui_dialog_ft">
+                <a href="javascript:;" class="weui_btn_dialog primary sure" style='color: #FEBC21;'>确定</a>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/zepto/zepto_1.1.6.js "></script>
+    <script type="text/javascript" src="js/main.js "></script>
+    <script type="text/javascript" src="js/template.js"></script>
+
+    <script id="template_convert" type="text/html">
+        {{each conversions as conversion i}}
+        <li>
+            <div class="gift-description">
+                <span class="font-size-14">{{conversion.typeName}}</span>
+                <span class="font-size-12">有效日期：{{conversion.expiresAt}}</span>
+                <span><i class="parvalue" data-parvalue="{{conversion.parValue}}" style="color:#EE5752;">{{conversion.parValue}}</i><i>元/张</i></span>
+            </div>
+            <div class="gift-point">
+                <i class="iconfont">&#xe627;</i><span class="font-size-20 point-val" >{{(conversion.parValue)*100}}</span>
+            </div>
+            <div class="gift-img">
+                <img src="{{imgUrl}}{{conversion.imageUrl}}" alt=" ">
+            </div>
+            <div class="gift-btn" data-type="{{conversion.typeCode}}">
+                <i class="convert">兑</i>
+            </div>
+        </li>
+        {{/each}}
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            var memberid = getParamByName("memberid", window.location);
+            $('#back').click(function () {
+                window.location = 'member.html?memberid=' + memberid;
+            });
+            var imgUrl = window.location.href.substr(0,window.location.href.indexOf('point_deposit'));
+
+            var allPoint = 0;
+            //头部显示总积分
+            function init() {
+                ajax2('sysmng.initTemplate.do?subSys=wesurvey&tplID=133&memberID=' + memberid, 'json', 'get', null, function (data) {
+                    $('.deposit-amount-box .number span').html(data.objs[0].pointSumWithdraw);
+                    allPoint = data.objs[0].pointSumWithdraw;
+                }, function (error) {
+                    console.log(error);
+                })
+                return allPoint;
+            }
+            init();
+
+            var data = {
+                subSys: 'wesurvey',
+                repID: '110',
+                isQuery: '1',
+                dispType: '12',
+                perRows: '2000'
+            };
+            //请求所有的卡
+            ajax2('sysmng.jsonreport.do?', 'json', 'get', data, function (data){
+                template.config('escape');
+                var html = template('template_convert',{imgUrl:imgUrl,conversions:data.objs});
+                $('.gift-box ul').html(html);
+                bindClick('li');
+            },function(error){
+                alert(error);
+            });
+
+            //点击兑换
+            var bindClick = function (context) {
+                $(".gift-btn",context).off('click').on('click',function () {
+                    var parvalue = $(this).siblings('.gift-description').find('.parvalue').data('parvalue');
+                    var typeCode = $(this).data('type');
+                    var amount = $(this).siblings('.gift-point').find('.point-val').html();
+                    var data = {
+                        amount:amount,//需要花费的积分
+                        parValue: parvalue,//面值
+                        typeCode:typeCode,//卡类型
+                    }
+                    if (amount < allPoint) {
+                        ajax2('wesurvey.pointdeposit.do?memberID=' + memberid, 'json', 'post', data, function (data) {
+                            //提示兑换成功
+                            $(".weui_dialog_alert").show().find('.weui_dialog_title').html("兑换成功");
+                            $(".weui_dialog_alert").find('.weui_dialog_bd').html('您的兑换申请已提交，审核通过后礼品卡将在“我的礼品卡”中查看！');
+                            $('.sure').on('click',function(){
+                                init();
+                            });
+                        }, function (error) {
+                            $(".weui_dialog_alert").show().find('.weui_dialog_title').html("兑换失败");
+                            $(".weui_dialog_alert").find('.weui_dialog_bd').html(error);
+                        });
+                    } else {
+                        //弹出窗口提示积分不足
+                        $(".weui_dialog_alert").show().find('.weui_dialog_title').html("兑换失败");
+                        $(".weui_dialog_alert").find('.weui_dialog_bd').html('您的积分不足，暂不能兑换此商品！');
+                    }
+                });
+            }
+
+
+            //关闭弹出层
+            $('.weui_dialog_alert .sure').click(function () {
+                $('.weui_dialog_alert').hide();
+            })
+            //@ sourceURL=dynamicScript-point-deposit.js
+        })
+    </script>
+</body>
+
+</html>

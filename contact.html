@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+    <title>汽车调查</title>
+    <link rel="stylesheet" href="css/iconfont/myfont.css" />
+    <link rel="stylesheet" href="css/weui-master/dist/style/weui.css" />
+    <link rel="stylesheet" href="css/iconfont/myfont.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/contact.css" />
+</head>
+
+<body>
+    <header>
+        <ul>
+            <li id="back" class="iconfont">&#xe662;返回<i>|</i></li>
+            <li>发布调研</li>
+            <li></li>
+        </ul>
+    </header>
+    <div class="dBody">
+        <div class="search-info">
+            <div class="input-box">
+                <label class="label-name"><i class="iconfont" style="color:#FEBC21;font-size:16px;padding-left:8px;">&#xe611;</i></label>&nbsp;<i>|</i><input class="font-size-12 weui-validate" type="text" name="name" placeholder="企业名称" /><i class="iconfont contact-error"
+                    style="color:#EF5752;">&#xe651;</i>
+            </div>
+            <div class="input-box">
+                <label class="label-name"><i class="iconfont font-size-20" style="color:#FE9121;">&#xe647;</i></label>&nbsp;<i>|</i><input class="font-size-12 weui-validate" type="phone" name="phone" placeholder="联系电话" /><i class="iconfont contact-error"
+                    style="color:#EF5752;">&#xe651;</i>
+            </div>
+            <div class="input-box">
+                <label class="label-name"><i class="iconfont font-size-20" style="color:#EF5752;">&#xe645;</i></label>&nbsp;<i>|</i><input class="font-size-12 weui-validate" type="email" name="email" placeholder="邮箱" /><i class="iconfont contact-error"
+                    style="color:#EF5752;">&#xe651;</i>
+            </div>
+            <div class="input-box">
+                <label class="label-name"><i class="iconfont font-size-20" style="color:#FEDF21;">&#xe618;</i></label>&nbsp;
+                <textarea class="textarea font-size-12 weui-validate" name="remark" style="margin-left:51px;" placeholder="情况介绍"></textarea>
+            </div>
+        </div>
+        <div class="submit font-size-17">提交</div>
+        <div class="help-describe" style="">
+            <i>正在建设中，敬请关注.....</i>
+        </div>
+        <a href="javascript:;" class="help font-size-12">遇到问题，获取帮助？</a>
+    </div>
+    <!--遮罩层-->
+    <div class="mask" style="display:none;">
+        <div class="car"></div>
+        <div class="tip-box">
+            <p>发布成功</p>
+            <p>您已成功提交企业调研信息，我们会尽快处理。审核通过后将发送邮件到您的邮箱，并通知您，谢谢您的参与！</p>
+        </div>
+        <p class="share-begin" style="display:none;"><i class="iconfont">&#xe61a;</i>&nbsp;&nbsp;现在分享给好友吧</p>
+        <div class="share-box" style="display: none;">
+            <div class="share">
+                <div class="wechart share-wechart">
+                    <div class="wechart-bg" style="background-color: #3EB237;">
+                        <i class="iconfont">&#xe600;</i>
+                    </div>
+                    <p>微信</p>
+                </div>
+            </div>
+            <div class="share">
+                <div class="wechart share-qq">
+                    <div class="wechart-bg" style="background-color: #FEBC21;">
+                        <i class="iconfont" style="line-height: 26px;">&#xe601;</i>
+                    </div>
+                    <p>腾讯QQ</p>
+                </div>
+            </div>
+            <div class="share">
+                <div class="wechart share-circle-friend">
+                    <div class="wechart-bg" style="background-color: #00D900;">
+                        <i class="iconfont">&#xe604;</i>
+                    </div>
+                    <p>朋友圈</p>
+                </div>
+            </div>
+            <div class="share">
+                <div class="wechart share-xinlang">
+                    <div class="wechart-bg" style="background-color: #E04D6A;">
+                        <i class="iconfont">&#xe60a;</i>
+                    </div>
+                    <p>新浪微博</p>
+                </div>
+            </div>
+        </div>
+        <div class="close">Ｘ</div>
+    </div>
+</body>
+
+</html>
+<script type="text/javascript" src="js/zepto/zepto_1.1.6.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js "></script>
+<script>
+    $(function() {
+
+        //返回
+        var memberid = getParamByName("memberid", window.location);
+        $('#back').click(function() {
+            window.location = 'home.html?memberid=' + memberid;
+        });
+
+        //文本框自增高
+        autoTextArea(document.getElementsByClassName("textarea")[0]);
+
+        //输入验证
+        var validate = false;
+        $(".contact-error").hide();
+        $('.search-info .weui-validate').blur(function() {
+            var dataName = $(this).attr("type");
+            var val = $(this).val();
+            if ($(this).val() == "") {
+                $(this).siblings(".contact-error").show();
+                validate = false;
+            } else if (dataName == "phone") {
+                if (!(/^1[3|4|5|7|8]\d{9}$/.test(val))) {
+                    $(this).siblings(".contact-error").show();
+                    validate = false;
+                }
+            } else if (dataName == "email") {
+
+                if (!(/^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g.test(val))) {
+                    $(this).siblings(".contact-error").show();
+                    validate = false;
+                }
+            } else {
+                validate = true;
+            }
+        }).focus(function() {
+            $(this).siblings(".contact-error").hide();
+        })
+
+        //提交按钮变色
+        $('.submit').on('click', function() {
+            $('.search-info .weui-validate').each(function(i, e) {
+                if ($(e).val() == "") {
+                    $(this).siblings(".contact-error").show();
+                }
+            })
+            if (validate == true) {
+                $('.submit').css('background-color', '#FEBC21');
+                $('.submit').css('color', '#fff');
+                var data = {};
+                data.memberID = memberid;
+                data.name = $(".weui-validate[name=name]").val();
+                data.phoneNumber = $(".weui-validate[name=phone]").val();
+                data.email = $(".weui-validate[name=email]").val();
+                data.remark = $(".weui-validate[name=remark]").val();
+                ajax2('wesurvey.contact.do?op=create', 'json', 'post', data, function(data) {
+                    console.log(data);
+                    $('.mask').show();
+                }, function(error) {
+
+                })
+            }
+        });
+
+        // 分享接口
+        var formData = {
+            requestUrl: location.href
+        }
+        ajax2('sysmng.initTemplate.do?subSys=wesurvey&tplID=141', 'json', 'get', formData, function(data) {
+            wx.config(data);
+        }, function(error) {});
+        wx.ready(function() {
+            //微信分享
+            wx.onMenuShareAppMessage({
+                title: '欢迎参加汽车调研', // 分享标题
+                desc: '欢迎参加汽车调研，期待您的加入', // 分享描述
+                link: 'www.baidu.com', // 分享链接
+                imgUrl: '', // 分享图标
+                type: 'link', // 分享类型,music、video或link，不填默认为link
+                dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                success: function() {
+                    $('.mask').css('display', 'none'); // 用户确认分享后执行的回调函数
+                    window.location.href = "home.html";
+                },
+                cancel: function() {
+                    $('.mask').css('display', 'none'); // 用户取消分享后执行的回调函数
+                }
+            });
+
+            //QQ分享
+            wx.onMenuShareQQ({
+                title: '汽车调研', // 分享标题
+                desc: '欢迎参加汽车调研，期待您的加入', // 分享描述
+                link: '', // 分享链接
+                imgUrl: '', // 分享图标
+                success: function() {
+                    $('.mask').css('display', 'none'); // 用户确认分享后执行的回调函数
+                    window.location.href = "home.html";
+                },
+                cancel: function() {
+                    $('.mask').css('display', 'none'); // 用户取消分享后执行的回调函数
+                }
+            });
+
+            //朋友圈分享
+            wx.onMenuShareTimeline({
+                title: '', // 分享标题
+                link: '', // 分享链接
+                imgUrl: '', // 分享图标
+                success: function() {
+                    $('.mask').css('display', 'none'); // 用户确认分享后执行的回调函数
+                    window.location.href = "home.html";
+                },
+                cancel: function() {
+                    $('.mask').css('display', 'none'); // 用户取消分享后执行的回调函数
+                }
+            });
+
+            //新浪微博分享
+            wx.onMenuShareWeibo({
+                title: '', // 分享标题
+                desc: '', // 分享描述
+                link: '', // 分享链接
+                imgUrl: '', // 分享图标
+                success: function() {
+                    $('.mask').css('display', 'none'); // 用户确认分享后执行的回调函数
+                    window.location.href = "home.html";
+                },
+                cancel: function() {
+                    $('.mask').css('display', 'none'); // 用户取消分享后执行的回调函数
+                }
+            });
+        });
+
+        //关闭遮罩层
+        $('.close').on('click', function() {
+            $(this).parent('.mask').css('display', 'none');
+        });
+
+        //
+        $('.help').off('click').on('click', function() {
+            $('.help-describe').toggle();
+        })
+
+    });
+    //@ sourceURL=dynamicScript-contact.js
+</script>

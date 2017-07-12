@@ -1,0 +1,111 @@
+[{
+    "id": "1",
+    "namecn": "计算机软件",
+    "nameen": "",
+    "fullnamecn": "",
+    "fullnameen": "",
+    "alias": "软件",
+    "createdat": "2016-06-04 17:45:30.000",
+    "createdby": "admin",
+    "updatedat": "",
+    "updatedby": ""
+}, {
+    "id": "2",
+    "namecn": "互联网/电子商务",
+    "nameen": "",
+    "fullnamecn": "",
+    "fullnameen": "",
+    "alias": "电商",
+    "createdat": "2016-06-04 17:45:45.000",
+    "createdby": "admin",
+    "updatedat": "",
+    "updatedby": ""
+}, {
+    "id": "3",
+    "namecn": "人力资源服务",
+    "nameen": "",
+    "fullnamecn": "",
+    "fullnameen": "",
+    "alias": "人力",
+    "createdat": "2016-06-04 17:46:05.000",
+    "createdby": "admin",
+    "updatedat": "",
+    "updatedby": ""
+}, {
+    "id": "4",
+    "namecn": "保险",
+    "nameen": "",
+    "fullnamecn": "",
+    "fullnameen": "",
+    "alias": "保险",
+    "createdat": "2016-06-04 17:46:29.000",
+    "createdby": "admin",
+    "updatedat": "",
+    "updatedby": ""
+}, {
+    "id": "5",
+    "namecn": "房地产/物业管理",
+    "nameen": "",
+    "fullnamecn": "",
+    "fullnameen": "",
+    "alias": "房产",
+    "createdat": "2016-06-04 17:46:52.000",
+    "createdby": "admin",
+    "updatedat": "",
+    "updatedby": ""
+}, {
+    "id": "6",
+    "namecn": "金融/银行",
+    "nameen": "",
+    "fullnamecn": "",
+    "fullnameen": "",
+    "alias": "金融",
+    "createdat": "2016-06-04 17:47:42.000",
+    "createdby": "admin",
+    "updatedat": "",
+    "updatedby": ""
+}, {
+    "id": "7",
+    "namecn": "教育/科研/培训",
+    "nameen": "",
+    "fullnamecn": "",
+    "fullnameen": "",
+    "alias": "教育",
+    "createdat": "2016-06-04 17:48:11.000",
+    "createdby": "admin",
+    "updatedat": "",
+    "updatedby": ""
+}, {
+    "id": "8",
+    "namecn": "建筑/建材",
+    "nameen": "",
+    "fullnamecn": "",
+    "fullnameen": "",
+    "alias": "建筑",
+    "createdat": "2016-06-04 17:49:05.000",
+    "createdby": "admin",
+    "updatedat": "",
+    "updatedby": ""
+}, {
+    "id": "9",
+    "namecn": "娱乐休闲/餐饮/服务",
+    "nameen": "",
+    "fullnamecn": "",
+    "fullnameen": "",
+    "alias": "娱乐",
+    "createdat": "2016-06-04 17:49:24.000",
+    "createdby": "admin",
+    "updatedat": "",
+    "updatedby": ""
+}, {
+    "id": "10",
+    "namecn": "其他行业",
+    "nameen": "",
+    "fullnamecn": "",
+    "fullnameen": "",
+    "alias": "其他",
+    "createdat": "2016-06-04 17:49:41.000",
+    "createdby": "admin",
+    "updatedat": "",
+    "updatedby": ""
+}, {}]

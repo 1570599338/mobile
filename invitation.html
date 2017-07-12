@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
+    <title></title>
+    <link rel="stylesheet" href="css/iconfont/myfont.css"/>
+    <link rel="stylesheet" href="css/weui-master/dist/style/weui.css"/>
+    <link rel="stylesheet" href="css/base.css"/>
+    <link rel="stylesheet" href="css/registration.css"/>
+</head>
+<body>
+<header>
+    <ul>
+        <li id="back" class="iconfont">&#xe662;<i>|</i></li>
+        <li>汽车调查－登录页面</li>
+        <li></li>
+    </ul>
+</header>
+<div class="logo-box">
+    <div class='logo'></div>
+    <p class="font-size-17">汽车调查</p>
+</div>
+
+<form action="#">
+    <div class="box">
+        <p><i class="iconfont">&#xe60c;</i><i>|</i><input type="text" class="phonenumber font-size-14" placeholder="请输入手机号" pattern="^\(?\d{3}\)?[-\s]\d{3}[-\s]\d{4}.*?$"/></p>
+        <input type="button" class="getcode font-size-12" id="getcode" value="点击获取验证码" style="" />
+        <p><i class="iconfont">&#xe614;</i><i>|</i><input type="text" class="validatecode font-size-14" placeholder="请输入验证码"/></p>
+    </div>
+    <div id="logon" class="register register-off"><a href="#" class="font-size-17">登录</a></div>
+</form>
+</body>
+
+<!-- zepto  -->
+<script type="text/javascript" src="js/zepto/zepto_1.1.6.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+
+<script type="text/javascript">
+
+    var invitationid = getParamByName('invitationid', window.location);
+
+    $(function () {
+
+        //获取验证码
+        $('#getcode').off('click').on('click', function () {
+            var phoneNumber = $('.phonenumber').val();
+            if (phoneNumber) {
+                var submitData = {
+                    phoneNumber: phoneNumber
+                }
+                ajaxPost('sms/create', submitData, null, function (data) {
+                    //$('.validatecode').val(data.objs[0].code);
+                    if (data.errors.length > 0) {
+                        $('.validatecode').val(data.errors[0].msg.split("info=")[1]);
+                    } else {
+                        $('#logon').addClass('register-active').removeClass('register-off');
+                    }
+                }, function (err) {
+                    alert(err);
+                })
+            } else {
+                alert('请输入手机号');
+            }
+        });
+
+        //登录，如果用户不存在则创建用户
+        $('#logon').on('click', function () {
+            var phoneNumber = $('.phonenumber').val();
+            var validatecode = $('.validatecode').val();
+            ajax2('wesurvey.logon.do?phoneNumber=' + phoneNumber + '&code=' + validatecode + '&invitationID=' + invitationid, 'json', 'get', null, function (data) {
+                if (data.objs && data.objs.length > 0) {
+                    var member = data.objs[0];
+                    window.location = "welcome.html?memberid=" + member.memberID + "&templateid=" + member.templateID;
+                }
+            }, function (error) {
+
+            })
+        });
+
+        //
+        $('.validatecode').on('change', function () {
+            $('#logon').addClass('register-active').removeClass('register-off');
+        });
+
+    });
+
+    //@ sourceURL=dynamicScript-invitation.js
+</script>
+
+</html>
+

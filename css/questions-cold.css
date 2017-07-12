@@ -1,0 +1,315 @@
+/*标题样式start*/
+.title-box{
+    width: 90%;
+    border-bottom: 2px solid #06AFD8;
+    margin:auto;
+}
+.title{
+    margin:auto;
+}
+.title .img-left{
+    float: left;
+}
+.title .question-title{
+    float: right;
+    padding-left:12px;
+    font-size:17px;
+    color:#333;
+}
+/*end*/
+.questions-box{
+    padding:20px 15px;
+}
+/*去掉默认单选框对勾样式*/
+.weui_cells_radio .weui_check + .weui_icon_checked:before{
+    display: block;
+    content: '\EA08';
+    width: 40px;
+    height: 32px;
+    /*background-color: #eee;*/
+    background: url(../img/bg-gray.png) no-repeat;
+    background-size: cover;
+    color:#fff;
+    line-height: 32px;
+    text-align: center;
+    margin-right:-15px;
+
+}
+.weui_cells_radio .weui_check:checked + .weui_icon_checked:before{
+    display: block;
+    content: '\EA08';
+    width: 40px;
+    height: 32px;
+    /*background-color: #06AFD8;*/
+    background: url(../img/bg-blue.png) no-repeat;
+    background-size: cover;
+    color:#fff;
+    line-height: 32px;
+    text-align: center;
+    margin-right:-15px;
+}
+.weui_cell:before{
+    left:0px;
+}
+.label-border{
+    border-left:1px solid #D9D9D9;
+    border-right:1px solid #D9D9D9;
+}
+.next{
+    width: 92%;
+    height: 40px;
+    color:#fff;
+    text-align: center;
+    line-height: 40px;
+    margin:0 auto 62px;
+    font-size:14px;
+    background-color: #06AFD8;
+    cursor: pointer;
+}
+/*进度条*/
+.line{
+    position: absolute;
+    width: 90%;
+    height: 1px;
+    margin:8px 0 20px;
+    left:50%;
+    margin-left:-45%;
+    background-color: #BFF0FD;
+}
+.tip{
+    width: 3px;
+    height: 7px;
+    background-color: #06AFD8;
+    vertical-align: middle;
+    position: absolute;
+    margin-top:-7px;
+    left:0px;
+    border-bottom-right-radius: 180px;
+}
+.line .mask{
+    position: absolute;
+    left:0;
+    top:0;
+    background-color: #06AFD8;
+    width: 0;
+    height: 100%;
+}
+.weui_cell_bd p{
+    font-size:12px;
+}
+.questions-box{
+    display: none;
+}
+.questions-box:first-child{
+    display: block;
+}
+.questions-pc{
+    display: none;
+}
+.next-pc{
+    display: none;
+}
+@media screen and (min-width:701px){
+    .questions-pc{
+        display: block;
+        padding-left:15px;
+        padding-right:15px;
+    }
+    .next{
+        display: none;
+    }
+    .next-pc{
+        display: block;
+        margin-top:30px;
+    }
+    .video-js{
+        width: 350px;
+        height: 280px;
+    }
+}
+/*图片题*/
+.questions-box .imgs{
+    display: flex;
+}
+.questions-box .imgs .img-box{
+    flex:1;
+    height: 88px;
+    position: relative;
+}
+.questions-box .imgs .img-box .img-circle{
+    width: 61px;
+    height: 61px;
+    border-radius:50%;
+    position: absolute;
+    background: url(../img/girl2.jpg) no-repeat center;
+    background-size: cover;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    margin:auto;
+}
+.questions-box .imgs .img-box .img-mask{
+    width: 61px;
+    height: 61px;
+    border-radius:50%;
+    position: absolute;
+    background: rgba(0,0,0,.6);
+    top:0;
+    left:0;
+    display: none;
+}
+.questions-box .imgs .img-box .img-circle .checked-circle{
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    background-color: #06AFD8;
+    position: absolute;
+    top:50%;
+    margin-top:-11px;
+    right:0;
+    color:#fff;
+    font-size:14px;
+    line-height: 23px;
+    text-align: center;
+    display: none;
+}
+/*整个蒙板*/
+.whole-mask{
+    width: 100%;
+    height: 100%;
+    margin-top:44px;
+    background-color: rgba(0, 0, 0, .9);
+    position: fixed;
+    top:0;
+    left:0;
+}
+.whole-mask .mask-close{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 14px;
+    right:8px;
+    background-color: #000;
+    text-align: center;
+    line-height: 30px;
+    font-size:18px;
+    color:#fff;
+    border-radius: 50%;
+}
+/*蒙板上的祝福语*/
+.whole-mask .congratulate{
+    margin:auto;
+    margin-top:63px;
+}
+.whole-mask .congratulate p{
+    color:#FF7F00;
+    font-size: 20px;
+    text-align: center;
+    font-family: '方正粗谭黑简体', 'Microsoft YaHei', sans-serif;
+}
+/*蒙板上的积分*/
+.whole-mask .yellow-circle{
+    width: 151px;
+    height: 151px;
+    border-radius: 50%;
+    background-color: #fff;
+
+    position: relative;
+    /*margin-top:63px;*/
+    box-shadow:1px 14px 56px 19px #FEC110  inset;
+
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    margin:auto;
+}
+/*蒙板上的积分块*/
+.whole-mask .myscore{
+    width: 249px;
+    height: 249px;
+    margin:auto;
+    margin-top:63px;
+    position: relative;
+}
+.whole-mask .yellow-circle .yellow-out-circle{
+    width: 151px;
+    height: 151px;
+    border-radius: 50%;
+    background-color: transparent;
+    margin:auto;
+    box-shadow: 0px 0px 65px -3px #FEC110;
+}
+.whole-mask .yellow-circle .score{
+    width: 115px;
+    height: 115px;
+    border-radius: 50%;
+    background-color: #FF7F00;
+    box-shadow:0px 1px 10px 2px #fff;
+    position: absolute;
+    top:5px;
+    left:50%;
+    margin-left:-58px;
+}
+.whole-mask .yellow-circle .score .dot{
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    position: absolute;
+    top: 2px;
+    left:50%;
+    margin-left:-2px;
+    border-radius: 50%;
+}
+.whole-mask .yellow-circle .score .varieties{
+    font-family: '方正粗谭黑简体', 'Microsoft YaHei', sans-serif;
+    font-size:20px;
+    color:#fff;
+    text-align: center;
+    margin-top: 20px;
+}
+.whole-mask .yellow-circle .score .count{
+    font-size:30px;
+    font-family: '方正粗谭黑简体', 'Microsoft YaHei', sans-serif;
+    color:#FEBB20;
+    margin-top:0px;
+    text-align: center;
+}
+/*周围的小积分*/
+/*.whole-mask .yellow-1{
+    width: 34px;
+    height: 41px;
+    border-radius: 50%;
+    box-shadow:-5px 2px 23px 5px #FEBB20;
+    position: absolute;
+    top:-18px;
+    transform: rotate(45deg);
+}
+.whole-mask .yellow-1 .orange-circle{
+    width: 32px;
+    height: 39px;
+    border-radius: 50%;
+    box-shadow:0px 2px 5px 2px #fff;
+    background-color: #FF7F00;
+    transform: rotate(-20deg);
+}
+.whole-mask .yellow-1 .orange-circle .small-dot{
+    width: 4px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #fff;
+    position: absolute;
+    top:3px;
+    left:50%;
+    margin-left:-2px;
+    color:#fff;
+    font-size:10px;
+
+}
+.whole-mask .yellow-1 .orange-circle .small-dot p{
+    transform: skewX(20deg);
+    font-size:12px;
+    color:#fff;
+}*/
+

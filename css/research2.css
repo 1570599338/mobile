@@ -1,0 +1,92 @@
+html,body{
+    height:100%;
+    margin:0;
+    padding:0;
+    color:#333;
+}
+.header{
+    position: absolute;
+    z-index: 5;
+    top:0;
+}
+.dBody{
+    width: 100%;
+    overflow: auto;
+    top:44px;
+    position: absolute;
+    z-index: 10;
+    bottom: 50px;
+}
+.dBody .two-tab{
+    display: flex;
+}
+.dBody .two-tab li{
+    flex:1;
+    text-align: center;
+    line-height: 30px;
+    border-bottom: 1px solid #ddd;
+    font-size:17px;
+    color:#999;
+}
+.dBody .two-tab li:hover
+,.dBody .two-tab li.active{
+    background-color: #06AFD8;
+    color:#fff;
+}
+footer{
+    border-top:1px solid #ddd;
+}
+/*以上为公共部分－自适应布局*/
+.search-info{
+    width: 90%;
+    margin:5px auto 65px;
+    display: block;
+}
+.company-search{
+    display: none;
+}
+.search-info i{
+    padding-left:10px;
+    color:#06AFD8;
+}
+.search-info .label-name{
+    padding-left:7px;
+    font-size:14px;
+}
+.search-info .input-box{
+    border-bottom: 1px solid #06AFD8;
+    line-height:41px;
+}
+.search-info .input-box input{
+    padding-left:10px;
+    font-size:14px;
+}
+.dBody .submit{
+    width: 90%;
+    line-height: 40px;
+    text-align: center;
+    background-color: #BFF0FD;
+    margin:0 auto 18px;
+    font-size:14px;
+    color:#999;
+}
+.dBody a{
+    display: block;
+    color:#06AFD8;
+    text-decoration: underline;
+    text-align: center;
+    font-size:12px;
+}
+/*企业调研*/
+.dBody .search-company-info{
+    display: none;
+}
+/*.last-input{
+    position: relative;
+}
+.count{
+    position: absolute;
+    top:0;
+    right:10px;
+}*/
+

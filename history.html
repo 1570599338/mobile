@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+    <title>汽车调查</title>
+    <link rel="stylesheet" href="css/iconfont/myfont.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/history.css" />
+</head>
+
+<body>
+    <header>
+        <ul>
+            <li id="back" class="iconfont">&#xe662;返回<i>|</i></li>
+            <li>历史答卷</li>
+            <li></li>
+        </ul>
+    </header>
+    <div class="history-bg">
+        <p class="font-size-12">您的历史答卷数</p>
+        <p class="history-count"></p>
+    </div>
+    <div class="content-box"></div>
+    <div class="go-top" style="background-color: #fff;"><i class="iconfont font-size-20" style="color:#FEBC21;">&#xe65c;</i></div>
+    <!-- zepto  -->
+    <script type="text/javascript" src="js/zepto/zepto_1.1.6.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+    <script type="text/javascript">
+        var memberid = getParamByName("memberid", window.location);
+        $(function() {
+
+            //回退
+            $('#back').on('click', function() {
+                window.location = "member.html?memberid=" + memberid;
+            });
+
+            //返回顶部按钮的显示与隐藏
+            $(window).on('scroll',function(){
+                if($(this).scrollTop() > 800){
+                    $('.go-top').css('display','block');
+                }else{
+                    $('.go-top').css('display','none');
+                }
+            });
+            //返回到顶部操作
+            $(".go-top").on("click", function () {
+                $("body").scrollTo({toT:0});
+            });
+
+            var data = {
+                subSys: 'wesurvey',
+                repID: 87,
+                isQuery: '1',
+                dispType: '12',
+                perRows: '2000',
+            }
+            data.selCndIDs = "memberID";
+            data.cnd_memberID = memberid;
+            var html = "";
+            ajax2('sysmng.jsonreport.do?', 'json', 'get', data, function(data) {
+                $(".history-count").html(data.count);
+                var dataVal = data.objs;
+                if (dataVal.length > 0) {
+                    for (var i = 0; i < dataVal.length; i++) {
+                        html +='<div class="content clearfix">' +
+                                '<div class="title">' +
+                                '<div class="intro">' +
+                                '<p style="line-height: 18px;" class="font-size-14">' + dataVal[i].templateName + '</p>' +
+                                '<p class="time" style="line-height:26px; ">答卷时间：' + dataVal[i].completedAt + '</p>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="look-bg"><a class="check-questionnaire" href="statistical.html?memberid=' + memberid + '&sampleid=' + dataVal[i].id + '&templateid=' + dataVal[i].templateCode + '&templateName=' + dataVal[i].templateName + '">' +
+                                '<i class="iconfont">&#xe649;</i>' +
+                                '<p>查看问卷</p>' +
+                                '</a>' +
+                                '</div>' +
+                                '</div>';
+                    }
+                    $('.content-box').html('').append(html);
+                } else {
+                    $('.content-box').html('').append('<i class="iconfont hint-none">&#xe624;</i><p class="hint-text">您还没有历史答卷<p>');
+                }
+            }, function(error) {})
+        });
+
+        //@ sourceURL=dynamicScript-history.js
+    </script>
+</body>
+
+</html>

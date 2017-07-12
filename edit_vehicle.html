@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+    <title>汽车调查</title>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" type="text/css" href="js/mdatetimer/zepto.mdatetimer.css">
+    <link rel="stylesheet" href="css/iconfont/myfont.css" />
+    <link rel="stylesheet" href="js/LArea-master/css/LArea.css">
+</head>
+
+<body>
+    <!-- header -->
+    <header>
+        <ul>
+            <li id="back" class="iconfont">&#xe662;确定<i>|</i></li>
+            <li>车辆信息</li>
+            <li></li>
+        </ul>
+    </header>
+    <!-- Brand/Model -->
+    <!--<div class="brochure field-section" style="display:none;">
+        <input type="text" id="brochure" class='change-info-input' style="display:none;" />
+        <input type="text" id="brochure_name" name="" value="" class='change-info-input' readonly="readonly">
+    </div>-->
+    <!-- PlateNumber  -->
+    <div class="platenumber field-section" style="display: none;">
+        <input type="text" id="platenumber" class='change-info-input' value="" />
+        <p class="change-tip"></p>
+    </div>
+    <!-- VinNumber -->
+    <div class="vinnumber field-section" style="display: none;">
+        <input type="text" id="vinnumber" class='change-info-input' />
+        <p class="change-tip"></p>
+    </div>
+    <!-- Color -->
+    <!--<div class="color field-section" style="display: none;">
+        <input type="text" id="color" class='change-info-input' />
+        <p class="change-tip"></p>
+    </div>-->
+    <!-- BoughtDate -->
+    <div class="boughtdate field-section" style="display: none;">
+        <input type="text" id="boughtdate" class='change-info-input date-picker' readonly="readonly" />
+        <p class="change-tip"></p>
+    </div>
+    <!--volume-->
+    <div class="volume field-section" style="display: none;">
+        <input type="text" id="volume" class='change-info-input' />
+        <p class="change-tip"></p>
+    </div>
+    <!-- LastDateTime -->
+    <div class="lastmaintaintime field-section" style="display:none;">
+        <input type="text" id="lastmaintaintime" class='change-info-input date-picker' readonly="readonly" />
+        <p class="change-tip"></p>
+    </div>
+    <!--LastDealerName-->
+    <div class="lastmaintaindealer field-section" style="display: none;">
+        <input type="text" id="lastmaintaindealer" class='change-info-input' />
+        <p class="change-tip"></p>
+    </div>
+</body>
+
+<!-- zepto  -->
+<script type="text/javascript" src="js/zepto/zepto_1.1.6.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/mdatetimer/zepto.mdatetimer.js"></script>
+<script type="text/javascript" src="js/LArea-master/js/LArea.min.js"></script>
+
+<script type="text/javascript">
+    $(function() {
+
+        var fieldMap = [];
+        fieldMap['brochure'] = 'brochure';
+        fieldMap['platenumber'] = 'plateNumber';
+        fieldMap['vinnumber'] = 'vinNumber';
+        fieldMap['volume'] = 'volume';
+        fieldMap['color'] = 'color';
+        fieldMap['boughtdate'] = 'boughtDate';
+        fieldMap['lastmaintaintime'] = 'lastMaintainTime';
+        fieldMap['lastmaintaindealer'] = 'lastMaintainDealer';
+
+        var memberid = getParamByName("memberid", window.location);
+        var vehicleid = getParamByName("vehicleid", window.location);
+        var driverid = getParamByName("driverid", window.location);
+        var field = getParamByName('field', window.location);
+        var title = getParamByName('title', window.location);
+
+        //验证输入合法性
+        var error = '',
+            value = '';
+        var validate = function() {
+            return true;
+        }
+
+        //回退按钮点击事件
+        $("#back").on('click', function() {
+            //验证数据
+            if (validate() == false) {
+                return;
+            }
+            //提交数据
+            var data = {
+                'driverID': driverid
+            };
+            data[field] = $('#' + field).val();
+            //
+            ajax2('wesurvey.vehicle.do?op=' + field + '&memberID=' + memberid + "&id=" + vehicleid, 'json', 'post', data, function(data) {
+                //var vehicle = data.objs[0]; vehicleid = vehicle.id;
+                window.location = 'vehicle.html?memberid=' + memberid + '&driverid=' + data.objs[0].driverID + '&vehicleid=' + data.objs[0].id;
+            }, function(error) {
+                //
+            });
+        });
+
+        //隐藏/显示编辑区域
+        //$('.field-section').hide();
+        $('.' + field).show();
+        //更新title
+        $('.title').text('修改' + title);
+
+        //查询条件
+        var data = {
+            subSys: 'wesurvey',
+            repID: '41',
+            isQuery: '1',
+            dispType: '12',
+            perRows: '2000',
+            selCndID: "id",
+            cnd_id: vehicleid,
+        };
+        //获取车辆详细信息
+        ajax2('sysmng.jsonreport.do?', 'json', 'post', data, function(data) {
+            if (data.objs && data.objs.length > 0) {
+                var vehicle = data.objs[0];
+                //更新界面
+                $('#' + field).val(vehicle[fieldMap[field]]);
+            }
+        }, function(error) {
+            //
+        });
+        //初始化日期控件
+        if (field == "boughtdate" || field == "lastmaintaintime") {
+            var date = new Date;
+            var nowYear = date.getFullYear()
+            var years = [];
+            for (var i = 1950; i < (nowYear + 1); i++) {
+                years.push(i);
+            }
+            $('.date-picker').mdatetimer({
+                mode: 1, //时间选择器模式：1：年月日，2：年月日时分（24小时），3：年月日时分（12小时），4：年月日时分秒。默认：1
+                format: 2, //时间格式化方式：1：2015年06月10日 17时30分46秒，2：2015-05-10  17:30:46。默认：2
+                years: years, //年份数组
+                nowbtn: true, //是否显示现在按钮
+                onOk: function() {
+                    //alert('OK');
+                }, //点击确定时添加额外的执行函数 默认null
+                onCancel: function() {
+                    //alert('A');
+                }, //点击取消时添加额外的执行函数 默认null
+            });
+        }
+    });
+
+    //@ sourceURL=dynamicScript-edit-vehicle.js
+</script>
+
+</html>

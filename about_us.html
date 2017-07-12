@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+    <title>汽车调查</title>
+    <link rel="stylesheet" href="css/iconfont/myfont.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/about_us.css" />
+    <script src="js/template.js"></script>
+    <script src="js/aboutUs.js"></script>
+</head>
+
+<body>
+    <header>
+        <ul>
+            <li id="back" class="iconfont">&#xe662;返回<i>|</i></li>
+            <li>关于我们</li>
+            <li></li>
+        </ul>
+        <div class="title">
+            <div class="ellipse">
+                <p class="about">关于</p>
+
+                <p class="us">我们</p>
+
+                <div class="circle">
+                    <div class="small">
+                        <i class="iconfont" style="font-size:20px;">&#xe621;</i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="line">
+            <div class="dot"></div>
+        </div>
+        <div class="content" id="content">
+            <div class="content-square">
+                <div class="intro-title">
+                    <div class="title-circle">1</div>
+                    卓思简介
+                </div>
+                <div class="content-box">
+                    <p>[MWSP]是中国领先的移动终端调研平台。我们专注于汽车市，致力于成为连接消费者和汽车企业的沟通桥梁。让消费者的声音更好地传达给汽车企业决策层，同时也让汽车企业时刻把握市场动向，开发出消费者所真正需要的产品。</p>
+
+                    <div class="more-box">
+                        <br/>
+                        <p>只要您是车主，您就可以通过在线注册及实名认证的方式加入到我们的平台中并成为【MWSP】的会员。我们会定期向我们的会员推送调研邀请，收到邀请的会员在完成相应的调研后，可以获取相应的积分或实物奖励。<br/><br/>【MWSP】隶属于北京卓思天成数据咨询股份有限公司。卓思是业内领先的汽车专业调研公司，以提供最为专业和优质的调研服务为主业。</p>
+                    </div>
+                    <a href="javascript:;" class="see-more">查看更多</a>
+                </div>
+            </div>
+            <!--<script id="abContent" type="text/html">
+            {{each list as value i}}
+            <div class="content-square">
+                <div class="intro-title">
+                    <div class="title-circle">
+                        <div class="white-circle">{{i+1}}</div>
+                    </div>
+                    {{value.title}}
+                </div>
+                <div class="content-box">
+                    <p>{{value.content.substring(0,92)}}</p>
+                    <div class="more-box">
+                        <p>{{value.content.substring(92,1000)}}</p>
+                    </div>
+                    <a href="javascript:;" class="see-more">查看更多</a>
+                </div>
+            </div>
+            {{/each}}
+        </script>-->
+            <!--<div class="content-square">
+            <div class="intro-title" style="border-color:#9DED1D;">
+                <div class="title-circle" style="background-color:#9DED1D;">2</div>
+                汽车调查
+            </div>
+            <div class="content-box">
+                <p>汽车调查是卓思大数据存储的一项调查工作，调查公司及个人对各种汽车的各项指标反馈的调查存储，以定向指导未来的研发设计及商业活动。</p>
+
+                <div class="more-box">
+                    <p>卓思专注于汽车行业，以市场研究业务为主，并提供数据和和渠道咨询服务。卓思在产品生命周期各阶段均有丰富的项目经验，能够为客户提供全面的市场研究服务</p>
+                </div>
+                <a href="javascript:;" class="see-more">查看更多</a>
+            </div>
+        </div>-->
+
+            <div class="content-square">
+                <div class="intro-title" style="border-color:#1ED8ED;">
+                    <div class="title-circle" style="background-color:#1ED8ED;">2</div>
+                    联系我们
+                </div>
+                <div class="content-box">
+                    <!--<p><i class="iconfont" style="color:#fff;">&#xe602;</i><a href="http://www.onlinesurvey.com">汽车调查网址：www.onlinesurvey.com</a></p>-->
+                    <p><i class="iconfont" style="color:#fff;">&#xe637;</i><a href="http://www.maxinsight.cn">卓思数据官网：www.maxinsight.cn</a></p>
+                    <p><i class="iconfont" style="color:#fff;">&#xe647;</i><a href="javascript:;">电话：86(10)6468-7240</a></p>
+                    <p><i class="iconfont" style="color:#fff;">&#xe62a;</i><a href="javascript:;">传真：86(10) 6460-5320</a></p>
+                    <p><i class="iconfont" style="color:#fff;">&#xe645;</i><a href="javascript:;">电子邮件：info@maxinsight.cn</a></p>
+                    <p><i class="iconfont" style="color:#fff;float:left;line-height: 20px;">&#xe646;</i><a href="javascript:;">地址：北京市朝阳区万红西街2号燕东大厦D座1-2层 100015</a></p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- zepto  -->
+    <script type="text/javascript" src="js/zepto/zepto_1.1.6.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript">
+        var memberid = getParamByName("memberid", window.location);
+        $(function() {
+
+            $('#back').click(function() {
+                window.location = 'home.html?memberid=' + memberid;
+            });
+
+        });
+
+        //@ sourceURL=dynamicScript-about_us.js
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+body{
+    background-color: #EEEEEE;
+}
+.content{
+    height: 50px;
+    background-color: #fff;
+    margin-top:8px;
+    padding:10px 15px;
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+.content .text{
+    -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: 1;         /* OLD - Firefox 19- */
+    -webkit-flex: 1;          /* Chrome */
+    -ms-flex: 1;              /* IE 10 */
+    flex: 1;                  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    font-size:12px;
+    color:#333;
+}
+.content .img{
+    background: url(../img/car-img.png) no-repeat;
+    background-size: cover;
+    width: 80px;
+    height: 50px;
+    margin-left:13px;
+}
+.content .text .intro{
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    margin-top:6px;
+    color:#999;
+    font-size:10px;
+    transform: scale(0.83333333);
+    -webkit-transform-origin-x: 0;
+}
+.content .text .intro .star,
+.content .text .intro .zan,
+.content .text .intro .date{
+    -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: 1;         /* OLD - Firefox 19- */
+    -webkit-flex: 1;          /* Chrome */
+    -ms-flex: 1;              /* IE 10 */
+    flex: 1;                  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+/*点击加载更多*/
+.more{
+   /* height: 49px;
+    width: 120%;
+    background-color: #fff;*/
+
+    font-size:10px;
+    transform: scale(0.83333333);
+    -webkit-transform-origin-x: 0;
+    /*text-align: center;
+    margin-top:8px;
+    line-height: 49px;*/
+    color:#A5770B;
+    margin-top:7px;
+    display: block;
+    margin-left:15px;
+    text-decoration: underline;
+}

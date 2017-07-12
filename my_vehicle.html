@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+    <title>个人中心</title>
+    <link rel="stylesheet" href="css/iconfont/myfont.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/my_vehicle.css" />
+</head>
+
+<body>
+    <header>
+        <ul>
+            <li id="back" class="iconfont">&#xe662;<i>|</i></li>
+            <li>汽车调查－车主中心</li>
+            <li></li>
+        </ul>
+    </header>
+    <div class="vehicles-box">
+        <ul class="vehicles-list">
+        </ul>
+        <div class="vehicles-add">
+            <a href="vehicle.html">
+                <i class="iconfont" style="font-size:12px;padding-right:4px;">&#xe631;</i>添加更多车辆
+            </a>
+        </div>
+    </div>
+</body>
+
+<!-- zepto  -->
+<script type="text/javascript" src="js/zepto/zepto_1.1.6.js"></script>
+<script type="text/javascript" src="js/zepto-master/src/touch.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+
+<script type="text/javascript">
+    $(function() {
+        var memberid = getParamByName("memberid", window.location);
+        $('#back').on('tap', function() {
+            window.location = 'member.html?memberid=' + memberid;
+        });
+
+        var linkData = function(repID) {
+            var data = {
+                subSys: 'wesurvey',
+                repID: repID,
+                isQuery: '1',
+                dispType: '12',
+                perRows: '2000',
+            }
+            return data;
+        };
+        var init = function() {
+            var criteria = linkData(104);
+            criteria.selCndIDs = "memberID";
+            criteria.cnd_memberID = memberid;
+            var html = "";
+            ajax2('sysmng.jsonreport.do?', 'json', 'get', criteria, function(data) {
+                var driverData = data.objs;
+                $('.vehicles-add a').attr('href', 'vehicle.html?memberid=' + memberid + '&vehicleid=-1' + '&vehicleid' + driverData[0].driverID);
+                if (driverData.length >= 2)
+                    $(".vehicles-add").hide();
+                for (var i = 0; i < driverData.length; i++) {
+                    html += '<li data-vehicle="1000472997">' +
+                        '<a href="vehicle.html?memberid=' + memberid + '&vehicleid=' + driverData[i].id + '&driverid=' + driverData[0].driverID + '">' +
+                        '<p class="vehicle-img" style="background-image:url(' + app.resHost + "wapmember/" + (driverData[i].imageUrl1 != "" ? driverData[i].imageUrl1 : "option/vehicle.png") + ')"></p>' +
+                        '<span class="vehicle-model">' + driverData[i].modelName + '</span>' +
+                        '<span class="vehicle-right"></span>' +
+                        '</a>' +
+                        '</li>'
+                }
+                $('.vehicles-list').html('').append(html);
+            }, function(error) {})
+        }
+        init();
+    });
+
+    //@ sourceURL=dynamicScript-my_vehicle.js
+</script>
+
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
+    <title></title>
+    <link rel="stylesheet" href="css/iconfont/myfont.css"/>
+    <link rel="stylesheet" href="css/weui-master/dist/style/weui.css"/>
+    <link rel="stylesheet" href="css/base.css"/>
+    <link rel="stylesheet" href="css/registration.css"/>
+</head>
+<body>
+<header>
+    <ul>
+        <li id="back" class="iconfont">&#xe662;<i>|</i></li>
+        <li>汽车调查－注册页面</li>
+        <li></li>
+    </ul>
+</header>
+<div class="logo-box">
+    <div class='logo'></div>
+    <p class="font-size-17">汽车调查</p>
+</div>
+
+<form action="#">
+    <div class="box">
+        <p><i class="iconfont">&#xe60c;</i><i>|</i><input type="text" class="phonenumber font-size-14" placeholder="请输入手机号" pattern="^\(?\d{3}\)?[-\s]\d{3}[-\s]\d{4}.*?$"/></p>
+        <input type="button" class="getcode font-size-12" id="getcode" value="点击获取验证码" style="" />
+        <p><i class="iconfont">&#xe614;</i><i>|</i><input type="text" class="validatecode font-size-14" placeholder="请输入验证码"/></p>
+    </div>
+    <div id="logon" class="register register-off"><a href="#" class="font-size-17">登录</a></div>
+</form>
+</body>
+<!--注册奖励弹出框-->
+<div class="public-mask">
+    <div class="public-alert-box">
+        <p class="alert-type font-size-14">注册成功</p>
+        <p class="alert-intro font-size-12" style="line-height: 20px;">
+            您已成功注册，系统随机赠送<span class="reward-type"></span></span><span class="reward-amount"></span>，自动存入您的<span class="reward-type"></span>账户。祝您答卷愉快！
+        </p>
+        <i class="iconfont close">&#xe663;</i>
+    </div>
+</div>
+
+<!-- zepto  -->
+<script type="text/javascript" src="js/zepto/zepto_1.1.6.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+
+<script type="text/javascript">
+
+    var openid = getParamByName('openid', window.location);
+    var gotourl = getParamByName('gotourl', window.location);
+    var templateid = getParamByName('templateid', window.location);
+
+    $(function () {
+        if(!openid && templateid){
+            window.location = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf80f149ebb5a09ac&redirect_uri=http%3A%2F%2Fmi-research.cn%2Fwesurvey%2FmainService.sv%3Fmenuid%3Dwelcome%26templateid%3D"+templateid+"&response_type=code&scope=snsapi_userinfo&state=STATE&connect_redirect=1#wechat_redirect";
+        } else {
+            //获取验证码
+            $('#getcode').on('click', function () {
+                var phoneNumber = $('.phonenumber').val();
+                if (phoneNumber) {
+                    var submitData = {
+                        phoneNumber:phoneNumber
+                    }
+                    ajaxPost('sms/create', submitData, null, function (data) {
+                        if(data.errors.length>0){
+                            $('.validatecode').val('').attr('placeholder',data.errors[0].msg.split("info=")[1]);
+                        } else {
+                            $('#logon').addClass('register-active').removeClass('register-off');
+                        }
+
+                    }, function (err) {
+                        alert(err);
+                    })
+                } else {
+                    alert('请输入手机号');
+                }
+            });
+
+            //登录，如果用户不存在则创建用户
+            $('#logon').on('click', function () {
+                var phoneNumber = $('.phonenumber').val();
+                var code =  $('.validatecode').val();
+                ajax2('wesurvey.logon.do?phoneNumber=' + phoneNumber + '&openID=' + openid  + '&code=' + code, 'json', 'post', null, function (data) {
+                    //ajax2('wesurvey.logon.do?phoneNumber=' + phoneNumber + '&openID=oCYA6vzBr3EK0E1oYPbaqTmFUY0g'  + '&code=' + code, 'json', 'post', null, function (data) {
+                    if(data == null){
+                        $('.validatecode').val('').attr('placeholder',"验证码错误！");
+                    } else if (data.objs && data.objs.length > 0) {
+                        var member = data.objs[0];
+                        //注册奖励弹出
+                        if(member.isRegister == 'true') {
+                            var rewardType = '';
+                            if(member.rewardType == 1){
+                                rewardType = '礼金';
+                            }else if(member.rewardType == 2){
+                                rewardType = '积分';
+                            }
+                            $('.public-mask').css('display','block');
+                            $('.public-mask .reward-type').html(rewardType);
+                            $('.public-mask .reward-amount').html(member.rewardAmount);
+                            $('.public-mask .close').on('click', function() {
+                                $('.public-mask').css('display','none');
+                                if(!gotourl){
+                                    if(templateid){
+                                        gotourl="welcome.html?templateid="+templateid;
+                                    } else {
+                                        gotourl="welcome.html";
+                                    }
+                                }
+                                window.location = gotourl + (gotourl.indexOf('?') >= 0 ? '&' : '?') + "memberid=" + member.id;
+                            });
+                        }else{
+                            if(!gotourl){
+                                if(templateid){
+                                    gotourl="welcome.html?templateid="+templateid;
+                                } else {
+                                    gotourl="welcome.html";
+                                }
+                            }
+                            window.location = gotourl + (gotourl.indexOf('?') >= 0 ? '&' : '?') + "memberid=" + member.id;
+                        }
+                    }
+                }, function (error) {
+                    //$('.validatecode').val('').attr('placeholder',"验证码错误！");
+                });
+            });
+
+            //验证码更改事件
+            $('.validatecode').on('change', function () {
+                $('#logon').addClass('register-active').removeClass('register-off');
+            });
+        }
+
+
+    });
+
+    //@ sourceURL=dynamicScript-registration.js
+</script>
+
+</html>
+
+
+

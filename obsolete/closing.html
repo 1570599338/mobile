@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
+    <link rel="stylesheet" href="css/base.css"/>
+    <style>
+        /*蒙板*/
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .mask-box {
+            background: url(img/complete1.png) no-repeat center center;
+            background-size: cover;
+            position: relative;
+            z-index: 99;
+            top: 0;
+            left: 0;
+        }
+        @media (min-width: 767px) {
+            .mask-box{
+                width:640px;
+                margin:auto;
+            }
+            body{
+                background-color: #FEBC21;
+            }
+        }
+        .mask-box .red-body {
+            position: absolute;
+            top:42px;
+            left:0;
+            bottom:0;
+            right:0;
+            margin:auto;
+        }
+
+        .mask-box .red-body p {
+            text-align: center;
+            color: #fff;
+            font-family: '方正粗谭黑简体', 'Microsoft YaHei', sans-serif;
+            text-shadow: 2px 2px 2px #000;
+        }
+
+        .mask-box .red-body p:first-child {
+            font-size: 20px;
+        }
+
+        .mask-box .red-body p:last-child {
+            font-size: 30px;
+        }
+
+        .mask-box .btn-box {
+            height: 70px;
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            margin-left: -118px;
+        }
+
+        .mask-box .btn-box .left, .mask-box .btn-box .close {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid #fff;
+            float: left;
+            vertical-align: middle;
+            font-size: 12px;
+            font-family: "方正正中黑简体", "Microsoft YaHei", "sans-serif";
+            line-height: 50px;
+            text-align: center;
+            word-wrap: break-word;
+            color: #fff;
+            background-color: #FF7F00;
+            box-shadow: 0 6px 10px #FF7F00;
+        }
+
+        .mask-box .btn-box .left p {
+            margin-top: 13px;
+            color: #fff;
+            font-size: 12px;
+            font-family: "方正正中黑简体", "Microsoft YaHei", "sans-serif";
+            line-height: 14px;
+        }
+
+        .mask-box .btn-box .middle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 1px solid #fff;
+            float: left;
+            margin: 0 30px;
+            vertical-align: middle;
+            line-height: 20px;
+            text-align: center;
+            background-color: #EF5752;
+            box-shadow: 0 5px 10px #EF5752;
+            margin-top: -10px;
+        }
+
+        .mask-box .btn-box .middle p {
+            color: #fff;
+            font-size: 17px;
+            font-family: "方正正中黑简体", "Microsoft YaHei", "sans-serif";
+            margin-top: 17px;
+        }
+        .mask-box .success-tip{
+            position: absolute;
+            color:#fff;
+            text-align: center;
+            top:160px;
+            left:0;
+            right:0;
+            bottom:0;
+            margin:auto;
+            font-family: "方正正中黑简体", "Microsoft YaHei", "sans-serif";
+            font-size:17px;
+        }
+        /*红包*/
+        .mask-box .red-envelope{
+            width: 200px;
+            height: 200px;
+            background: url(img/red-envelope.png) no-repeat center center;
+            background-size:cover;
+            position: absolute;
+            top:-106px;
+            left:0;
+            right:0;
+            bottom:0;
+            margin:auto;
+        }
+        .mask-box  .congratulations p{
+            text-align: center;
+            font-family: "方正正中黑简体", "Microsoft YaHei", "sans-serif";
+        }
+        .mask-box .congratulations p:first-child{
+            color:#EF5752;
+            font-size: 17px;
+            padding-top:40px;
+            padding-bottom:11px;
+        }
+        .mask-box .congratulations p:last-child{
+            color:#fff;
+            font-size:12px;
+        }
+        .mask-box .red-body i{
+            font-style:normal;
+        }
+        .mask-box .intro{
+            color:#fff;
+            font-size:12px;
+            text-align:center;
+            position: absolute;
+            bottom:166px;
+            width: 240px;
+            left:50%;
+            margin-left:-120px;
+        }
+        .mask-box .intro span{
+            color:#EE5752;
+        }
+    </style>
+</head>
+<body>
+<div class="mask-box">
+    <div class="congratulations"><p>恭喜您完成此份问卷</p><p>您将获得</p></div>
+    <div class="red-envelope">
+        <div class="red-body">
+            <p>礼金</p>
+            <p>¥<i class="money">100</i></p>
+        </div>
+        <div class="success-tip">我要领取</div>
+    </div>
+    <div class="intro">点击<span>“我要领取”</span>后，自动存入您的<span>礼金账户</span></div>
+    <div class="btn-box">
+        <div class="left">
+            <p>
+                我的<br>
+                礼金
+            </p>
+        </div>
+        <div class="middle">
+            <p>
+                问卷<br>
+                统计
+            </p>
+        </div>
+        <div class="close">退出</div>
+    </div>
+</div>
+
+<script src="js/zepto/zepto_1.1.6.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+
+<script type="text/javascript">
+
+    var memberid = getParamByName("memberid", window.location);
+
+    $(function () {
+
+        /*蒙板*/
+        $('.mask-box').css('height', $(window).height(), 'width', $(window).width());
+        //我要领取
+        $('.success-tip').on('click',function(){
+           $('.success-tip').html('领取成功');
+        });
+
+        //退出
+        $('.close').on('click', function () {
+            window.location = 'surveys.html?memberid=' + memberid;
+        });
+        //我的礼金
+        $('.left').on('click',function(){
+            window.location = 'emoney.html?memberid=' + memberid + 'money=' + $('.money').html();
+        });
+        //问卷统计
+        $('.middle').on('click',function(){
+            window.location = 'history.html?memberid=' + memberid;
+        })
+
+    });
+
+    //@ sourceURL=dynamicScript-point.js
+</script>
+
+</body>
+</html>

@@ -1,0 +1,709 @@
+body {
+    background-color: #eee;
+}
+/*问卷*/
+.template-name{
+    width: 100%;
+    background-color: #fff;
+    text-align: center;
+    font-size:17px;
+    color:#333;
+}
+.template-name i{
+    color:#FEBC21;
+}
+/*标题样式start*/
+.title-box {
+    padding: 0;
+    height: 45px;
+}
+
+.title {
+    width: 96%;
+    margin: auto;
+    border-bottom: 1px solid red;
+    position: relative;
+}
+
+.title-type {
+    width: 70px;
+    height: 20px;
+    border: 1px solid #EF5752;
+    border-radius: 4px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: #fff;
+    color: #EF5752;
+    font-size: 12px;
+    text-align: center;
+    line-height: 21px;
+}
+
+/*end*/
+.weui_cells {
+    margin-top: 14px;
+}
+
+.question-box {
+    padding: 0px 6px 20px;
+}
+/*去掉默认单选框对勾样式*/
+.weui_cells_radio .weui_check:checked + .weui_icon_checked:before {
+    display: block;
+    content: '';
+}
+
+.weui_cell:before {
+    left: 0px;
+}
+
+/*选项上的小汽车*/
+.options .car {
+    position: absolute;
+    /*right:16px;*//*正常位置*/
+    /*right:420px;*//*隐藏位置*/
+    right: 1350px;
+    top: -9px;
+    font-size: 43px;
+    color: #FEBC21;
+}
+
+.options .hook {
+    position: absolute;
+    /* left:240px;*//*正常位置*/
+    /*left:340px;*//*隐藏位置*/
+    left: 1350px;
+    top: 4px;
+    font-size: 26px;
+    color: #FE9121;
+}
+
+/*end*/
+.label-border {
+    border-left: 1px solid #D9D9D9;
+    border-right: 1px solid #D9D9D9;
+    border-top: 1px solid #D9D9D9;
+}
+
+.label-border:last-child {
+    border-bottom: 1px solid #D9D9D9;
+}
+
+.next-box {
+    text-align: center;
+    padding: 0 6px;
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+.next-box .btn{
+    -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: 1;         /* OLD - Firefox 19- */
+    width: 20%;               /* For old syntax, otherwise collapses. */
+    -webkit-flex: 1;          /* Chrome */
+    -ms-flex: 1;              /* IE 10 */
+    flex: 1;                  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    height: 40px;
+    color:#fff;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 700;
+    margin-top:0px;
+    margin-bottom:20px;
+    font-family: "方正正中黑简体", "Microsoft YaHei", "sans-serif";
+    -webkit-appearance : none ;  /*解决iphone safari上的圆角问题*/
+}
+.prev {
+    background-color: #FEBC21;
+    margin-right:6px;
+}
+.next {
+    background-color: #FE9121;
+}
+
+.weui_cell_bd p {
+    font-size: 12px;
+    /*width: 80%;*/
+}
+
+/*多选框*/
+.weui_cells_checkbox .weui_check:checked + .weui_icon_checked:before {
+    content: '';
+}
+
+.weui_cells_checkbox .weui_icon_checked:before {
+    content: '';
+}
+
+.question-content {
+    width: 94%;
+    margin: 10px 3% 25px;
+    background-color: #fff;
+    overflow-y: auto;
+}
+
+/*进度条*/
+.progress {
+    width: 94%;
+    height: 2px;
+    background-color: #FEBC21;
+    position: fixed;
+    left: 3%;
+    bottom: 12px;
+}
+
+.bar {
+    position: absolute;
+    top: -30px;
+    left: 0;
+    cursor: pointer;
+    font-size: 30px;
+    color: #EF5752;
+}
+
+.mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #EF5752;
+    width: 0;
+    height: 100%;
+}
+/*红旗*/
+.flag{
+    width: 24px;
+    height: 25px;
+    background: url(../img/flag.png) no-repeat center center;
+    background-size: cover;
+    position:absolute;
+    bottom:0;
+    right:0;
+}
+/*图片题*/
+.options ul {
+    /*margin: 12px 4% 0px;
+    width: 92%;*/
+}
+.options ul.img-question{
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+    -moz-column-gap:20px;
+    -webkit-column-gap:20px;
+    column-gap:20px;
+}
+.options ul.img-question img{
+    width:100% !important;
+}
+.options ul li {
+    margin-bottom:10px;
+    cursor: pointer;
+    position: relative;
+    border:1px solid #f8f8f8;
+}
+
+.options ul li:nth-child(3n) {
+    margin-right: 0;
+}
+
+.options ul li .li-mask {
+    width:100%;
+    height: 100%;
+    /*height: 160px;*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .6);
+    z-index: 1;
+    text-align: center;
+    color: #FEBC21;
+    display: none;
+}
+.options ul li .li-mask i{
+    font-size:30px;
+    position: absolute;
+    top:32%;
+    left:0;
+    right:0;
+}
+.question-box .options .img-title{
+    position:absolute;
+    bottom:-24px;
+    left:16px;
+}
+.question-box .options .img-open{
+    position: absolute;
+    bottom:-46px;
+    left:0;
+    width: 56px;
+    height: 14px;
+}
+.img-box {
+    padding-bottom: 0;
+}
+
+/*打分题*/
+.star {
+    color: #FF7F00;
+    font-size: 18px;
+}
+
+#star {
+    display: inline-block;
+}
+
+#star a {
+    margin-right: 2px;
+}
+
+.total {
+    float: right;
+    display: inline-block;
+    font-size: 12px;
+    vertical-align: bottom;
+    line-height: 26px;
+}
+
+.score {
+    color: #333;
+}
+.question-box .matrix-score-a a{
+    text-align: center;
+}
+/*灰色阴影*/
+.weui_cell, .weui_check_label, .label-border,
+.weui_cells, .weui_cells_radio, .options,
+.weui_cell_bd, .weui_cell_primary {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/*多行埴空题*/
+.options textarea {
+    margin-left: 2px;
+    width: 95%;
+    padding: 4px;
+    border: 1px solid #D9D9D9;
+}
+
+/*多项填空*/
+.options .multiple_blank {
+    width: 97%;
+    height: 32px;
+    padding-left: 4px;
+    border: 1px solid #D9D9D9;
+    margin-bottom: 12px;
+}
+
+.options .multiple_blank_group p {
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+
+/*矩阵打分题*/
+.question-box .tip .top-left,
+.question-box .score-title .score-title-left,
+.question-box .score-box .score-left
+{
+    float: left;
+    width:100px;
+}
+.question-box .tip .top-right,
+.question-box .score-title .score-title-right,
+.question-box .score-box .test-right{
+    float: right;
+    width:60px;
+}
+.question-box .tip .top-middle,
+.question-box .score-title .score-title-middle,
+.question-box .score-box .score-middle{
+    margin:0 60px 10px 100px;
+    width:auto;
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+.question-box .tip .top-middle{
+    margin-bottom: 10px;
+}
+.question-box .top-middle .score-flex,
+.question-box .score-title-middle .score-flex,
+.question-box .score-middle .score-flex{
+    color:#333;
+    font-size:12px;
+    -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: 1;         /* OLD - Firefox 19- */
+    width: 20%;               /* For old syntax, otherwise collapses. */
+    -webkit-flex: 1;          /* Chrome */
+    -ms-flex: 1;              /* IE 10 */
+    flex: 1;                  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+.question-box .score-title .score-title-middle i {
+    padding:0 4px;
+    text-align: center;
+    font-size:12px;
+    background-color: #eee;
+}
+.question-box .score-box .score-middle a{
+    height:20px;
+    text-align: center;
+    line-height: 20px;
+    -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: 1;         /* OLD - Firefox 19- */
+    width: 20%;               /* For old syntax, otherwise collapses. */
+    -webkit-flex: 1;          /* Chrome */
+    -ms-flex: 1;              /* IE 10 */
+    flex: 1;                  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+.question-box .score-right,
+.question-box .top-right,
+.question-box .score-title .score-title-right{
+    float: left;
+    width: 36px;
+    font-size: 12px;
+    text-align: center;
+    font-size:12px;
+    padding-top:6px;
+}
+.question-box .top-right,
+.question-box .score-title .score-title-right{
+    width:62px;
+}
+/*矩阵单选、多选*/
+.question-box .matrix{
+    border-left:5px solid #f9f9f9;
+    padding-top:10px;
+}
+.question-box .matrix-rows i{
+    width: 10px;
+    height: 10px;
+    background-color: #FE9121;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right:8px;
+    margin-left:5px;
+}
+.question-box .matrix-rows{
+    height: 23px;
+    width: 100%;
+    background-color: #FFF9F2;
+    font-size:14px;
+    line-height: 23px;
+    margin-left:-5px;
+}
+.question-box .matrix-rows .open-text{
+    height: 23px;
+    vertical-align: middle;
+    width: 65%;
+    border:1px solid #D9D9D9;
+    padding:2px 4px;
+}
+.question-box .matrix .weui_cells{
+    padding-left:20px;
+}
+/*矩阵打分题展开*/
+.question-box .matrix{
+    border-left:5px solid #f9f9f9;
+    padding-top:10px;
+}
+.question-box .matrix-rows i{
+    width: 10px;
+    height: 10px;
+    background-color: #FE9121;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right:8px;
+    margin-left:5px;
+}
+.question-box .matrix-rows{
+    height: auto;
+    width: 100%;
+    background-color: #FFF9F2;
+    font-size:14px;
+    line-height: 23px;
+    margin-left:-5px;
+}
+.question-box .matrix .weui_cells{
+    padding-left:20px;
+}
+/*矩阵方格样式*/
+.question-box{
+    padding: 0px 6px 20px;
+}
+.question-box .matrix-box{
+    border-top:1px solid #d9d9d9;
+    border-left:1px solid #d9d9d9;
+}
+.question-box .matrix-box .matrix-title,
+.question-box .matrix-box .matrix-options{
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+.question-box .matrix-box .matrix-title .matrix-col-title,
+.question-box .matrix-box .matrix-options .matrix-option,
+.question-box .matrix-box .matrix-options .matrix-options-title{
+    -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: 1;         /* OLD - Firefox 19- */
+    width: 20%;               /* For old syntax, otherwise collapses. */
+    -webkit-flex: 1;          /* Chrome */
+    -ms-flex: 1;              /* IE 10 */
+    flex: 1;                  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    border-right:1px solid #d9d9d9;
+    border-bottom:1px solid #d9d9d9;
+    font-size:12px;
+    text-align: center;
+}
+.question-box .matrix-box .matrix-options .matrix-open-option{
+    border:1px solid #d9d9d9;
+}
+.question-box .matrix-box .matrix-title p{
+    padding:12px 0;
+}
+.question-box .matrix-box .matrix-options p{
+    /*line-height: 45px;*/
+}
+.question-box .matrix-box .matrix-options p i{
+    color:#eee;
+    font-size:28px;
+}
+.question-box .matrix-box .matrix-options p.active i{
+    color:#FE9121;
+}
+.question-box .raty-box .options .label-border{
+    border-bottom:none;
+}
+.question-box .raty-box .options a:last-child .label-border{
+    border:1px solid #D9D9D9;
+}
+/*单选题开放选项*/
+.question-box .open .open-option{
+    border:1px solid #D9D9D9;
+    padding:4px;
+    /*margin-left:28px;*/
+    display: block;
+    height:28px;
+    line-height: 24px;
+    overflow: hidden;
+    font-size: 14px;
+    padding:2px;
+    width:84%;
+    margin-top:4px;
+}
+/*必答题*/
+.mandatory{
+    width: 120px;
+    height: 18px;
+    line-height: 18px;
+    background-color: #EF5752;
+    border-radius: 10px;
+    text-align: center;
+    color:#fff;
+    position: relative;
+    left:-60px;
+    margin-top:4px;
+    font-size:10px;
+    -webkit-transform:scale(0.83333333);
+    -o-transform:scale(0.83333333);
+    -moz-transform:scale(0.83333333);
+    -ms-transform:scale(0.83333333);
+    transform: scale(0.83333333);
+
+    -webkit-transform-origin-x: 0;
+    -o-transform-origin-x:0;
+
+
+    margin-left:20%;
+    -webkit-animation: move 0.2s ease 3;
+    -o-animation: move 0.2s ease 3;
+
+    -webkit-animation-name:move;
+    -webkit-animation-duration:0.2s;
+    -webkit-animation-iteration-count:3;
+    -webkit-animation-timing-function:ease;
+
+    -moz-animation-name:move;
+    -moz-animation-duration:0.2s;
+    -moz-animation-iteration-count:3;
+    -moz-animation-timing-function:ease;
+
+    -ms-animation-name:move;
+    -ms-animation-duration:0.2s;
+    -ms-animation-iteration-count:3;
+    -ms-animation-timing-function:ease;
+
+    animation-name:move;
+    animation-duration:0.2s;
+    animation-iteration-count:3;
+    animation-timing-function:ease;
+}
+@-khtml-keyframes move {
+    12.5%{
+        left:-26px;
+    }
+    25%{
+        left:-16px;
+    }
+    37.5%{
+        left:-26px;
+    }
+    50%{
+        left:-36px;
+    }
+    62.5%{
+        left:-46px;
+    }
+    75%{
+        left:-56px;
+    }
+    87.5%{
+        left:-46px;
+    }
+    100%{
+        left:-36px;
+    }
+}
+@-moz-keyframes move {
+    12.5%{
+        left:-26px;
+    }
+    25%{
+        left:-16px;
+    }
+    37.5%{
+        left:-26px;
+    }
+    50%{
+        left:-36px;
+    }
+    62.5%{
+        left:-46px;
+    }
+    75%{
+        left:-56px;
+    }
+    87.5%{
+        left:-46px;
+    }
+    100%{
+        left:-36px;
+    }
+}
+@-ms-keyframes move {
+    12.5%{
+        left:-26px;
+    }
+    25%{
+        left:-16px;
+    }
+    37.5%{
+        left:-26px;
+    }
+    50%{
+        left:-36px;
+    }
+    62.5%{
+        left:-46px;
+    }
+    75%{
+        left:-56px;
+    }
+    87.5%{
+        left:-46px;
+    }
+    100%{
+        left:-36px;
+    }
+}
+@-o-keyframes move {
+    12.5%{
+        left:-26px;
+    }
+    25%{
+        left:-16px;
+    }
+    37.5%{
+        left:-26px;
+    }
+    50%{
+        left:-36px;
+    }
+    62.5%{
+        left:-46px;
+    }
+    75%{
+        left:-56px;
+    }
+    87.5%{
+        left:-46px;
+    }
+    100%{
+        left:-36px;
+    }
+}
+@-webkit-keyframes move {
+    12.5%{
+        left:-26px;
+    }
+    25%{
+        left:-16px;
+    }
+    37.5%{
+        left:-26px;
+    }
+    50%{
+        left:-36px;
+    }
+    62.5%{
+        left:-46px;
+    }
+    75%{
+        left:-56px;
+    }
+    87.5%{
+        left:-46px;
+    }
+    100%{
+        left:-36px;
+    }
+}
+@keyframes move{
+    12.5%{
+        left:-26px;
+    }
+    25%{
+        left:-16px;
+    }
+    37.5%{
+        left:-26px;
+    }
+    50%{
+        left:-36px;
+    }
+    62.5%{
+        left:-46px;
+    }
+    75%{
+        left:-56px;
+    }
+    87.5%{
+        left:-46px;
+    }
+    100%{
+        left:-36px;
+    }
+
+}
+
+

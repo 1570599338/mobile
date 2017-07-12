@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+    <title>汽车调查</title>
+    <link rel="stylesheet" href="css/iconfont/myfont.css" />
+    <link rel="stylesheet" href="css/weui-master/dist/style/weui.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/person.css" />
+</head>
+
+<body>
+    <header>
+        <ul>
+            <li id="back" class="iconfont">&#xe662;返回<i>|</i></li>
+            <li>车辆信息</li>
+            <li></li>
+        </ul>
+    </header>
+    <div class="top">
+        <div class="profile-top">
+            <div class="profile-headimg pic">
+                <!--<input type="file" name="" class="imgload" style="display:none" />-->
+            </div>
+
+        </div>
+    </div>
+    <div class="base-info">
+        <div class="weui_cells weui_cells_access">
+            <a class="weui_cell" href="javascript:;" baseurl="vehicle_brochure.html?field=brochure&title=品牌车型">
+                <i class="iconfont" style="color:#ef5752;font-size:22px">&#xe648;</i>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="font-size-14">品牌车型</p>
+                </div>
+                <div class="weui_cell_ft brochure"></div>
+            </a>
+            <a class="weui_cell" href="javascript:;" baseurl="edit_vehicle.html?field=platenumber&title=车牌号">
+                <i class="iconfont" style="color:#A5770B;font-size:22px">&#xe61e;</i>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="font-size-14">车牌号</p>
+                </div>
+                <div class="weui_cell_ft platenumber"></div>
+            </a>
+            <a class="weui_cell" href="javascript:;" baseurl="edit_vehicle.html?field=vinnumber&title=车架号">
+                <i class="iconfont" style="color:#FB7832;font-size:22px"> &#xe62f;</i>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="font-size-14">车架号</p>
+                </div>
+                <div class="weui_cell_ft vinnumber"></div>
+            </a>
+            <a class="weui_cell" href="javascript:;" baseurl="vehicle_color.html?field=color&title=车身颜色">
+                <i class="iconfont" style="color:#EF5752;font-size:22px">&#xe61c;</i>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="font-size-14">车身颜色</p>
+                </div>
+                <div class="weui_cell_ft color"></div>
+            </a>
+            <a class="weui_cell" href="javascript:;" baseurl="edit_vehicle.html?field=boughtdate&title=购买日期">
+                <i class="iconfont" style="color:#FEBC21;font-size:22px"> &#xe61f;</i>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="font-size-14">购买日期</p>
+                </div>
+                <div class="weui_cell_ft boughtdate"></div>
+            </a>
+            <a class="weui_cell" href="javascript:;" baseurl="edit_vehicle.html?field=volume&title=汽车排量">
+                <i class="iconfont" style="color:#F60981;font-size:22px"> &#xe65b;</i>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="font-size-14">汽车排量</p>
+                </div>
+                <div class="weui_cell_ft volume"></div>
+            </a>
+        </div>
+    </div>
+    <div class="extra-info">
+        <div class="weui_cells weui_cells_access">
+            <a class="weui_cell" href="javascript:;" baseurl="edit_vehicle.html?field=lastmaintaintime&title=最后一次保养时间">
+                <i class="iconfont" style="color:#9DED1D;font-size:22px">&#xe62e;</i>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="font-size-14">最后一次保养时间</p>
+                </div>
+                <div class="weui_cell_ft lastmaintaintime"></div>
+            </a>
+            <a class="weui_cell" href="javascript:;" baseurl="edit_vehicle.html?field=lastmaintaindealer&title=最后一次保养经销商">
+                <i class="iconfont" style="color:#FB7832;font-size:22px"> &#xe63c;</i>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="font-size-14">最后一次保养经销商</p>
+                </div>
+                <div class="weui_cell_ft lastmaintaindealer"></div>
+            </a>
+        </div>
+    </div>
+    <div class="owner-info">
+        <div class="weui_cells weui_cells_access ower">
+            <a class="weui_cell" href="javascript:;">
+                <i class="iconfont" style="color:#FB7832;font-size:22px">&#xe64b;</i>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="font-size-14">车辆认证</p>
+                </div>
+                <div class="weui_cell_ft font-size-14 owner-certification"></div>
+            </a>
+        </div>
+    </div>
+    <div class="vehicle-info">
+        <div class="weui_cells weui_cells_access vehicles-add">
+            <a class="weui_cell" href="vehicle.html">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <i class="iconfont" style="color:#9DED1D;font-size:14px">&#xe631;</i>
+                    <p class="font-size-14">添加更多车辆</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <!-- zepto  -->
+    <script type="text/javascript" src="js/zepto/zepto_1.1.6.js"></script>
+    <script type="text/javascript" src="js/zepto-master/src/touch.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js "></script>
+    <script type="text/javascript">
+        $(function() {
+            var memberid = getParamByName("memberid", window.location);
+            var vehicleid = getParamByName("vehicleid", window.location);
+            var driverid = getParamByName("driverid", window.location);
+            //回退
+            $('#back').on('tap', function() {
+                window.location = "member.html?memberid=" + memberid + '&vehicleid=' + vehicleid + '&driverid=' + driverid;
+            });
+            //添加车辆
+            var linkData = function(repID) {
+                var data = {
+                    subSys: 'wesurvey',
+                    repID: repID,
+                    isQuery: '1',
+                    dispType: '12',
+                    perRows: '2000',
+                }
+                return data;
+            };
+            var criteria = linkData(104);
+            criteria.selCndIDs = "memberID";
+            criteria.cnd_memberID = memberid;
+            var html = "";
+            ajax2('sysmng.jsonreport.do?', 'json', 'get', criteria, function(data) {
+                    var driverData = data.objs;
+                    if (driverData.length >= 2) {
+                        $('.vehicle-info').hide();
+                    } else {
+                        $('.vehicles-add a').attr('href', 'vehicle.html?memberid=' + memberid + '&vehicleid=-1' + '&driverid=' + driverid);
+                    }
+
+                }, function(error) {})
+                //请求车辆详细信息
+            var getVehicle = function(vehicleid, onSuccess) {
+                //查询条件
+                var criteria = {
+                    subSys: 'wesurvey',
+                    repID: '41',
+                    isQuery: '1',
+                    dispType: '12',
+                    perRows: '2000',
+                    selCndIDs: "id",
+                    cnd_id: vehicleid
+                };
+                //提交请求
+                ajax2('sysmng.jsonreport.do', 'json', 'get', criteria, function(data) {
+                    var vehicle = data.objs[0];
+                    onSuccess(vehicle);
+                }, function(error) {
+                    //
+                })
+            };
+
+            //请求会员车辆详细信息
+            if (vehicleid >= 0) {
+                getVehicle(vehicleid, function(vehicle) {
+                    if (vehicle != "" && vehicle != undefined && vehicle != null) {
+                        //更新界面
+                        $('.brochure').text(vehicle.brandName + '-' + vehicle.modelName);
+                        $('.platenumber').text(vehicle.plateNumber);
+                        $('.vinnumber').text(vehicle.vinNumber);
+                        $('.color').text(vehicle.colorName);
+                        $('.boughtdate').text(vehicle.boughtDate);
+                        $('.volume').text(vehicle.volume);
+                        $('.lastmaintaintime').text(vehicle.lastMaintainTime);
+                        $('.lastmaintaindealer').text(vehicle.lastMaintainDealer);
+                        $(".profile-headimg").css({
+                            "background-image": "url(" + app.resHost + "wapmember/" + vehicle.imageUrl + ")",
+                            "background-size": "cover"
+                        });
+                        if (vehicle.state == 0) {
+                            $('.owner-certification').text("审核中");
+                        } else if (vehicle.state == 1) {
+                            $('.owner-certification').text("审核通过");
+                        } else if (vehicle.state == 2) {
+                            $('.owner-certification').text("未通过");
+                        } else if (vehicle.state == 3) {
+                            $('.owner-certification').text("");
+                        }
+                        //更新链接
+                        $('.base-info a').each(function(index, element) {
+                            var baseurl = $(this).attr('baseurl');
+                            $(this).attr('href', baseurl + "&memberid=" + memberid + "&vehicleid=" + vehicleid + '&driverid=' + driverid);
+                        });
+                        $('.extra-info a').each(function(index, element) {
+                            var baseurl = $(this).attr('baseurl');
+                            $(this).attr('href', baseurl + "&memberid=" + memberid + "&vehicleid=" + vehicleid + '&driverid=' + driverid);
+                        });
+                        $('.add-info a').each(function(index, element) {
+                            var baseurl = $(this).attr('baseurl');
+                            $(this).attr('href', baseurl + "&memberid=" + memberid + "&vehicleid=" + vehicleid + '&driverid=' + driverid);
+                        })
+                    }
+
+                });
+            } else {
+                //更新链接
+                $('.base-info a').each(function(index, element) {
+                    var baseurl = $(this).attr('baseurl');
+                    $(this).attr('href', baseurl + "&memberid=" + memberid + "&vehicleid=" + vehicleid + '&driverid=' + driverid);
+                });
+                $('.extra-info a').each(function(index, element) {
+                    var baseurl = $(this).attr('baseurl');
+                    $(this).attr('href', baseurl + "&memberid=" + memberid + "&vehicleid=" + vehicleid + '&driverid=' + driverid);
+                });
+                $('.add-info a').each(function(index, element) {
+                    var baseurl = $(this).attr('baseurl');
+                    $(this).attr('href', baseurl + "&memberid=" + memberid + "&vehicleid=" + vehicleid + '&driverid=' + driverid);
+                })
+            };
+
+            //图片上传
+            wx.ready(function() {
+                var formData = {
+                    requestUrl: location.href
+                }
+                ajax2('sysmng.initTemplate.do?subSys=wesurvey&tplID=137', 'json', 'get', formData, function(data) {
+                    wx.config(data);
+                }, function(error) {});
+                //隐藏分享功能
+                hideShar();
+            });
+            $('.profile-headimg').on('tap', function() {
+                wx.chooseImage({
+                    count: 1, // 默认9
+                    sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                    success: function(res) {
+                        var localIds = res.localIds;
+
+                        function upload() {
+                            //调用上传图片接口
+                            wx.uploadImage({
+                                localId: localIds[0], // 需要上传的图片的本地ID，由chooseImage接口获得
+                                isShowProcess: 1, // 默认为1，显示进度提示
+                                success: function(res) {
+                                    var data = {};
+                                    var serverId = res.serverId; // 返回图片的服务器端ID
+                                    data.serverID = serverId;
+                                    data.localIds = localIds;
+                                    data.memberID = memberid;
+                                    data.vehicleID = vehicleid;
+                                    data.driverID = driverid;
+                                    ajax2('wesurvey.wapuploadimage.do?op=vehicle', 'json', 'post', data, function(data) {
+                                            console.log(data);
+                                            $(".profile-headimg").css({
+                                                "background-image": "url(" + app.resHost + data.objs[0].fileName + ")",
+                                                "background-size": "cover"
+                                            });
+                                            driverid = data.objs[0].driverID;
+                                        },
+                                        function() {
+                                            //location.href = "bbbb.html";
+                                        })
+                                },
+                                fail: function(res) {
+                                    alert('上传失败');
+                                }
+                            });
+                        };
+                        upload();
+
+                    }
+                });
+            });
+
+
+            //请求车辆详细信息
+            $('.ower').on('click', function() {
+                //查询条件
+                window.location = 'owner_certification.html?memberid=' + memberid + '&vehicleid=' + vehicleid + '&driverid=' + driverid + '&audit=vehicle';
+            });
+
+        });
+
+        //@ sourceURL=dynamicScript-vehicle.js
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>问卷</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/iconfont/myfont.css"/>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/survey_detail.css" />
+</head>
+<body>
+    <header class='header'>
+        <ul>
+            <li id="back" class="iconfont">&#xe662;返回<i>|</i></li>
+            <li>问卷简介</li>
+            <li></li>
+        </ul>
+    </header>
+    <div class="bg"></div>
+    <div class="content-box">
+        <div class="title-box">
+            <p><i class="iconfont title-title">&#xe623;</i><span class="title-label">问卷名称</span></p>
+            <p class="title"></p>
+        </div>
+        <div class="guide-box">
+            <p><i class="iconfont guide-title">&#xe618;</i><span class="title-label">问卷介绍</span></p>
+            <p class="guide"></p>
+            <p class="look"><a href="javascript:;">查看详细介绍</a></p>
+        </div>
+        <div class="detail-box">
+            <p><i class="iconfont detail-title">&#xe612;</i><span class="title-label">问卷明细</span></p>
+            <p class="detail-p"><i class="iconfont" style="color:#FE9121;margin-right:7px;">&#xe60f;</i><span class="begin-date">2016/03/01</span>－<span class="end-date">2016/07/31</span></p>
+            <!--<p class="detail-p"><i class="iconfont" style="color:#BF9942;margin-right:7px;">&#xe616;</i><span>调查总人数：<b class="quota-count"></b>人</span></p>-->
+            <p class="detail-p"><i class="iconfont" style="color:#EF5752;margin-right:7px;">&#xe60b;</i><span>已有<b class="involver-count" style="color:#ED5752;"></b>人参与</span></p>
+            <p class="detail-p"><i class="iconfont" style="color:#FE9121;margin-right:7px;">&#xe619;</i><span>分享：<b class="shared-count" style="color:#ED5752;"></b></span></p>
+            <p class="detail-p"><i class="iconfont" style="color:#FEBC21;margin-right:7px;">&#xe615;</i><span>点赞：<b class="liked-count" style="color:#ED5752;"></b></span></p>
+        </div>
+        <div class="start"><a href="#" style="color: #fff;">开始答卷</a></div>
+    </div>
+
+    <!--<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="js/jquery-raty/lib/jquery.raty.min.js"></script>-->
+    <script type="text/javascript" src="js/zepto/zepto_1.1.6.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+    <script>
+
+        $(function () {
+
+            var templateid = getParamByName("templateid", window.location);
+            var projectid = getParamByName("projectid", window.location);
+            var memberid = getParamByName("memberid", window.location);
+            var signAgreement = getParamByName("signAgreement", window.location);
+            var tmpName = getParamByName("tmpName", window.location);
+            var state = 1;
+
+            //
+            $('.start').on('click', function () {
+                window.location = 'welcome.html?memberid=' + memberid + '&projectid=' + projectid + '&templateid=' + templateid + '&signAgreement=' + signAgreement + '&tmpName=' + tmpName;
+            });
+
+            //回退
+            $('#back').on('click', function () {
+                window.location = 'surveys.html?memberid=' + memberid;
+            });
+
+            //
+            $('.look a').on('click', function () {
+               if($(this).html() == "查看详细介绍") {
+                   $(this).html("收起");
+                   $('.guide').css('-webkit-line-clamp','inherit');
+               } else if($(this).html() == "收起") {
+                   $(this).html('查看详细介绍');
+                   $('.guide').css('-webkit-line-clamp','3');
+               }
+            });
+            //请求调查问卷详细信息
+            ajaxGet('survey/get?templateid=' + templateid + '&state=' + state, function (data) {
+                var survey = data.objs[0];
+                //$('.reward .type').html(survey.reward.typeName);
+                //$('.reward .amount').html(survey.reward.amount);
+                $('.title').html(survey.template.name);
+                $('.guide').html(survey.template.guide);
+                $('.begin-date').html(survey.project.beginDate);
+                $('.end-date').html(survey.project.endDate);
+                $('.involver-count').html(survey.involverCount);
+                $('.shared-count').html(survey.sharedCount);
+                $('.liked-count').html(survey.likedCount);
+                $('.more-box').html();
+            }, function (error) {
+                alert(error)
+            });
+        });
+
+        //@ sourceURL=dynamicScript-survey-detail.js
+    </script>
+
+</body>
+</html>

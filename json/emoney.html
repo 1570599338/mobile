@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/iconfont/myfont.css" />
+    <link rel="stylesheet" href="css/weui-master/dist/style/weui.css" />
+    <link rel="stylesheet" href="css/reward.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/deposit.css" />
+
+    <link rel="stylesheet" href="../css/iconfont/myfont.css" />
+    <link rel="stylesheet" href="../css/weui-master/dist/style/weui.css" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/deposit.css" />
+</head>
+
+<body>
+    <header>
+        <ul>
+            <li id="back" class="iconfont">&#xe662;<i>|</i></li>
+            <li>汽车调查 - 我的礼金</li>
+            <li></li>
+        </ul>
+    </header>
+    <div class="reward-box">
+        <div class="reward-balance-box">
+            <div class="reward-auditing">
+                <div class="status font-size-12">审核中</div>
+                <div class="amount"><i class="font-size-20">¥</i><span class="font-size-20"></span></div>
+                <div class="reward-bg"> </div>
+            </div>
+            <div class="reward-convert active">
+                <div class="status">可提现</div>
+                <div class="amount"><i>¥</i><span></span></div>
+                <div class="reward-bg"> </div>
+            </div>
+            <div class="reward-draw">
+                <div class="status font-size-12">已提现</div>
+                <div class="amount"><i class="font-size-20">¥</i><span class="font-size-20"></span></div>
+                <div class="reward-bg"></div>
+            </div>
+        </div>
+        <div class="box-child">
+
+        </div>
+        <div class="reward-transactions-box">
+            <div class="conver-list">
+                <ul>
+
+                </ul>
+            </div>
+            <div class="deposit-transactions auditing-list" style="display:none">
+                <ul class="">
+
+                </ul>
+            </div>
+            <div class="draw-list" style="display:none">
+                <ul>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="weui_dialog_alert" style="display:none;">
+        <div class="weui_mask" style="z-index:500"></div>
+        <div class="weui_dialog" style="z-index:600">
+            <div class="weui_dialog_hd"><strong class="weui_dialog_title">提现成功</strong></div>
+            <div class="weui_dialog_bd">您的提现申请已提交，审核通过后礼金将已红包的形式发送给您！</div>
+            <div class="weui_dialog_ft">
+                <a href="javascript:;" class="weui_btn_dialog primary sure" style='color:#FEBC21;'>确定</a>
+            </div>
+        </div>
+    </div>
+    <!-- zepto  -->
+    <script type="text/javascript" src="js/zepto/zepto_1.1.6.js"></script>
+    <script type="text/javascript" src="js/zepto-master/src/touch.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/memberUi.js"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            var memberid = getParamByName("memberid", window.location);
+            $('#back').click(function() {
+                window.location = 'member.html?memberid=' + memberid;
+            });
+            //请求数据
+            var data = {
+                subSys: 'wesurvey',
+                repID: '0',
+                isQuery: '1',
+                dispType: '12',
+                perRows: '2000',
+                cnd_memberID: memberid,
+                selCndIDs: "memberID"
+            };
+            //页面初始化
+            function init() {
+                ajax2('sysmng.initTemplate.do?subSys=wesurvey&tplID=131&memberID=' + memberid, 'json', 'get', null, function(data) {
+                    $('.weui_dialog_alert').css('display', 'none');
+                    $('.reward-auditing .amount span').html(data.objs[0].emoneySumAuditing);
+                    $('.reward-convert .amount span').html(data.objs[0].emoneySumWithdraw);
+                    $('.reward-draw .amount span').html(data.objs[0].emoneySumDeposit);
+                }, function(error) {
+                    console.log(error);
+                })
+                pointConvert()
+            }
+            //礼金审核
+            $('.reward-auditing').on('tap', function() {
+                data.repID = "66";
+                auditingCss($(this));
+                ajax2('sysmng.jsonreport.do?', 'json', 'get', data, function(data) {
+                    var deposit = data.objs;
+                    var html = ""
+                    if (deposit.length > 0) {
+                        for (var i = 0; i < deposit.length; i++) {
+                                html += '<li><i></i><b class="iconfont">&#xe652;</b><div class="intro"><div class="angle"></div><p class="title">+' + deposit[i].amount + '</p><div class="point-source"><span style="color:#EF5752;font-size:14px;"><' + deposit[i].templateName + '></span><span>获得日期：' + deposit[i].dateTime + '</span></div></div></li>'
+                        }
+                        $('.auditing-list ul').html('').append(html);
+                    } else {
+                        $('.auditing-list ul').html('').append('<i class="iconfont hint-none">&#xe64f;</i><p class="hint-text">没有正在审核中的礼金<p>');
+                    }
+
+                }, function(error) {
+                    //
+                })
+
+            });
+            //可提现
+            function pointConvert() {
+                data.repID = "5";
+                ajax2('sysmng.jsonreport.do?', 'json', 'get', data, function(data) {
+                    console.log(data)
+                    var deposit = data.objs;
+                    var html = ""
+                    if (deposit.length > 0) {
+                        for (var i = 0; i < deposit.length; i++) {
+                            if(deposit[i].templateID==0){
+                                html += '<li><i></i><b class="iconfont">&#xe652;</b><div class="intro">' +
+                                        '<div class="angle"></div><p class="title">+' + deposit[i].amount + '</p>' +
+                                        '<div class="point-source"><span style="color:#EF5752;"><' + deposit[i].eventTypeName + '></span>' +
+                                        '<span>获取日期：' + deposit[i].dateTime + '</span> ' +
+                                        '<span>状态：' + (deposit[i].auditState==1?"审核中":"已通过") + '</span></div></div></li>'
+                            }else{
+                                if(deposit[i].eventTypeCode==2){
+                                    html += '<li><i></i><b class="iconfont">&#xe652;</b><div class="intro">' +
+                                            '<div class="angle"></div><p class="title">+' + deposit[i].amount + '</p>' +
+                                            '<div class="point-source"><span style="color:#EF5752;"><' + deposit[i].eventTypeName + '></span>' +
+                                            '<span>获取日期：' + deposit[i].dateTime + '</span> ' +
+                                            '<span>状态：' + (deposit[i].auditState==1?"审核中":"已通过") + '</span></div></div></li>'
+                                }else{
+                                    html += '<li><i></i><b class="iconfont">&#xe652;</b><div class="intro">' +
+                                            '<div class="angle"></div><p class="title">+' + deposit[i].amount + '</p>' +
+                                            '<div class="point-source"><span style="color:#EF5752;"><' + deposit[i].templateName + '></span>' +
+                                            '<span>获取日期：' + deposit[i].dateTime + '</span> ' +
+                                            '<span>状态：' + (deposit[i].auditState==1?"审核中":"已通过") + '</span></div></div></li>'
+                                }
+
+                            }
+
+                        }
+                        $('.conver-list ul').html('').append(html);
+                    } else {
+                        $('.conver-list ul').html('').append('<i class="iconfont hint-none">&#xe64f;</i><p class="hint-text">没有提现的礼金<p>');
+                    }
+
+                }, function(error) {
+                    //
+                })
+            }
+            //可提现切换时样式
+            $(".reward-convert").on('tap', function() {
+                convertCss($(this))
+                pointConvert();
+            });
+            convertCss($(".reward-convert"));
+
+            //监听input值得变化设置按钮状态
+            $(".input-money").on("input", function() {
+                var _this = $(this).find("input");
+                if (_this.val() <= 0) {
+                    $('.deposit-btn').css({
+                        "background": "#FFDA85",
+                        "color": "#999",
+                        "pointer-events": "none"
+                    });
+                } else {
+                    $('.deposit-btn').css({
+                        "background": "#FEBC21",
+                        "color": "#fff",
+                        "pointer-events": "all"
+                    });
+                }
+            })
+
+            //提现操作
+            $(".deposit-btn").on('tap', function() {
+                    var deposit = 0;
+                    //查询可提现金额
+                    ajax2('sysmng.initTemplate.do?subSys=wesurvey&tplID=131&memberID=' + memberid, 'json', 'get', null, function(data) {
+                        deposit = data.objs[0].emoneySumWithdraw;
+                        var data = {
+                            "amount": $(".input-money input").val()
+                        };
+                        if (data.amount > 0 && (deposit - data.amount > 0)) {
+                            ajax2('wesurvey.memberConsume.do?op=emoney&memberID=' + memberid, 'json', 'get', data, function(data) {
+                                $('.weui_dialog_alert').css('display', 'block');
+                                $('.weui_dialog_alert .sure').on('tap', function() {
+                                    init();
+                                });
+                            }, function(error) {
+                                console.log(error);
+                            })
+                        }
+                    }, function(error) {})
+
+                })
+                //已提现
+            $('.reward-draw').on('tap', function() {
+                    data.repID = "7";
+                    drawCss($(this));
+                    ajax2('sysmng.jsonreport.do?', 'json', 'get', data, function(data) {
+                        console.log(data)
+                        var deposit = data.objs;
+                        var html = ""
+                        if (deposit.length > 0) {
+                            for (var i = 0; i < deposit.length; i++) {
+                                html += '<li><i></i><b class="iconfont">&#xe652;</b><div class="intro"><div class="angle"></div><p class="title">+' + deposit[i].amount + '</p><div class="point-source"><span style="line-height:50px">提现日期：' + deposit[i].dateTime + '</span></div></div></li>'
+                            }
+                            $('.draw-list ul').html('').append(html);
+                        } else {
+                            $('.draw-list ul').html('').append('<i class="iconfont hint-none">&#xe64f;</i><p class="hint-text">没有提现的礼金<p>');
+                        }
+
+                    }, function(error) {
+                        //
+                    })
+                })
+                //页面初始化
+            init();
+            //@ sourceURL=dynamicScript-emoney.js
+        });
+    </script>
+
+</body>
+
+</html>

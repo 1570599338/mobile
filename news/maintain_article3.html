@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <title>驯养坐骑－详情页</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/iconfont/myfont.css" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/news_usedcar.css"/>
+    <!--<link rel="stylesheet" href="../css/news_maintain.css" />-->
+</head>
+
+<body>
+<header>
+    <ul>
+        <li id="back" class="iconfont">&#xe662;返回<i>|</i></li>
+        <li class='seconde-li'>驯养坐骑－详情页</li>
+        <li></li>
+    </ul>
+</header>
+<div class="title-box">
+    <h2>眼睛是心灵的窗户 汽车灯具保养勿忽视</h2>
+    <div class="intro">
+        <p><i class="iconfont" style="color:#FEBC21;">&#xe635;</i>驯养坐骑</p>
+        <p><i class="iconfont" style="color:#FFE758;">&#xe60f;</i>2016-04-08</p>
+    </div>
+    <!--<div class="tip">
+        <i class="iconfont share-tip" style="color:#EF5752;font-size:18px;padding-right:9px;">&#xe61a;</i>
+        <i class="iconfont comment-tip" style="color:#FE9121;font-size:18px;">&#xe632;</i>
+    </div>-->
+</div>
+<div class="share-box">
+    <div class="angle-share"></div>
+    <div class="share">
+        <div class="wechart">
+            <div class="wechart-bg" style="background-color: #3EB237;">
+                <i class="iconfont">&#xe600;</i>
+            </div>
+            <p>微信</p>
+        </div>
+    </div>
+    <div class="share">
+        <div class="wechart">
+            <div class="wechart-bg" style="background-color: #FEBC21;">
+                <i class="iconfont" style="line-height: 26px;">&#xe601;</i>
+            </div>
+            <p>腾讯QQ</p>
+        </div>
+    </div>
+    <div class="share">
+        <div class="wechart">
+            <div class="wechart-bg" style="background-color: #00D900;">
+                <i class="iconfont">&#xe604;</i>
+            </div>
+            <p>朋友圈</p>
+        </div>
+    </div>
+    <div class="share">
+        <div class="wechart">
+            <div class="wechart-bg" style="background-color: #E04D6A;">
+                <i class="iconfont">&#xe60a;</i>
+            </div>
+            <p>新浪微博</p>
+        </div>
+    </div>
+</div>
+<div class="complete-box">
+    <div class="angle-com"></div>
+    <i class="iconfont">&#xe632;</i>
+    <input type="text" placeholder="请在此处输入您的评论"/>
+    <span>完成</span>
+</div>
+<div class="content clearfix">
+    <p>汽车灯光的品质直接影响着行车安全，因此车辆灯光器材的保养就显得尤为重要，而汽车灯具如何保养，检修应该注意哪些问题，您可能就了解得没这么详细了。下面请教专业人士，教教咱怎么让爱车的灯具好又亮。</p>
+    <br/>
+    <h4>灯泡要配合车型 劣质灯泡易引发危险</h4>
+    <p>“汽车灯泡不是越贵越好，一定要选择适合自身车辆的型号。”成都金鑫汽车快修的赵师傅说，选择汽车灯泡除了型号外，还要挑选品质过硬的产品，要达到良好的配光性、高亮和密封性，这样才能保证行车更加安全。</p>
+    <br/>
+    <h4>灯泡两年要检修 灯罩老化需及时更换</h4>
+    <p>“一般来说，行驶5万公里或2年左右，建议检测一次灯泡亮度。”赵师傅说，如果灯泡需要更换，最好两边同时更换，以免更换单侧造成两边亮度不同，造成驾驶员视线受到影响。同时，灯罩老化也会影响灯光的亮度，甚至会使灯光模糊，严重影响行车照明效果，易引发安全事故，因此如果灯罩出现老化或破损，也应该及时更换。</p>
+    <br/>
+    <h4>车灯自检并不难 改装氙灯要慎重</h4>
+    <p>赵师傅表示，车尾灯日常的简单维护比较简单，一般车主可以自己进行，“关闭车辆电源，拆下防尘板清洁并整理，如果有损毁可将损坏的灯泡换下将防尘板复位就行了。”而大灯的调整和更换最好到专业门店或品牌4S店进行处理。同时，赵师傅还提醒喜爱改装车灯的朋友，改装氙灯的亮度是一般卤素灯泡的3倍，易造成附近车辆及行人的视觉盲区，酿成交通事故，因此改装一定要慎重。</p>
+    <p class="active-box">
+        <span><i class="iconfont" style="color:#FE9121;">&#xe619;</i>4123</span>
+        <span><i class="iconfont" style="color:#FEBC21;">&#xe615;</i>254</span>
+    </p>
+</div>
+<!-- zepto  -->
+<script type="text/javascript" src="../js/zepto/zepto_1.1.6.js"></script>
+<script type="text/javascript" src="../js/zepto-master/src/touch.js"></script>
+<script type="text/javascript" src="../js/main.js"></script>
+<script type="text/javascript" src="../js/news_usedcar.js"></script>
+
+<script type="text/javascript">
+    var memberid = getParamByName("memberid", window.location);
+    $(function () {
+
+        //回退
+        $('#back').on('click', function () {
+            window.location = '../news_maintain.html?memberid=' + memberid;
+        });
+        if($(window).width()<700){
+            $('img').css('width','100%');
+        }else{}
+    });
+
+    //@ sourceURL=dynamicScript-maintain-article.js
+</script>
+
+</body>
+
+</html>

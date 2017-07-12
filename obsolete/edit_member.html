@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+    <title></title>
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" type="text/css" href="../js/mdatetimer/zepto.mdatetimer.css">
+    <link rel="stylesheet" href="../js/LArea-master/css/LArea.css">
+</head>
+
+<body>
+    <!-- header -->
+    <header>
+        <ul>
+            <li id="back">&lt;<i>|</i></li>
+            <li class="title"></li>
+            <li>. . .</li>
+        </ul>
+    </header>
+    <!-- shortname -->
+    <div class="shortname field-section" style="display: none;">
+        <input type="text" id="shortname" class='change-info-input' />
+        <p class="change-tip">好名字更有范，还能结识更多朋友哦！</p>
+    </div>
+    <!-- gender -->
+    <div class="gender field-section" style="display: none;">
+        <input type="text" id="gender" class='change-info-input' />
+        <p class="change-tip"></p>
+    </div>
+    <!-- birthdate -->
+    <div class="birthdate field-section" style="display: none;">
+        <input type="text" id="birthdate" class='change-info-input' value="" readonly />
+        <p class="change-tip"></p>
+    </div>
+    <!-- mobilenumber1 -->
+    <div class="mobilenumber1 field-section" style="display: none;">
+        <input type="text" id="mobilenumber1" class='change-info-input' />
+        <p class="change-tip"></p>
+    </div>
+    <!-- mobilenumber2 -->
+    <div class="mobilenumber2 field-section" style="display: none;">
+        <input type="text" id="mobilenumber2" class='change-info-input' />
+        <p class="change-tip"></p>
+    </div>
+    <!-- email -->
+    <div class="email field-section" style="display: none;">
+        <input type="text" id="email" class='change-info-input' />
+        <p class="change-tip"></p>
+    </div>
+    <!-- location -->
+    <div class="location field-section" style="display: none;">
+        <input type="text" id="location" class='change-info-input' style="display:none;" />
+        <input type="text" id="location_name" class='change-info-input' />
+        <p class="change-tip"></p>
+    </div>
+    <!--行业-->
+    <!--<div class="location field-section" style="display: none;">
+        <input type="text" id="location" class='change-info-input' style="display:none;" />
+        <input type="text" id="location_name" class='change-info-input' />
+        <p class="change-tip"></p>
+    </div>-->
+    <!-- zepto  -->
+    <script type="text/javascript" src="js/zepto/zepto_1.1.6.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/mdatetimer/zepto.mdatetimer.js"></script>
+    <script type="text/javascript" src="js/LArea-master/js/LArea.min.js"></script>
+
+    <script type="text/javascript">
+        $(function() {
+
+            var fieldMap = [];
+            fieldMap['shortname'] = 'shortname'; //shortName
+            fieldMap['gender'] = 'gender';
+            fieldMap['birthdate'] = 'birthdate'; //birthDate
+            fieldMap['mobilenumber1'] = 'mobilenumber1'; //mobileNumber1
+            fieldMap['mobilenumber2'] = 'mobilenumber2'; //mobileNumber2
+            fieldMap['email'] = 'email';
+            fieldMap['industry'] = 'industry';
+            fieldMap['profession'] = 'profession';
+
+            var error = '',
+                value = '';
+
+            //验证输入合法性
+            var validate = function() {
+                if (field == "shortname") {
+                    value = $('#' + field).val();
+                } else if (field == "birthdate") {
+                    value = $('#' + field).val();
+                    if (value == "") {
+                        return false;
+                    }
+                } else if (field == "gender") {
+                    value = $('#' + field).val();
+                } else if (field == "mobilenumber1") {
+                    value = $('#' + field).val();
+                    if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(value))) {
+                        return false;
+                    }
+                } else if (field == "mobilenumber2") {
+                    value = $('#' + field).val();
+                    if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(value))) {
+                        return false;
+                    }
+                } else if (field == "email") {
+                    value = $('#' + field).val();
+                    if (!(/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((.[a-zA-Z0-9_-]{2,3}){1,2})$/.test(value))) {
+                        return false;
+                    }
+
+                }
+            }
+
+            //回退按钮点击事件
+            $("#back").click(function() {
+                //验证数据
+                if (validate() == false) {
+                    alert(error);
+                    return;
+                }
+                //提交数据
+                var data = field + "=" + value;
+                if (field == "location") {
+                    value = $('#' + field).val().split(",");
+                    data = "citycode=" + value[1];
+                }
+                ajax2('wesurvey.opMemberInfo.do?op=' + field + '&id=' + app.memberId, 'text', 'post', data, function(data) {
+                    window.location = 'member.html?field=' + field + '&value=' + value;
+                }, function(error) {
+                    window.location = 'member.html?field=' + field + '&value=' + value;
+                });
+            });
+
+            var field = getParamByName('field', window.location);
+            var title = getParamByName('title', window.location);
+
+            //隐藏/显示编辑区域
+            //$('.field-section').hide();
+            $('.' + field).show();
+            //更新title
+            $('.title').text('修改' + title);
+
+            //查询条件
+            var data = {
+                subSys: 'wesurvey',
+                repID: '39',
+                isQuery: '1',
+                dispType: '12',
+                perRows: '2000'
+            };
+
+            //请求会员详细信息
+            ajax2('sysmng.jsonreport.do?', 'json', 'post', data, function(data) {
+                if (data.data && data.data.length > 0) {
+                    //member对象
+                    var member = data.data[0];
+                    //更新界面
+                    $('#' + field).val(member[fieldMap[field]]);
+                }
+            }, function(error) {
+                //
+            });
+
+            //请求行业列表
+            if (field == "industry") {
+                var industries = data.data;
+            }
+            //请求职业列表
+            else if (field == "profession") {
+                var professions = data.data;
+            }
+            //请求省份/城市列表
+            else if (field == "location") {
+
+                //sysmng.initTemplate.do?subSys=wesurvey&tplID=121
+                ajax2('sysmng.initTemplate.do?subSys=wesurvey&tplID=121', 'json', 'post', data, function(data) {
+                    if (data) {
+                        var location = data;
+                        var area = new LArea();
+                        area.init({
+                            'trigger': '#location_name', //触发选择控件的文本框，同时选择完毕后name属性输出到该位置
+                            'valueTo': '#location', //选择完毕后id属性输出到该位置
+                            'keys': {
+                                id: 'postcode',
+                                name: 'name'
+                            }, //绑定数据源相关字段 id对应valueTo的value属性输出 name对应trigger的value属性输出
+                            'type': 1, //数据源类型
+                            'data': location //数据源
+                        });
+                    }
+                }, function(error) {
+                    //
+                });
+            }
+            //初始化日期控件
+            else if (field == "birthdate") {
+                //出生日期
+                $('#birthdate').mdatetimer({
+                    mode: 1, //时间选择器模式：1：年月日，2：年月日时分（24小时），3：年月日时分（12小时），4：年月日时分秒。默认：1
+                    format: 2, //时间格式化方式：1：2015年06月10日 17时30分46秒，2：2015-05-10  17:30:46。默认：2
+                    years: [2000, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017], //年份数组
+                    nowbtn: true, //是否显示现在按钮
+                    onOk: function() {
+                        //alert('OK');
+                    }, //点击确定时添加额外的执行函数 默认null
+                    onCancel: function() {
+                        //alert('A');
+                    }, //点击取消时添加额外的执行函数 默认null
+                });
+            }
+        });
+
+        //@ sourceURL=dynamicScript-profile-memberEdit.js
+    </script>
+
+</body>
+
+</html>

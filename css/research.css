@@ -1,0 +1,110 @@
+html,body{
+    height:100%;
+    margin:0;
+    padding:0;
+    color:#333;
+}
+.header{
+    position: absolute;
+    z-index: 5;
+    top:0;
+}
+.dBody{
+    width: 100%;
+    overflow: auto;
+    top:44px;
+    position: absolute;
+    z-index: 10;
+    bottom: 50px;
+}
+.dBody .two-tab{
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+.dBody .two-tab li{
+    -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: 1;         /* OLD - Firefox 19- */
+    width: 20%;               /* For old syntax, otherwise collapses. */
+    -webkit-flex: 1;          /* Chrome */
+    -ms-flex: 1;              /* IE 10 */
+    flex: 1;                  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    text-align: center;
+    line-height: 30px;
+    border-bottom: 1px solid #ddd;
+    font-size:17px;
+    color:#999;
+}
+.dBody .two-tab li:hover
+,.dBody .two-tab li.active{
+    background-color: #FEBC21;
+    color:#fff;
+}
+footer{
+    border-top:1px solid #ddd;
+}
+/*以上为公共部分－自适应布局*/
+.search-info{
+    width: 90%;
+    margin:14px auto 20px;
+    display: block;
+}
+.search-info i{
+    padding-left:10px;
+    color:#FEBC21;
+}
+.search-info .label-name{
+    padding-left:7px;
+    font-size:14px;
+}
+.search-info .input-box{
+    border-bottom: 1px solid #FEBC21;
+    line-height:41px;
+}
+.search-info .input-box input{
+    padding-left:10px;
+    font-size:12px;
+}
+.dBody .submit{
+    width: 90%;
+    line-height: 40px;
+    text-align: center;
+    background-color: #FFDA85;
+    margin:0 auto 18px;
+    font-size:14px;
+    color:#999;
+}
+.dBody a{
+    display: block;
+    color:#A5770B;
+    text-decoration: underline;
+    text-align: center;
+    font-size:10px;
+    transform: scale(0.83333333);
+    -webkit-transform-origin-x: 0;
+    margin-left:20%;
+}
+/*文本框*/
+.textarea {
+    display: block;
+    margin:0 auto;
+    overflow: hidden;
+    width: 550px;
+    font-size: 14px;
+    height: 18px;
+    line-height: 24px;
+    padding:2px;
+    padding-left:11px;
+    margin-top:-35px;
+    width:74%;
+    margin-left:46px;
+    margin-bottom: 10px;
+}
+textarea {
+    border:none;
+    border-left:1.5px solid #FEBC21;
+    outline: 0 none;
+}
+

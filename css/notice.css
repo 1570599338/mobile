@@ -1,0 +1,47 @@
+body{
+    background-color: #eee;
+}
+.container{
+    height: auto;
+    margin:2% 2%;
+}
+.container .notice-box{
+    padding:6px 10px;
+    border-top:3px solid #FEBC21;
+    background-color: #fff;
+    margin-bottom:10px;
+}
+.notice-box .notice-title{
+    border-bottom:1px solid #eee;
+    padding-bottom:5px;
+    margin-bottom: 5px;
+}
+.notice-box .notice-title .left{
+    float: left;
+}
+.notice-box .notice-title .right{
+    float: right;
+}
+.notice-box .notice-title .left h2{
+    line-height: 28px;
+}
+.notice-box .notice-title .left .time{
+    color:#999;
+}
+.notice-box .notice-title .right .circle{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 26px;
+    color:#fff;
+}
+.notice-box .notice-title .right .amounts{
+    background-color: #FF7F00;
+}
+.notice-box .notice-title .right .integral{
+    background-color: #FEBC21;
+}
+.notice-box .notice-title .right .giftcard{
+    background-color: #EF5752;
+}

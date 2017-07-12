@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+    <title>汽车调查</title>
+    <link rel="stylesheet" href="css/iconfont/myfont.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/notice.css"/>
+</head>
+<body>
+<header>
+    <ul>
+        <li id="back" class="iconfont">&#xe662;返回<i>|</i></li>
+        <li>消息中心</li>
+        <li></li>
+    </ul>
+</header>
+<div class="container"></div>
+</body>
+</html>
+<script src="js/zepto/zepto_1.1.6.js"></script>
+<script src="js/main.js"></script>
+<script>
+    $(function() {
+        var memberid = getParamByName("memberid", window.location);
+        //回退按钮
+        $("#back").click(function () {
+            window.location = 'member.html?memberid=' + memberid;
+        });
+        var noticeData = {
+            subSys: 'wesurvey',
+            repID: '119',
+            isQuery: '1',
+            dispType: '12',
+            selCndIDs: "memberID",
+            cnd_memberID: memberid
+        }
+       ajax2('sysmng.jsonreport.do?', 'json', 'get', noticeData, function(data) {
+            if (data.objs && data.objs.length > 0) {
+                var notices = data.objs;
+                for(var i = 0;i<notices.length;i++){
+                    if(notices[i].typeCode == 1){
+                        typeName = 'amounts';
+                        icon = '&#xe652;';
+                    }else if(notices[i].typeCode == 2){
+                        typeName = 'integral';
+                        icon = '&#xe627;';
+                    }else if(notices[i].typeCode == 3){
+                        typeName = 'giftcard'
+                        icon = '&#xe60e;';
+                    }
+                    var html = '<div class="notice-box">' +
+                            '<div class="notice-title clearfix">' +
+                            '<div class="left">' +
+                            '<h2 class="font-size-14">' + notices[i].eventTypeName + '通知</h2>' +
+                            '<p class="time">' + notices[i].createdAt + '</p>' +
+                            '</div>' +
+                            '<div class="right">' +
+                            '<div class="circle ' + typeName + '">' +
+                            '<i class="iconfont">'+icon+'</i>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="notice-content">' +
+                            '<p>' + notices[i].content + '</p>' +
+                            '</div>' +
+                            '</div>';
+                    $('.container').append(html);
+                }
+            }
+       });
+    });
+    //@ sourceURL=dynamicScript-notice.js
+</script>

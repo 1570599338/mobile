@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
+    <title>汽车调查</title>
+    <link href="http://vjs.zencdn.net/5.8.8/video-js.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/weui-master/dist/style/weui.css"/>
+    <link rel="stylesheet" href="css/iconfont/myfont.css"/>
+    <link rel="stylesheet" href="css/base.css"/>
+    <link rel="stylesheet" href="css/questions.css"/>
+</head>
+<body>
+<header class='header'>
+    <ul>
+        <li id="back" class="iconfont">&#xe662;返回<i>|</i></li>
+        <li>问卷答题</li>
+        <li></li>
+    </ul>
+</header>
+<div class="template-name">
+    <i class="iconfont font-size-20">&#xe623;</i>
+    <span class="font-size-17"></span>
+</div>
+<div class="question-content">
+    <!--  -->
+    <div class="weui_cell title-box">
+        <div class="title">
+            <div class="title-type type font-size-12"></div>
+        </div>
+    </div>
+    <div class="question-box"></div>
+    <!--<div class="questions-box">
+        <video id="really-cool-video" class="video-js vjs-default-skin vjs-big-play-centered" controls
+               preload="auto" width="280" height="200" poster="video/car.jpg"
+               data-setup='{techOrder:["flash","html5"]}'>
+            <source src="video/fun.mp4" type="video/mp4">
+            <source src="video/fun.mp4" type="video/webm">
+            <p class="vjs-no-js">
+                To view this video please enable JavaScript, and consider upgrading to a web browser
+                that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+            </p>
+        </video>
+    </div>-->
+    <div class="next-box">
+        <button class="btn prev" style="display:none;">上一题</button>
+        <!--<button class="btn next">下一题</button>-->
+        <input type="button" class="btn next" id="btn" value="下一题"/>
+    </div>
+    <!--分享弹出框-->
+    <div class="public-mask">
+        <div class="public-alert-box">
+            <p class="alert-type font-size-14">分享成功</p>
+            <p class="alert-intro font-size-12" style="line-height: 20px;">
+                您已成功分享，系统随机赠送<span class="reward-type"></span></span><span class="reward-amount"></span>，自动存入您的<span class="reward-type"></span>账户。祝您答卷愉快！
+            </p>
+            <i class="iconfont close">&#xe663;</i>
+        </div>
+    </div>
+</div>
+<div class="progress">
+    <div class="bar iconfont">&#xe63e;</div>
+    <div class="mask"></div>
+    <div class="flag"></div>
+</div>
+<!--弹出框：提示是否答过此卷-->
+<div class="weui_dialog_alert" style="display: none;">
+    <div class="weui_mask"></div>
+    <div class="weui_dialog">
+        <div class="weui_dialog_hd"><strong class="weui_dialog_title"></strong></div>
+        <div class="weui_dialog_bd"></div>
+        <div class="weui_dialog_ft">
+            <a href="javascript:;" class="weui_btn_dialog primary sure" style='color: #FEBC21;'>确定</a>
+        </div>
+    </div>
+</div>
+<!-- If you'd like to support IE8 -->
+<script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+<script src="http://vjs.zencdn.net/5.8.8/video.js"></script>
+<script type="text/javascript" src="js/zepto/zepto_1.1.6.js"></script>
+<script type="text/javascript" src="js/zepto/zepto_fx_1.1.6.js"></script>
+<script type="text/javascript" src="js/zepto/zepto_touch_1.1.6.js"></script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js "></script>
+<script type="text/javascript" src="js/template.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/questions.js"></script>
+
+<!--单选题模板-->
+<script id="template_single" type="text/html">
+    <div>
+        <div class="font-size-14 question-title">
+            <span class="font-size-14">{{number}}、</span>{{title}}
+            {{if optional == false}}
+            <span style="color:red;" class="font-size-20">*</span>
+            {{/if}}
+        </div>
+    </div>
+    <div class="options">
+        <div class="weui_cells">
+            <a href="javascript:;" class='option-style'>{{include 'template_single_option' question}}</a>
+        </div>
+    </div>
+</script>
+
+<!--单选题选项模板-->
+<script type="text/html" id="template_single_option">
+    {{each options as option i}}
+    <label class="weui_cell weui_check_label label-border" oid="{{option.id}}" for="{{option.id}}" code="{{option.code}}">
+        <div class="weui_cell_bd weui_cell_primary">
+            <p style="display:flex;">
+                <span class="font-size-12" style="margin:0 30px 0 0px;text-align: left;">{{option.title}}</span>
+                <span style="height: 20px; width: 45px;">
+                    <i class="iconfont car">&#xe641;</i>
+                    <i class="iconfont hook">&#xe642;</i>
+                </span>
+            </p>
+            {{if option.open}}
+            <p class="open" style="display:none;"><textarea class="open-option"></textarea></p>
+            {{/if}}
+        </div>
+        <div class="weui_cell_ft">
+            <input type="radio" class="weui_check radio" id="{{option.id}}">
+            <span class="weui_icon_checked"></span>
+        </div>
+    </label>
+    {{/each}}
+</script>
+
+<!--多选题模板-->
+<script id="template_multiple" type="text/html">
+    <div>
+        <div class="font-size-14 question-title">
+            <span class="font-size-14">{{number}}、</span>{{title}}
+            {{if optional == false}}
+            <span style="color:red;" class="font-size-20">*</span>
+            {{/if}}
+        </div>
+    </div>
+    <div class="options">
+        <div class="weui_cells">
+            <a href="javascript:;" class='option-style'>{{include 'template_multiple_option' question}}
+            </a>
+        </div>
+    </div>
+</script>
+
+<!--多选题选项模板-->
+<script type="text/html" id="template_multiple_option">
+    {{each options as option i}}
+    <label class="weui_cell weui_check_label label-border" oid="{{option.id}}" for="{{option.id}}" code="{{option.code}}" {{if option.exclusive}}exclusive="true"{{else}}exclusive="false"{{/if}}>
+        <div class="weui_cell_bd weui_cell_primary">
+            <p style="display:flex;">
+                <span class="font-size-12" style="margin:0 30px 0 0;text-align: left;">{{option.title}}</span>
+                <span style="height: 20px; width: 45px; flex: 1;">
+                    <i class="iconfont car">&#xe641;</i>
+                    <i class="iconfont hook">&#xe642;</i>
+                </span>
+            </p>
+            {{if option.open}}
+            <p class="open" style="display: none;"><textarea class="open-option"></textarea></p>
+            {{/if}}
+        </div>
+        <div class="weui_cell_ft">
+            <input type="checkbox" class="weui_check checkbox" id="{{option.id}}">
+            <span class="weui_icon_checked"></span>
+        </div>
+    </label>
+    {{/each}}
+</script>
+
+<!--星星打分题模板-->
+<script type="text/html" id="template_score_star">
+    <div>
+        <div class="font-size-14 question-title">
+            <span class="font-size-14">{{number}}、</span>{{title}}
+            {{if optional == false}}
+            <span style="color:red;" class="font-size-20">*</span>
+            {{/if}}
+        </div>
+    </div>
+    <div class="options">
+        <div class="weui_cells weui_cells_radio">
+            <div class="weui_cell weui_check_label label-border clearfix">
+                <div class="weui_cell_bd weui_cell_primary">
+                    {{include 'template_score_star_option' question}}
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!--星星打分题选项模板-->
+<script type="text/html" id="template_score_star_option">
+    <div class="clearfix raty-box">
+        <div class="matrix-score-a">
+            <label style="margin-bottom:10px;display: flex; float: left;width:76%;color: #333; font-size: 12px;">
+                {{each options as option i}}
+                    {{if i==0 || i == options.length-1}}
+                        <a style="flex: 1;visibility:visible;"><label class="font-size-12" style="width:18px;">{{options[i].title}}</label></a>
+                    {{else}}
+                        <a style="flex: 1;visibility:hidden;"><label class="font-size-12" style="width:18px;">{{options[i].title}}</label></a>
+                    {{/if}}
+                {{/each}}
+            </label>
+            <div class="total" style="display:none;">
+                <span class="score"></span>
+                <i class="iconfont" style="color:#FEBC21;font-size:18px;cursor: pointer;">&#xe651;</i>
+            </div>
+        </div>
+        <div class="matrix-score-a raty-score-box">
+            <div class="raty" max="{{options.length}}"  num="0" exid="" half="" code="" style="display: flex; float: left;width:76%;">
+                {{each options as option i}}
+                <a id="{{option.id}}" index="{{option.dispIndex}}" value="{{option.value}}" code="{{option.code}}" onclick="tickRaty(this)" style="flex: 1;"><i class="iconfont star font-size-20">&#xe63f;</i></a>
+                {{/each}}
+            </div>
+            <div class="total">
+                <span class="score"></span>
+                <i class="iconfont" code="" onclick="cancelRaty(this)" style="color:#FEBC21;font-size:18px;cursor: pointer;">&#xe651;</i>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!--方块打分题模板-->
+<script type="text/html" id="template_score_square">
+    <div>
+        <div class="font-size-14 question-title">
+            <span class="font-size-14">{{number}}、</span>{{title}}
+            {{if optional == false}}
+            <span style="color:red;" class="font-size-20">*</span>
+            {{/if}}
+        </div>
+    </div>
+    <div class="options">
+        <div class="weui_cells weui_cells_radio">
+            <div class="weui_cell weui_check_label label-border clearfix">
+                <div class="weui_cell_bd weui_cell_primary">
+                    {{include 'template_score_square_option' question}}
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!--方块打分题选项模板-->
+<script type="text/html" id="template_score_square_option">
+    <div class="clearfix raty-box">
+        <div class="matrix-score-a">
+            <label style="margin-bottom:10px;display: flex; float: left;width:76%;color: #333; font-size: 12px;">
+                {{each options as option i}}
+                {{if i==0 || i == options.length-1}}
+                <a style="flex: 1;visibility:visible;"><label class="font-size-12" style="width:18px;">{{options[i].title}}</label></a>
+                {{else}}
+                <a style="flex: 1;visibility:hidden;"><label class="font-size-12" style="width:18px;">{{options[i].title}}</label></a>
+                {{/if}}
+                {{/each}}
+            </label>
+            <div class="total" style="display:none;">
+                <span class="score"></span>
+                <i class="iconfont" style="color:#FEBC21;font-size:18px;cursor: pointer;">&#xe651;</i>
+            </div>
+        </div>
+        <div class="matrix-score-a raty-score-box">
+            <div class="raty" max="{{options.length}}"  num="0" exid="" half="" code="" style="display: flex; float: left;width:76%;">
+                {{each options as option i}}
+                <a class="square" id="{{option.id}}" index="{{option.dispIndex}}" value="{{option.value}}" code="{{option.code}}" onclick="tickRaty(this)" style="flex: 1;font-size:12px;height:20px;text-align:center;line-height:20px;color:#333;">{{i+1}}</a>
+                {{/each}}
+            </div>
+            <div class="total">
+                <span class="score"></span>
+                <i class="iconfont" code="" onclick="cancelRaty(this)" style="color:#FEBC21;font-size:18px;cursor: pointer;">&#xe651;</i>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!--填空题模板-->
+<script type="text/html" id="template_blank">
+    <div>
+        <div class="font-size-14 question-title">
+            <span class="font-size-14">{{number}}、</span>{{title}}
+            {{if optional == false}}
+            <span style="color:red;" class="font-size-20">*</span>
+            {{/if}}
+        </div>
+    </div>
+    <div class="options">
+        <div class="weui_cells">
+            <a href="javascript:;" class='option-style'>
+                {{include 'template_blank_option' question}}
+            </a>
+        </div>
+    </div>
+</script>
+
+<!--填空题选项模板-->
+<script type="text/html" id="template_blank_option">
+    {{each options as option i }}
+          <input type="text" oid="{{option.id}}" code="{{option.code}}" class="blank font-size-12" style="border: 1px solid #D9D9D9; height: 32px; padding-left: 4px; width: 97%;" />
+    {{/each}}
+</script>
+
+<!--图片单选题模板-->
+<script type="text/html" id="template_single_img">
+    <div>
+        <div class="font-size-14 question-title">
+            <span class="font-size-14">{{number}}、</span>{{title}}
+            {{if optional == false}}
+            <span style="color:red;" class="font-size-20">*</span>
+            {{/if}}
+        </div>
+    </div>
+    <div class="options img-single-box">
+        <ul class="img-question">
+            {{include 'template_single_img_option' question}}
+        </ul>
+    </div>
+</script>
+
+<!--图片单选选项模板-->
+<script type="text/html" id="template_single_img_option">
+    {{each options as option i}}
+    <li oid="{{option.id}}" code="{{option.code}}" >
+        <span class="li-mask"><i class="iconfont">&#xe610;</i></span>
+        <img src="{{resHost}}{{option.imageUrl}}"/>
+        <!--<span class="img-title" style="display:block;">{{option.title}}</span>
+        {{if option.open}}
+        <textarea class="img-open"></textarea>
+        {{/if}}-->
+    </li>
+    {{/each}}
+</script>
+
+<!--图片多选题模板-->
+<script type="text/html" id="template_multiple_img">
+    <div>
+        <div class="font-size-14 question-title">
+            <span class="font-size-14">{{number}}、</span>{{title}}
+            {{if optional == false}}
+            <span style="color:red;" class="font-size-20">*</span>
+            {{/if}}
+        </div>
+    </div>
+    <div class="options img-multiple-box">
+        <ul class="img-question">
+            {{include 'template_multiple_img_option' question}}
+        </ul>
+    </div>
+</script>
+
+<!--图片多选题选项模板-->
+<script type="text/html" id="template_multiple_img_option">
+    {{each options as option i}}
+    <li oid="{{option.id}}" code="{{option.code}}">
+        <span class="li-mask"><i class="iconfont">&#xe610;</i></span>
+        <img src="{{resHost}}{{option.imageUrl}}"/>
+        <!--<span class="img-title" style="display:block;">{{option.title}}</span>
+        {{if option.open}}
+        <textarea class="img-open open-option"></textarea>
+        {{/if}}-->
+    </li>
+    {{/each}}
+</script>
+
+<!--多行填空题模板-->
+<script type="text/html" id="template_multiple_line_blank">
+    <div>
+        <div class="font-size-14 question-title">
+            <span class="font-size-14">{{number}}、</span>{{title}}
+            {{if optional == false}}
+            <span style="color:red;" class="font-size-20">*</span>
+            {{/if}}
+        </div>
+    </div>
+    <div class="options">
+        <div class="weui_cells">
+            <a href="javascript:;" class='option-style'>
+                {{include 'template_multiple_line_blank_option' question}}
+            </a>
+        </div>
+    </div>
+</script>
+
+<!--多行填空选项模板-->
+<script type="text/html" id="template_multiple_line_blank_option">
+    {{each options as option i}}
+    <textarea oid="{{option.id}}" rows="{{option.blankRows}}" code="{{option.code}}" class="blank font-size-12"></textarea>
+    {{/each}}
+</script>
+
+<!--多项填空题模板-->
+<script type="text/html" id="template_multiple_blank">
+    <div>
+        <div class="font-size-14 question-title">
+            <span class="font-size-14">{{number}}、</span>{{title}}
+            {{if optional == false}}
+            <span style="color:red;" class="font-size-20">*</span>
+            {{/if}}
+        </div>
+    </div>
+    <div class="options">
+        <div class="weui_cells">
+            <a href="javascript:;" class='option-style'>
+                {{include 'template_multiple_blank_option' question}}
+            </a>
+        </div>
+    </div>
+</script>
+
+<!--多项填空选项模板-->
+<script type="text/html" id="template_multiple_blank_option">
+    {{each options as option i}}
+    <div class="multiple_blank_group">
+        <p>{{option.title}}</p>
+        <input type="text" oid="{{option.id}}" code="{{option.code}}" class="blank multiple_blank font-size-12" />
+    </div>
+    {{/each}}
+</script>
+
+<!--矩阵单选题模板（展开）-->
+<script type="text/html" id="template_matrix_single_fluid">
+    <div>
+        <div class="font-size-14 question-title">
+            <span class="font-size-14">{{number}}、</span>{{title}}
+            {{if optional == false}}
+            <span style="color:red;" class="font-size-20">*</span>
+            {{/if}}
+        </div>
+    </div>
+    {{each rows as rowopt i}}
+    <div class="matrix" oid="{{rowopt.id}}" code="{{rowopt.code}}">
+        <p class="matrix-rows" style="height:auto;">
+            <i></i>
+            <span class="font-size-14">{{rowopt.title}}</span>
+            {{if rowopt.open}}
+            <textarea class="open-text open-option"></textarea>
+            {{/if}}
+        </p>
+        <div class="options">
+            <div class="weui_cells">
+                <a href="javascript:;" class='option-style'>
+                    {{include 'template_matrix_single_fluid_option' question}}
+                </a>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</script>
+
+<!--矩阵单选题选项模板（展开）-->
+<script type="text/html" id="template_matrix_single_fluid_option">
+    {{each cols as colopt i}}
+    <label class="weui_cell weui_check_label label-border" oid="{{colopt.id}}" for="{{colopt.id}}" code="{{colopt.code}}">
+        <div class="weui_cell_bd weui_cell_primary">
+            <p style="display:flex;">
+                <span style="margin:0 30px 0 0px;text-align: left;" class="font-size-12">{{colopt.title}}</span>
+                <span style="height: 20px; width: 45px;">
+                    <i class="iconfont car">&#xe641;</i>
+                    <i class="iconfont hook">&#xe642;</i>
+                </span>
+            </p>
+            {{if colopt.open}}
+            <p class="open" style="display:none;"><textarea class="open-option"></textarea></p>
+            {{/if}}
+        </div>
+        <div class="weui_cell_ft">
+            <input type="radio" class="weui_check radio" id="{{colopt.id}}">
+            <span class="weui_icon_checked"></span>
+        </div>
+    </label>
+    {{/each}}
+</script>
+
+<!--矩阵多选题模板（展开）-->
+<script type="text/html" id="template_matrix_multiple_fluid">
+    <div>
+        <div class="font-size-14 question-title">
+            <span class="font-size-14">{{number}}、</span>{{title}}
+            {{if optional == false}}
+            <span style="color:red;" class="font-size-20">*</span>
+            {{/if}}
+        </div>
+    </div>
+    {{each rows as rowopt i}}
+    <div class="matrix" oid="{{rowopt.id}}" code="{{rowopt.code}}">
+        <p class="matrix-rows" style="height:auto;">
+            <i></i>
+            <span class="font-size-14">{{rowopt.title}}</span>
+            {{if rowopt.open}}
+            <textarea class="open-text open-option"></textarea>
+            {{/if}}
+        </p>
+        <div class="options">
+            <div class="weui_cells">
+                <a href="javascript:;" class='option-style'>
+                    {{include 'template_matrix_multiple_fluid_option' question}}
+                </a>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</script>
+
+<!--矩阵多选题选项模板（展开）-->
+<script type="text/html" id="template_matrix_multiple_fluid_option">
+    {{each cols as colopt i}}
+    <label class="weui_cell weui_check_label label-border" oid="{{colopt.id}}" for="{{colopt.id}}" code="{{colopt.code}}" {{if colopt.exclusive}}exclusive="true"{{else}}exclusive="false"{{/if}}>
+        <div class="weui_cell_bd weui_cell_primary">
+            <p style="display:flex;">
+                <span style="margin:0 30px 0 0px;text-align: left;" class="font-size-12">{{colopt.title}}</span>
+                <span style="height: 20px; width: 45px; flex: 1;">
+                    <i class="iconfont car">&#xe641;</i>
+                    <i class="iconfont hook">&#xe642;</i>
+                </span>
+            </p>
+            {{if colopt.open}}
+            <p class="open" style="display: none;"><textarea class="open-option"></textarea></p>
+            {{/if}}
+        </div>
+        <div class="weui_cell_ft">
+            <input type="checkbox" class="weui_check checkbox" id="{{colopt.id}}">
+            <span class="weui_icon_checked"></span>
+        </div>
+    </label>
+    {{/each}}
+</script>
+
+<!--矩阵单选题模板（表格）-->
+<script type="text/html" id="template_matrix_single_tabular">
+    <div>
+        <div class="font-size-14 question-title">
+            <span class="font-size-14">{{number}}、</span>{{title}}
+            {{if optional == false}}
+            <span style="color:red;" class="font-size-20">*</span>
+            {{/if}}
+        </div>
+    </div>
+    <div class="matrix-box" style="margin-top:10px;">
+        <div class="matrix-title">
+            <div class="matrix-col-title"></div>
+            {{each cols as colopt i }}
+            <div class="font-size-12 matrix-col-title">{{colopt.title}}</div>
+            {{/each}}
+        </div>
+        {{each rows as rowopt i}}
+        <div class="matrix-options matrix-options-single" oid="{{rowopt.id}}" code="{{rowopt.code}}">
+            <div class="font-size-12 matrix-options-title">{{rowopt.title}}
+                {{if rowopt.open}}
+                <textarea class="open-option matrix-open-option"></textarea>
+                {{/if}}
+            </div>
+            {{include 'template_matrix_single_tabular_option' question}}
+        </div>
+        {{/each}}
+    </div>
+</script>
+
+<!--矩阵单选题选项模板（表格）-->
+<script type="text/html" id="template_matrix_single_tabular_option">
+    {{each cols as colopt i}}
+    <p class="matrix-option" oid="{{colopt.id}}" code="{{colopt.code}}">
+        <i class="iconfont">&#xe654;</i>
+        {{if colopt.open}}
+        <textarea class="open-option matrix-open-option"></textarea></p>
+        {{/if}}
+    {{/each}}
+</script>
+
+<!--矩阵多选题模板（表格）-->
+<script type="text/html" id="template_matrix_multiple_tabular">
+    <div>
+        <div class="font-size-14 question-title">
+            <span class="font-size-14">{{number}}、</span>{{title}}
+            {{if optional == false}}
+            <span style="color:red;" class="font-size-20">*</span>
+            {{/if}}
+        </div>
+    </div>
+    <div class="options matrix-box" style="margin-top:10px;">
+        <div class="matrix-title">
+            <div class="matrix-col-title"></div>
+            {{each cols as colopt i }}
+            <div class="font-size-12 matrix-col-title">{{colopt.title}}</div>
+            {{/each}}
+        </div>
+        {{each rows as rowopt i}}
+        <div class="matrix-options matrix-options-multiple" oid="{{rowopt.id}}" code="{{rowopt.code}}">
+            <div class="font-size-12 matrix-options-title">{{rowopt.title}}
+                {{if rowopt.open}}
+                <textarea class="open-option matrix-open-option"></textarea>
+                {{/if}}
+            </div>
+            {{include 'template_matrix_multiple_tabular_option' question}}
+        </div>
+        {{/each}}
+    </div>
+</script>
+
+<!--矩阵多选题选项模板（表格）-->
+<script type="text/html" id="template_matrix_multiple_tabular_option">
+    {{each cols as colopt i}}
+    <p class="matrix-option" oid="{{colopt.id}}" code="{{colopt.code}}" {{if colopt.exclusive}}exclusive="true"{{else}}exclusive="false"{{/if}}>
+        <i class="iconfont">&#xe654;</i>
+        {{if colopt.open}}
+        <textarea class="open-option matrix-open-option"></textarea>
+        {{/if}}
+    </p>
+    {{/each}}
+</script>
+
+<!--矩阵打分题（展开）-->
+<script type="text/html" id="template_matrix_score_fluid">
+    <div>
+        <div class="font-size-14 question-title">
+            <span class="font-size-14">{{number}}、</span>{{title}}
+            {{if optional == false}}
+            <span style="color:red;" class="font-size-20">*</span>
+            {{/if}}
+        </div>
+    </div>
+    {{each rows as rowopt i}}
+    <div class="matrix raty-box raty-score-box">
+        <p class="matrix-rows clearfix">
+            <i style="float:left;margin-top:6px;"></i>
+            <span style="float:left;" class="font-size-14">{{rowopt.title}}</span>
+            {{if rowopt.open}}
+            <textarea class="open-option" style="width:100px;border:1px solid #d9d9d9;"></textarea>
+            {{/if}}
+            <span class="score-right score" style="float:right;">0分</span>
+        </p>
+        <div class="options">
+            <div class="weui_cells raty" oid="{{rowopt.id}}" max="{{cols.length}}" num="0" exid="" half="" code="">
+                {{include 'template_matrix_score_fluid_option' question}}
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</script>
+
+<!--矩阵打分题选项模板（展开）-->
+<script type="text/html" id="template_matrix_score_fluid_option">
+    {{each cols as colopt i}}
+    <a href="javascript:;" class='option-style' id="{{colopt.id}}" index="{{colopt.index}}" value="{{colopt.value}}" code="{{colopt.code}}" onclick="tickRaty(this)">
+        <label class="weui_cell label-border">
+            <div class="weui_cell_bd weui_cell_primary" style="line-height: 25px;">
+                <p style="display:flex;">
+                    <i style="padding-right: 14px;width:14px;" class="star iconfont">&#xe63f;</i>
+                    <span style="margin:0 30px 0 0px;text-align: left;" class="font-size-12">{{colopt.title}}</span>
+                </p>
+            </div>
+        </label>
+    </a>
+    {{/each}}
+</script>
+
+<!--矩阵打分题模板（表格）-->
+<script type="text/html" id="template_matrix_score_tabular_star">
+    <div>
+        <div class="font-size-14 question-title">
+            <span class="font-size-14">{{number}}、</span>{{title}}
+            {{if optional == false}}
+            <span style="color:red;" class="font-size-20">*</span>
+            {{/if}}
+        </div>
+    </div>
+    <div class="options" style="margin-top:10px;">
+        <div class="clearfix tip">
+            <div class="top-left"></div>
+            <div class="top-right"></div>
+            <div class="top-middle">
+                {{each cols as colopt i}}
+                {{if i == 0 || i == cols.length-1}}
+                <label class="score-flex">{{cols[i].title}}</label>
+                {{else}}
+                <label class="score-flex">{{cols[i].title}}</label>
+                {{/if}}
+                {{/each}}
+            </div>
+        </div>
+        <div class="clearfix score-title">
+            <div class="score-title-left"></div>
+            <div class="score-title-right"></div>
+            <div class="score-title-middle">
+                {{each cols as colopt i}}
+                <i class="score-flex font-size-12" style="text-align: left;">{{colopt.value}}分</i>
+                {{/each}}
+            </div>
+        </div>
+        {{each rows as rowopt i}}
+        <div class="clearfix score-box raty-box raty-score-box">
+            <div class="score-left font-size-12">
+                {{rowopt.title}}
+                {{if rowopt.open}}
+                <textarea class="open-option" style="width:70px;"></textarea>
+                {{/if}}
+            </div>
+            <div class="test-right">
+                <div class="score-right score" style="line-height: 15px;"></div>
+                <i class="iconfont cancel" style="color: #FEBC21; font-size: 16px; cursor: pointer;" code=""  onclick="cancelRaty(this)">&#xe651;</i>
+            </div>
+            <div class="score-middle raty" oid="{{rowopt.id}}" max="{{cols.length}}" num="0" exid="" half="" code="">
+                {{include 'template_matrix_score_tabular_star_option' question}}
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</script>
+
+<!--矩阵打分题选项模板（表格）-->
+<script type="text/html" id="template_matrix_score_tabular_star_option">
+    {{each cols as colopt i}}
+    <a oid="{{colopt.id}}" index="{{colopt.dispIndex}}" value="{{colopt.value}}" code="{{colopt.code}}" onclick="tickRaty(this)"><i class="iconfont star">&#xe63f;</i></a>
+    {{/each}}
+</script>
+
+<!--描述题-->
+<script type="text/html" id="template_desc">
+    <div>
+        <div class="font-size-14 question-title">
+            <span class="font-size-14">{{number}}、</span>{{title}}
+        </div>
+    </div>
+</script>
+
+<!--矩阵打分题（方块表格）-->
+<script type="text/html" id="template_matrix_score_tabular_square">
+    <div>
+        <div class="question-title">
+            <span>{{number}}、</span>{{title}}
+            {{if optional == false}}
+            <span style="color:red;">*</span>
+            {{/if}}
+        </div>
+    </div>
+    <div class="options" style="margin-top:10px;">
+        <div class="clearfix tip">
+            <div class="top-left"></div>
+            <div class="top-right"></div>
+            <div class="top-middle">
+                {{each cols as colopt i}}
+                {{if i == 0 || i == cols.length-1}}
+                <label class="score-flex">{{cols[i].title}}</label>
+                {{else}}
+                <label class="score-flex">{{cols[i].title}}</label>
+                {{/if}}
+                {{/each}}
+            </div>
+        </div>
+        <div class="clearfix score-title">
+            <div class="score-title-left"></div>
+            <div class="score-title-right"></div>
+            <div class="score-title-middle">
+                {{each cols as colopt i}}
+                <i class="score-flex" style="text-align: left;">{{colopt.value}}分</i>
+                {{/each}}
+            </div>
+        </div>
+        {{each rows as rowopt i}}
+        <div class="clearfix score-box raty-box raty-score-box">
+            <div class="score-left font-size-12">
+                {{rowopt.title}}
+                {{if rowopt.open}}
+                <textarea class="open-option" style="width:70px;"></textarea>
+                {{/if}}
+            </div>
+            <div class="test-right">
+                <div class="score-right score" style="line-height: 15px;"></div>
+                <i class="iconfont cancel" style="color: #FEBC21; font-size: 16px; cursor: pointer;" code="" onclick="cancelRaty(this)">&#xe651;</i>
+            </div>
+            <div class="score-middle raty" oid="{{rowopt.id}}" max="{{cols.length}}" num="0" exid="" half="" code="">
+                {{include 'template_matrix_score_tabular_square_option' question}}
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</script>
+
+<!--矩阵打分题选项模板（方块表格）-->
+<script type="text/html" id="template_matrix_score_tabular_square_option">
+    {{each cols as colopt i}}
+    <a oid="{{colopt.id}}" index="{{colopt.dispIndex}}" value="{{colopt.value}}" code="{{colopt.code}}"  class="score-flex square" onclick="tickRaty(this)">{{i+1}}</a>
+    {{/each}}
+</script>
+
+<script>
+
+    var memberid = getParamByName("memberid", window.location);
+    var projectid = getParamByName("projectid", window.location);
+    var templateid = getParamByName("templateid", window.location);
+    var tmpName = getParamByName("tmpName", window.location);
+
+    /*单选、多选题样式*/
+    var type = $(window).width() > 700 ? 'click' : 'tap';
+
+    //答题序号
+    var _step = 0;
+    //答题索引，当前题目在questions的偏移位置
+    var _index = 0;
+    //题目列表
+    var _questions = [];
+    //答题历史
+    var _tracking = { top: null };
+    //问卷
+    var _sample = null;
+    //结束
+    var _closing = null;
+    //停留时间
+    var wait = -1;
+    var stay = 0;
+
+    $(function () {
+
+        //回退按钮
+        $("#back").click(function () {
+            window.location = 'surveys.html?memberid=' + memberid;
+        });
+		debugger;
+        //问卷标题
+        $('.template-name span').html(tmpName);
+
+        //上一题
+        $('.prev').on('click', function () {
+            if (_tracking.top != null) {
+                var trap = _tracking[_tracking.top];
+                _index = trap.index;
+                _step = trap.step;
+                goto(_questions);
+                _tracking.top = trap.top;
+                if (_tracking.top == null)
+                    $('.prev').hide();
+            } else {
+                //已到第一道题
+            }
+        });
+	debugger;
+        //请求下一题数据
+        var going = function(){
+            ajaxGet('sample/getByProjectid?projectid='+projectid+'&memberid='+memberid, function (data){
+                var data = data.objs;
+                if(data.length > 0){
+                    $(".weui_dialog_alert").show().find('.weui_dialog_title').html("警告");
+                    $(".weui_dialog_alert").find('.weui_dialog_bd').html('不可重复答卷或您的答卷次数超过限定！');
+                    $('.weui_dialog_alert .sure').on(type, function () {
+                        $('.weui_dialog_alert').css('display', 'none');
+                    });
+                }else{
+                    var question = _questions[_index];
+                    if (evalGeneralLogic(question, '.question-box') == true) {
+                        _sample = next(_questions, _sample);
+                        $('.prev').show();
+                    } else {
+                        ; //此处应有动画效果
+                    }
+                }
+            });
+        }
+		debugger;
+        ajaxGet('template/get?id=' + templateid, function(data){
+        	debugger;
+            stay = data.objs[0].waitBeforeNext
+            wait = stay == 0 ? -1:stay;
+        },function(){
+
+        });
+        //过多少秒后“下一题”按钮才生效
+        function time(_this) {
+            if (wait == 0) {
+                _this.removeAttribute('disabled');
+                _this.value = "下一题";
+                wait = stay;
+                going();
+            } else if (wait == -1) {
+                going();
+            } else {
+                _this.setAttribute("disabled", true);
+                _this.value = wait + "秒后生效";
+                wait--;
+                setTimeout(function () {
+                    time(_this)
+                }, 1000)
+            }
+        }
+        //下一题
+        $('.next').on('click', function () {
+            time(this);
+        });
+
+	debugger;
+        //获取题目列表
+        ajaxGet('question/search?templateid=' + templateid, function (data) {
+        	debugger;
+            _questions = data.objs;
+            ajaxGet('questiongroup/search?templateid=' + templateid, function(data) {//需要乱序的题目列表区间
+                var orders = data.objs;
+                ajaxGet('sample/search?templateid=' + templateid + '&memberid=' + memberid, function (data) {
+                    _sample = data.objs.length > 0 ? data.objs[0] : null;
+                    //题目乱序
+                    _questions = _sample == null || _sample.answers.length <= 0 ? judge(_questions, orders) : judge(_questions,orders, _sample.answers)
+                    //_sample == null || _sample.answers.length <= 0 ? goto(_questions) : resume(_questions, _sample);
+                    _sample == null || _sample.answers.length <= 0 ? goto(_questions) : resume(_questions, _sample);
+                }, function (err) {
+                    alert(err);
+                });
+            },function(err) {
+                alert(err);
+            });
+        }, function (err) {
+            alert(err);
+        });
+
+        //问卷的高度
+        $('.question-content').css('max-height', $(window).height() - 100);
+        $('.question-box .matrix-box .matrix-options .matrix-open-option').ready(function(){
+            $('.question-box .matrix-box .matrix-options .matrix-open-option').each(function(){
+                $(this).css('width',($(this).parent().width()-16));
+            })
+        });
+
+        //调用分享接口
+        var header = window.location.href.split('?')[0];
+        var newHref = header.substr(0, header.lastIndexOf('/') + 1);
+        var href = newHref + 'registration.html?templateid=' + templateid;
+        shareFun(href,memberid,'.question-content',templateid);
+
+    });
+
+    //@ sourceURL=dynamicScript-questions.js
+</script>
+</body>
+</html>
+
+
+

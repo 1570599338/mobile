@@ -1,0 +1,95 @@
+/*.html{
+    background-image: url(../img/wenjuan.png) !important;
+}*/
+html{
+    background-image: url(../img/about_us_bg.png);
+    background-repeat:no-repeat;
+    background-position:center;
+    background-attachment:fixed;
+    height:100%;
+}
+
+.content-wraper .answer-box{
+    padding:0 3% 2%;
+}
+.content-wraper .answer-box .content-box{
+    padding-top:13px;
+    background: rgba(255,255,255,.6);
+    border-radius: 4px 4px 10px 4px;
+    margin-top:3%;
+}
+.content-wraper .answer-box .content-box .img-left{
+    float: left;
+    border-right:1px solid #EFEFEF;
+    width: 29%;
+    padding-top:7px;
+}
+.content-wraper .answer-box .content-box .img-left .img{
+    width: 70px;
+    height: 70px;
+    margin:auto;
+}
+.content-wraper .answer-box .content-box .img-left .amounts{
+    background: url(../img/amounts.png) no-repeat center center;
+    background-size: cover;
+}
+.content-wraper .answer-box .content-box .img-left .integral{
+    background: url(../img/integral.png) no-repeat center center;
+    background-size: cover;
+}
+.content-wraper .answer-box .content-box .img-left .giftcard{
+    background: url(../img/giftcard.png) no-repeat center center;
+    background-size: contain;
+}
+.content-wraper .answer-box .content-box .img-left .img p{
+    font-family: '方正粗谭黑简体', 'Microsoft YaHei', sans-serif;
+    font-size:12px;
+    color:#fff;
+    text-align: center;
+    padding-top:6px;
+    text-shadow: 1px 0 2px #000;
+}
+.content-wraper .answer-box .content-box .img-left .img p:last-child{
+    font-size:14px;
+    line-height: 0;
+}
+.content-wraper .answer-box .content-box .intro-right{
+    float: right;
+    width: 66%;
+    padding-left:4%;
+    position: relative;
+    margin-top:4px;
+}
+.content-wraper .answer-box .content-box .intro-right .begin{
+    color:#999;
+}
+.content-wraper .answer-box .content-box .intro-right .end,
+.content-wraper .answer-box .content-box .intro-right .num{
+    color:#ED5752;
+}
+/*右下角*/
+.content-wraper .answer-box .content-box  .bottom-box{
+    height: 30px;
+    text-align: right;
+}
+.content-wraper .answer-box .content-box  .bottom-box a{
+    color:#fff;
+    font-size:14px;
+    font-family: "方正正中黑简体", "Microsoft YaHei", "sans-serif";
+    font-weight: 700;
+    line-height: 30px;
+    text-align: center;
+    display: inline-block;
+}
+.content-wraper .answer-box .content-box  .bottom-box a:first-child{
+    width: 73px;
+    height: 30px;
+    background-color: #FE9121;
+    border-top-left-radius: 12px;
+}
+.content-wraper .answer-box .content-box  .bottom-box a:last-child{
+    width: 45px;
+    height: 30px;
+    background-color: #FEBC21;
+    border-bottom-right-radius: 12px;
+}

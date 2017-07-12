@@ -1,0 +1,57 @@
+ * {
+     margin: 0;
+     padding: 0;
+ }
+ 
+ body {
+     background: #eee;
+ }
+ 
+ .ower-top {
+     text-align: center;
+     color: #333;
+     font-size: 16px;
+     margin: 10px 0;
+ }
+ 
+ .ower-top span {
+     vertical-align: baseline;
+     font-size: 16px;
+     padding-left: 5px;
+ }
+ 
+ .driving-license,
+ .driving-permit {
+     width: 86%;
+     background: #fff;
+     margin: 0 auto;
+     padding: 10px;
+     min-height: 200px;
+     background-size: 100%, 100%;
+     background-repeat: no-repeat;
+ }
+ 
+ .box-border {
+     width: 100%;
+     border: 1px dashed #FEDE94;
+     margin-left: -2px;
+     text-align: center;
+     font-size: 28px;
+     overflow: hidden;
+ }
+ 
+ .ower-title {
+     line-height: 28px;
+     margin: 68px 0;
+ }
+ 
+ .ower-title p {
+     width: 100%;
+ }
+ 
+ .permit-hint,
+ .license-hint {
+     width: 90%;
+     margin: 0 auto;
+     padding: 5px 0;
+ }

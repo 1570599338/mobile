@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <title>汽车调查</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/iconfont/myfont.css" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/news_usedcar.css" />
+    <!--<link rel="stylesheet" href="../css/news_maintain.css" />-->
+</head>
+
+<body>
+    <header>
+        <ul>
+            <li id="back" class="iconfont">&#xe662;返回<i>|</i></li>
+            <li class='seconde-li'>精选坐骑－详情页</li>
+            <li></li>
+        </ul>
+    </header>
+    <div class="title-box">
+        <h2></h2>
+        <div class="intro">
+            <p><i class="iconfont" style="color:#FEBC21;">&#xe635;</i>精选坐骑</p>
+            <p><i class="iconfont" style="color:#FFE758;">&#xe60f;</i>2016-04-08</p>
+        </div>
+        <!--<div class="tip">
+            <i class="iconfont share-tip" style="color:#EF5752;font-size:18px;padding-right:9px;">&#xe61a;</i>
+            <i class="iconfont comment-tip" style="color:#FE9121;font-size:18px;">&#xe632;</i>
+        </div>-->
+    </div>
+    <div class="share-box">
+        <div class="angle-share"></div>
+        <div class="share">
+            <div class="wechart">
+                <div class="wechart-bg" style="background-color: #3EB237;">
+                    <i class="iconfont">&#xe600;</i>
+                </div>
+                <p>微信</p>
+            </div>
+        </div>
+        <div class="share">
+            <div class="wechart">
+                <div class="wechart-bg" style="background-color: #FEBC21;">
+                    <i class="iconfont" style="line-height: 26px;">&#xe601;</i>
+                </div>
+                <p>腾讯QQ</p>
+            </div>
+        </div>
+        <div class="share">
+            <div class="wechart">
+                <div class="wechart-bg" style="background-color: #00D900;">
+                    <i class="iconfont">&#xe604;</i>
+                </div>
+                <p>朋友圈</p>
+            </div>
+        </div>
+        <div class="share">
+            <div class="wechart">
+                <div class="wechart-bg" style="background-color: #E04D6A;">
+                    <i class="iconfont">&#xe60a;</i>
+                </div>
+                <p>新浪微博</p>
+            </div>
+        </div>
+    </div>
+    <div class="complete-box">
+        <div class="angle-com"></div>
+        <i class="iconfont">&#xe632;</i>
+        <input type="text" placeholder="请在此处输入您的评论" />
+        <span>完成</span>
+    </div>
+    <div class="content clearfix">
+        <div class="content-text">
+
+        </div>
+        <div>
+            <p class="active-box">
+                <span class="viewcount"><i class="iconfont" style="color:#FE9121;">&#xe619;</i><span></span></span>
+                <span class="likecount"><i class="iconfont" style="color:#ccc;">&#xe615;</i><span></span></span>
+            </p>
+        </div>
+    </div>
+    <!-- zepto  -->
+    <script type="text/javascript" src="../js/zepto/zepto_1.1.6.js"></script>
+    <script type="text/javascript" src="../js/zepto-master/src/touch.js"></script>
+    <script type="text/javascript" src="../js/main.js"></script>
+    <script type="text/javascript" src="../js/news_usedcar.js"></script>
+
+    <script type="text/javascript">
+        var memberid = getParamByName("memberid", window.location);
+        var articleid = getParamByName("articleid", window.location);
+        $(function() {
+
+            //回退
+            $('#back').on('click', function() {
+                window.location = '../news_newcar.html?memberid=' + memberid;
+            });
+            if ($(window).width() < 700) {
+                $('img').css('width', '100%');
+            } else {}
+            var linkData = function(repid) {
+                var data = {
+                    subSys: 'wesurvey',
+                    repID: repid,
+                    isQuery: '1',
+                    dispType: '12',
+                    perRows: '2000',
+                };
+                return data;
+            }
+            var data = linkData(117);
+            data.cnd_articleid = articleid;
+            data.cnd_memberid = memberid;
+            data.cnd_type = 2;
+            data.selCndIDs = "type|articleid|memberid"
+            ajax2('sysmng.jsonreport.do', 'json', 'post', data, function(data) {
+                    $('.complete-box').html(data.objs[0].content);
+                    $('.title-box h2').html(data.objs[0].title);
+                    $('.release-time').html(data.objs[0].createdAt);
+                    $('.content-text').html($('.complete-box').text());
+                    $('.viewcount span').html(data.objs[0].viewCount);
+                    $('.likecount span').html(data.objs[0].likeCount);
+                    data.objs[0].likeState == "" ? ($('.likecount').attr('data-state', 2)) : ($('.likecount').attr('data-state', data.objs[0].likeState));
+                    if (data.objs[0].likeState == 1) {
+                        $('.likecount i').css('color', '#FE9121');
+                    }
+                },
+                function(error) {
+                    console.log(error);
+                });
+            //查看次数
+            ajax2('wesurvey.viewcount.do?articleid=' + articleid, 'json', 'post', [], function(data) {}, function(error) {})
+                //点赞次数
+            $('.likecount').click(function() {
+                var state = $(this).attr('data-state');
+                if (state == 1) {
+                    $('.likecount i').css('color', '#ccc');
+                    $(this).attr('data-state', 2);
+                    state = 2;
+                } else if (state == 2) {
+                    $('.likecount i').css('color', '#FE9121');
+                    $(this).attr('data-state', 1);
+                    state = 1;
+                }
+                var data = {
+                    likeState: state,
+                    memberID: memberid,
+                    articleID: articleid
+                }
+                ajax2('wesurvey.likecount.do', 'json', 'post', data, function(data) {
+                    $('.likecount span').html(data.objs[0].count);
+                }, function(error) {})
+            })
+        });
+
+        //@ sourceURL=dynamicScript-newcar-article.js
+    </script>
+
+</body>
+
+</html>

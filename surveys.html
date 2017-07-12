@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html class="html">
+<head lang="en">
+    <title>汽车调查</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/weui-master/dist/style/weui.css" />
+    <link rel="stylesheet" href="css/iconfont/myfont.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/surveys.css" />
+</head>
+<body>
+    <header>
+        <ul>
+            <li id="back" class="iconfont">&#xe662;返回<i>|</i></li>
+            <li>答卷机会</li>
+            <li></li>
+        </ul>
+    </header>
+    <div class="content-wraper">
+        <div id="survey_box" class="answer-box">
+        </div>
+    </div>
+
+    <!--弹出框-->
+    <div class="weui_dialog_alert" style="display: none;">
+        <div class="weui_mask"></div>
+        <div class="weui_dialog">
+            <div class="weui_dialog_hd"><strong class="weui_dialog_title">尊敬的用户</strong></div>
+            <div class="weui_dialog_bd">由于您未认证车主信息，请提交车主信息后再答卷</div>
+            <div class="weui_dialog_ft">
+                <a href="javascript:;" class="weui_btn_dialog primary sure" style='color: #FEBC21;'>确定</a>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/zepto/zepto_1.1.6.js"></script>
+    <script type="text/javascript" src="js/template-debug.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+    <script id="surveys" type="text/html">
+        <!---->
+        {{each surveys as survey i}}
+            <div class="content-box clearfix">
+                <div class="clearfix">
+                    <div class="img-left">
+                        {{if survey.reward.typeName === "礼金"}}
+                        <div class="img amounts">
+                            <p class="font-size-12">{{survey.reward.typeName}}</p>
+                            <p class="font-size-14">{{survey.reward.amount}}</p>
+                        </div>
+                        {{else if survey.reward.typeName == "积分"}}
+                        <div class="img integral">
+                            <p class="font-size-12">{{survey.reward.typeName}}</p>
+                            <p class="font-size-14">{{survey.reward.amount}}</p>
+                        </div>
+                        {{else}}
+                        <div class="img giftcard">
+                            <p class="font-size-12">{{survey.reward.typeName}}</p>
+                            <p class="font-size-14">{{survey.reward.amount}}</p>
+                        </div>
+                        {{/if}}
+                    </div>
+                    <div class="intro-right">
+                        <p><i class="iconfont" style="color: #FE9121;">&#xe623;</i>&nbsp;<span class="title font-size-17">{{survey.template.name}}</span></p>
+                        <p><i class="iconfont" style="color: #FEBC21;">&#xe60f;</i>&nbsp;<span class="begin font-size-12">{{(survey.project.beginDate).replace(/-/g,"/")}}－</span><span class="end font-size-12">{{(survey.project.endDate).replace(/-/g,"/")}}</span></p>
+                        <p><i class="iconfont" style="color: #EF5752;">&#xe60b;</i>&nbsp;<span class="num font-size-12">{{survey.involverCount}}</span><span class="join font-size-12">人参与</span></p>
+                    </div>
+                </div>
+                <div class="bottom-box">
+                    <a class="font-size-12 execute" href="welcome.html?memberid={{memberid}}&projectid={{survey.project.id}}&templateid={{survey.template.id}}&signAgreement={{if survey.template.signAgreement}}true{{else}}false{{/if}}&tmpName={{survey.template.name}}">我要答卷</a>
+                    <a class="font-size-12 intro" href="survey_detail.html?memberid={{memberid}}&projectid={{survey.project.id}}&templateid={{survey.template.id}}&signAgreement={{if survey.template.signAgreement}}true{{else}}false{{/if}}&tmpName={{survey.template.name}}">简介</a>
+                </div>
+            </div>
+        {{/each}}
+    </script>
+
+    <script>
+
+        $(function () {
+
+            var memberid = getParamByName("memberid", window.location);
+            var state = 1;//0未全答完（点进去/中途跳出）；1正常完成
+            var member = null, driver = null;
+            var gotourl = null;
+
+            //回退
+            $('#back').on('click', function () {
+                window.location = "home.html?memberid=" + memberid;
+            });
+
+            //获取可答卷列表
+            debugger;
+            /**
+            ajaxGet('survey/search?memberid=' + memberid +'&state=' + state, function (data) {
+                if (data.objs[0]){
+                    var latentMember = data.objs[0].latentMember;
+                    if (latentMember != 1) {
+                        $('.weui_dialog_bd').html('请完善个人信息后再参与答卷，谢谢！');
+                        $('.weui_dialog_alert').css('display', 'block');
+                        $('.sure').on('click', function(){
+                            window.location.href = 'member.html?memberid=' + memberid
+                        });
+                    } else {
+                        var html = template("surveys", { memberid: memberid, surveys: data.objs });
+                        $('#survey_box').html(html);
+                        $('html').removeClass('html');
+                    }
+                }
+                
+                //新手引导
+                /*if (data.objs.length > 0) {
+                    var html = template("surveys", { memberid: memberid, surveys: data.objs });
+                    $('#survey_box').html(html);
+                    $('html').removeClass('html');
+                }else{
+                    $('html').addClass('html').css({'background-size':'cover'});
+                }*/
+      /**      }, function (error) {
+                alert(error);
+            });
+**/
+            //请求会员详细信息
+            var criteria = {
+                subSys: 'wesurvey',
+                repID: '40',
+                isQuery: '1',
+                dispType: '12',
+                perRows: '2000',
+                selCndIDs: "id",
+                cnd_id: memberid
+            };
+            ajax2('sysmng.jsonreport.do?', 'json', 'get', criteria, function (data) {
+            	debugger;
+            	console.log("****"+data);
+                member = data.objs[0];
+                debugger;
+            }, function (error) {
+                alert(error);
+            });
+
+            //请求车主详细信息
+            var criteria = {
+                subSys: 'wesurvey',
+                repID: '90',
+                isQuery: '1',
+                dispType: '12',
+                perRows: '2000',
+                selCndIDs: "memberID",
+                cnd_memberID: memberid
+            };
+            ajax2('sysmng.jsonreport.do?', 'json', 'get', criteria, function (data) {
+                driver = data.objs[0];
+            }, function (error) {
+                alert(error);
+            });
+
+            //未认证车主/已答卷，提示不能答卷
+            $('#survey_box').off('click', '.execute').on('click', '.execute', function (e) {
+                if (member.type == 1) {
+                    if (!driver || driver.state != 1) {
+                        e.preventDefault();
+                        gotourl = 'member.html?memberid=' + memberid;
+                        $('.weui_dialog_bd').html('由于您未认证车主信息，请提交车主信息后再答卷！');
+                        $('.weui_dialog_alert').css('display', 'block');
+                    } else if (driver && driver.state == 1) {
+                        e.preventDefault();
+                        gotourl = null;
+                        gotourl = e.target.href;
+                        var templateid = getParamByName("templateid", gotourl);
+                        ajaxGet('sample/search?templateid=' + templateid + '&memberid=' + memberid, function (data) {
+                            var sample = data.objs.length > 0 ? data.objs[0] : null;
+                            if (sample != null) {
+                                gotourl = null; //stay here
+                                $('.weui_dialog_bd').html('您已经参与过此次调查，谢谢您的参与！');
+                                $('.weui_dialog_alert').css('display', 'block');
+                            } else {
+                                window.location.href = gotourl;
+                            }
+                        }, function (err) {
+                            alert(err);
+                        });
+                    }
+                } else {
+                    //evaluator is always eligiable
+                }
+            });
+
+            //关闭对话框
+            $('.weui_dialog_alert .sure').off('click').on('click', function (e) {
+                $('.weui_dialog_alert').css('display', 'none');
+                if (gotourl)
+                    window.location.href = gotourl;
+            });
+            //关闭引导页
+            $('.html').off('click').on('click', function() {
+               $(this).css('display','none').removeClass('html');
+            });
+
+            //下拉刷新
+            /*var Y = 0,moveY = 0,endY = 0, begin = 0, end = 0, poor = 0;
+            $(window).on('touchstart', function(e){
+                Y = e.touches[0].clientY;
+                begin = new Date();
+                console.log('Y:'+Y + 'date:'+begin);
+            }).on('touchmove', function(e){
+                endY = e.touches[0].clientY;
+                moveY = Y - endY;
+                console.log('moveY:'+moveY);
+            }).on('touchend', function(){
+                end = new Date();
+                poor = end.getTime() - begin.getTime();
+
+                if(moveY < -50 && poor > 300){
+                    ajaxGet('survey/search?memberid=' + memberid, function (data) {
+                        var html = template("surveys", { memberid: memberid, surveys: data.objs });
+                        $('#survey_box').html(html);
+                    }, function (error) {
+                        alert(error);
+                    });
+                }
+
+            });*/
+
+        });
+
+        //@ sourceURL=dynamicScript-surveys.js
+    </script>
+
+</body>
+</html>

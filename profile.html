@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+    <title>汽车调查</title>
+    <link rel="stylesheet" href="css/iconfont/myfont.css" />
+    <link rel="stylesheet" href="css/weui-master/dist/style/weui.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/person.css" />
+</head>
+
+<body>
+    <header>
+        <ul>
+            <li id="back" class="iconfont">&#xe662;返回<i>|</i></li>
+            <li>个人信息</li>
+            <li></li>
+        </ul>
+    </header>
+    <div class="top">
+        <div class="profile-top">
+            <div class="profile-headimg pic">
+                <!--<input type="file" name="" class="imgload" style="display:none" />-->
+            </div>
+        </div>
+    </div>
+    <div class="base-info">
+        <div class="weui_cells weui_cells_access">
+            <a class="weui_cell" href="edit_profile.html?field=shortname&title=姓名">
+                <i class="iconfont" style="color:#ef5752;font-size:22px">&#xe608;</i>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="font-size-14">姓名</p><span class="import">*</span>
+                </div>
+                <div class="weui_cell_ft shortname"></div>
+            </a>
+            <a class="weui_cell" href="edit_profile.html?field=gender&title=性别">
+                <i class="iconfont" style="color:#A5770B;font-size:22px">&#xe605;</i>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="font-size-14">性别</p><span class="import">*</span>
+                </div>
+                <div class="weui_cell_ft gender"></div>
+            </a>
+            <a class="weui_cell" href="edit_profile.html?field=birthdate&title=出生日期">
+                <i class="iconfont" style="color:#FB7832;font-size:22px"> &#xe609;</i>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="font-size-14">出生日期</p><span class="import">*</span>
+                </div>
+                <div class="weui_cell_ft birthdate"></div>
+            </a>
+            <a class="weui_cell" href="edit_profile.html?field=mobilenumber1&title=联系电话">
+                <i class="iconfont" style="color:#EF5752;font-size:22px"> &#xe647;</i>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="font-size-14">联系电话1</p>
+                </div>
+                <div class="weui_cell_ft mobilenumber1"></div>
+            </a>
+            <a class="weui_cell" href="edit_profile.html?field=mobilenumber2&title=联系电话">
+                <i class="iconfont" style="color:#FEBC21;font-size:22px"> &#xe647;</i>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="font-size-14">联系电话2</p>
+                </div>
+                <div class="weui_cell_ft mobilenumber2"></div>
+            </a>
+            <a class="weui_cell referee">
+                <i class="iconfont" style="color:#FF9120;font-size:22px">&#xe65a;</i>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="font-size-14">推荐人电话</p>
+                </div>
+                <div class="weui_cell_ft refererphonenumber"></div>
+            </a>
+            <a class="weui_cell" href="edit_profile.html?field=email&title=邮箱">
+                <i class="iconfont" style="color:#EF5752;font-size:22px"> &#xe645;</i>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="font-size-14">邮箱</p><span class="import">*</span>
+                </div>
+                <div class="weui_cell_ft email"></div>
+            </a>
+            <a class="weui_cell" href="edit_profile.html?field=location&title=地区">
+                <i class="iconfont" style="color:#FF9120;font-size:22px"> &#xe646;</i>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="font-size-14">地区</p><span class="import">*</span>
+                </div>
+                <div class="weui_cell_ft location"></div>
+            </a>
+            <a class="weui_cell" href="edit_profile.html?field=kidsnumber&title=子女信息">
+                <i class="iconfont" style="color:#FFBB20;font-size:22px"> &#xe616;</i>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="font-size-14">子女信息</p>
+                </div>
+                <div class="weui_cell_ft kidsnumber"></div>
+            </a>
+            <a class="weui_cell" href="edit_profile.html?field=income&title=收入">
+                <i class="iconfont" style="color:#B9F73E;font-size:22px">&#xe626;</i>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="font-size-14">收入</p><span class="import">*</span>
+                </div>
+                <div class="weui_cell_ft income"></div>
+            </a>
+            <a class="weui_cell" href="edit_profile.html?field=marriage&title=婚姻">
+                <i class="iconfont" style="color:#9FEF00;font-size:22px"> &#xe639;</i>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="font-size-14">婚姻状况</p>
+                </div>
+                <div class="weui_cell_ft marriage"></div>
+            </a>
+            <a class="weui_cell comment" href="edit_profile.html?field=remark&title=备注">
+                <i class="iconfont" style="color:#00CD00;font-size:22px"> &#xe638;</i>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="font-size-14">备注 </p>
+                </div>
+                <div class="weui_cell_ft remark">
+                    <span class="remark-text">
+
+                    </span>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="extra-info">
+        <div class="weui_cells weui_cells_access">
+            <a class="weui_cell" href="edit_profile.html?field=industry&title=行业">
+                <i class="iconfont" style="color:#9DED1D;font-size:22px"> &#xe603;</i>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="font-size-14">行业</p><span class="import">*</span>
+                </div>
+                <div class="weui_cell_ft industry"></div>
+            </a>
+            <a class="weui_cell" href="edit_profile.html?field=profession&title=职业">
+                <i class="iconfont" style="color:#FB7832;font-size:22px"> &#xe63a;</i>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="font-size-14">职业</p><span class="import">*</span>
+                </div>
+                <div class="weui_cell_ft profession"></div>
+            </a>
+        </div>
+    </div>
+    <div class="owner-info">
+        <div class="weui_cells weui_cells_access ower">
+            <a class="weui_cell" href="javascript:;">
+                <i class="iconfont" style="color:#FB7832;font-size:22px"> &#xe63c;</i>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="font-size-14">车主认证</p>
+                </div>
+                <div class="weui_cell_ft font-size-14 owner-certification"></div>
+            </a>
+        </div>
+        <!--完善信息弹出框-->
+        <div class="public-mask">
+            <div class="public-alert-box">
+                <p class="alert-type font-size-14" style="display:block;">完善信息奖励</p>
+                <p class="alert-intro font-size-12" style="line-height: 20px;"></p>
+                <i class="iconfont close">&#xe663;</i>
+            </div>
+        </div>
+    </div>
+
+    <!-- zepto  -->
+    <script type="text/javascript" src="js/zepto/zepto_1.1.6.js"></script>
+    <script type="text/javascript" src='js/zepto-master/src/touch.js'></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript">
+        var memberid = getParamByName("memberid", window.location);
+        var intact = getParamByName('intact', window.location);
+
+        $('.base-info a').each(function(index, element) {
+            var url = $(this).attr('href');
+            $(this).attr('href', url + "&memberid=" + memberid);
+        });
+        $('.extra-info a').each(function(index, element) {
+            var url = $(this).attr('href');
+            $(this).attr('href', url + "&memberid=" + memberid);
+        });
+
+        $(function() {
+            //回退
+            $('#back').on('tap', function() {
+                window.location = "member.html?memberid=" + memberid;
+            });
+            //推荐人
+            $('.referee').on('click', function() {
+                if ($(this).find('.refererphonenumber').html() == '') {
+                    $(this).attr('href', "edit_profile.html?field=refererphonenumber&title=推荐人电话&memberid=" + memberid);
+                } else {
+                    $(this).attr('href', window.location.href);
+                }
+            });
+            //图片上传
+            $('.profile-headimg').on("tap", function() {
+                $('.imgload').click();
+            });
+            //请求会员详细信息
+            var getMemberInfo = function() {
+                //查询条件
+                var criteria = {
+                    subSys: 'wesurvey',
+                    repID: '39',
+                    isQuery: '1',
+                    dispType: '12',
+                    perRows: '2000'
+                };
+                criteria.selCndIDs = "id";
+                criteria.cnd_id = memberid;
+                //
+                ajax2('sysmng.jsonreport.do?', 'json', 'get', criteria, function(data) {
+                    if (data.objs && data.objs.length > 0) {
+                        //member对象
+                        var profile = data.objs[0];
+                        //更新界面
+                        if (isUndefinedNullEmpty(profile.imageUrl) == false)
+                            $('#imageurl').attr('src', app.resHost + profile.imageUrl);
+                        $('.shortname').text(profile.shortName);
+                        $('.gender').text(profile.genderName);
+                        $('.birthdate').text(profile.birthDate);
+                        $('.mobilenumber1').text(profile.mobileNumber1);
+                        $('.mobilenumber2').text(profile.mobileNumber2);
+                        $('.refererphonenumber').text(profile.refererPhoneNumber);
+                        $('.email').text(profile.email);
+                        var kidsNumber = "";
+                        if (profile.kidsNumber != "")
+                            kidsNumber = profile.kidsNumber + "个子女"
+                        if (profile.kidsNumber > 5)
+                            kidsNumber = "5个以上个子女"
+                        if (profile.kidsNumber == 0)
+                            kidsNumber = "无子女"
+                        $('.kidsnumber').text(kidsNumber);
+                        $('.income').text(profile.incomeMax != "" ? (profile.incomeMax == -1 ? (profile.incomeMin + "及以上") : (profile.incomeMin + "~" + profile.incomeMax)) : "");
+                        var marriageStatus = "";
+                        if (profile.marriageCode == 1)
+                            marriageStatus = "未婚";
+                        if (profile.marriageCode == 2)
+                            marriageStatus = "已婚";
+                        $('.marriage').text(marriageStatus);
+                        $('.remark-text').text(profile.remark);
+                        if (isUndefinedNullEmpty(profile.provinceName) == false && isUndefinedNullEmpty(profile.cityName) == false)
+                            $('.location').text(profile.provinceName + ' ' + profile.cityName);
+                        if (isUndefinedNullEmpty(profile.industryName) == false)
+                            $('.industry').text(profile.industryName);
+                        if (isUndefinedNullEmpty(profile.professionName) == false)
+                            $('.profession').text(profile.professionName);
+                        if (profile.state == 0) {
+                            $('.owner-certification').text("审核中");
+                        } else if (profile.state == 1) {
+                            $('.owner-certification').text("审核通过");
+                        } else if (profile.state == 2) {
+                            $('.owner-certification').text("未通过");
+                        } else if (profile.state == 3) {
+                            $('.owner-certification').text("");
+                        }
+
+                    }
+                    //完善信息奖励
+                    if (intact == "true") {
+                        $('.public-mask', '.owner-info').css('display', 'block');
+                        var str = '感谢您完善了基本信息，系统奖随机赠送' + '<span class="reward-type">' + profile.rewardTypeName + '</span></span><span class="reward-amount">' + profile.rewardAmount + '</span>，自动存入您的<span class="reward-type">' + profile.rewardTypeName + '</span>账户。祝您答卷愉快！';
+                        $('.public-mask .alert-intro', '.owner-info').html(str);
+                        var oldHref = window.location.href;
+                        var newHref = oldHref.substr(0, oldHref.indexOf('&intact')) + "&intact=false";
+                    }
+                    $('.public-mask .close').on('click', function() {
+                        $('.public-mask', '.owner-info').css('display', 'none');
+                        window.location = newHref;
+                    });
+                }, function(error) {
+
+                });
+            };
+
+            //获取微信的基本信息
+            ajax2('wesurvey.AccessTokenOpenID.do?memberID=' + memberid, 'json', 'get', null, function(data) {
+                $(".profile-headimg").css({
+                    "background": "url(" + data.imageUrl + ")",
+                    "background-size": "cover"
+                })
+            }, function(error) {});
+
+            //请求会员详细信息
+            getMemberInfo();
+
+        });
+
+        var linkData = function(repID) {
+            var data = {
+                subSys: 'wesurvey',
+                repID: repID,
+                isQuery: '1',
+                dispType: '12',
+                perRows: '2000',
+            }
+            return data;
+        };
+        //请求车主详细信息
+        $('.ower').on('click', function() {
+            //查询条件
+            var criteria = linkData(90);
+            criteria.selCndIDs = "memberID";
+            criteria.cnd_memberID = memberid;
+            ajax2('sysmng.jsonreport.do?', 'json', 'get', criteria, function(data) {
+                if (data.objs[0]) {
+                    window.location = 'owner_certification.html?memberid=' + memberid + '&driverid=' + data.objs[0].id + '&audit=driver';
+                } else {
+                    window.location = 'owner_certification.html?memberid=' + memberid + '&driverid=-1&audit=driver';
+                }
+            }, function(error) {
+                //
+            })
+        });
+        //@ sourceURL=dynamicScript-profile.js
+    </script>
+
+</body>
+
+</html>

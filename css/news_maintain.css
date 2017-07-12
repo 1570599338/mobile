@@ -1,0 +1,107 @@
+body {
+    background: #eee;
+    font-family: "微软雅黑", "Microsoft YaHei", sans-serif;
+}
+
+.type {
+    height: 42px;
+    width: 100%;
+}
+
+.type li {
+    float: left;
+    width: 39%;
+    padding: 0 5%;
+    margin: 17px 0;
+    font-size: 17px;
+    color: #999;
+}
+
+.type li.active {
+    color: #FE9121;
+}
+
+.type li:first-child {
+    border-right: 2px solid #FEBC21;
+    text-align: right;
+}
+
+.type li:last-child {
+    text-align: left;
+}
+
+
+/*内容部分*/
+
+.content {
+    background: #fff;
+    position: relative;
+    width: 96%;
+    margin: auto;
+    margin-top:10px;
+}
+
+.pin {
+    padding: 0 0 0 1%;
+    float: left;
+    width: 48%;
+}
+
+
+/*
+.box {
+    float: left;
+    width: 48%;
+    padding-left: 2%;
+    background-color: #fff;
+    overflow: hidden;
+}*/
+
+.box {
+    border: 1px solid #eee;
+    border-radius: 5px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.content .box img {
+    width: 100%;
+    height: auto;
+}
+
+.content .box .intro {
+    padding: 12px;
+}
+
+.content .box .intro h4 {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.content .box .intro h5,
+.content .box .intro p {
+    color: #999;
+    line-height: 20px;
+}
+
+
+/*.content .article p {
+    letter-spacing: 2px;
+}*/
+
+.content .article img {
+    margin: auto;
+    width: 100%;
+}
+
+
+/*.article h4 {
+    font-size: 14px !important;
+    /*font-weight: 400;*/
+
+
+/*
+padding: 10px 0px 6px 6px;
+
+}
+*/

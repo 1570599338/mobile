@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>汽车调查</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/iconfont/myfont.css" />
+    <link rel="stylesheet" href="css/weui-master/dist/style/weui.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/deposit.css" />
+</head>
+
+<body>
+    <header>
+        <ul>
+            <li id="back" class="iconfont">&#xe662;返回<i>|</i></li>
+            <li>礼金提现</li>
+            <li></li>
+        </ul>
+    </header>
+    <div class="deposit-box">
+        <div class="emoney-top">
+            <div class="deposit-amount-box">
+                <p class="round"></p>
+                <span class="title font-size-14">总礼金</span>
+                <span class="number"><i class="font-size-30">¥</i><span class="font-size-30"></span></span>
+            </div>
+        </div>
+        <div class="deposit-number-box">
+            <div class="input-money">
+                <i class="iconfont">&#xe606;</i>
+                <span>
+                    <input type="number" min="0" class="font-size-14" placeholder="请输入提现金额">
+                </span>
+            </div>
+            <div class="code">
+                <i class="iconfont">&#xe614;</i>
+                <span>
+                    <input type="text" class="validatecode" placeholder="请输入验证码"/>
+                </span>
+                <input type="button" class="getcode font-size-12" id="getcode" value="点击获取验证码" style="" />
+            </div>
+            <div class="annotation font-size-12">
+                注：申请提现后，礼金会以微信红包的形式发到您的微信上，未绑定微信的用户不可提现!
+            </div>
+            <a href="javascript:;" class="deposit-btn font-size-17">提现</a>
+        </div>
+    </div>
+    <div class="weui_dialog_alert" style="display: none;">
+        <div class="weui_mask"></div>
+        <div class="weui_dialog">
+            <div class="weui_dialog_hd"><strong class="weui_dialog_title"></strong></div>
+            <div class="weui_dialog_bd"></div>
+            <div class="weui_dialog_ft">
+                <a href="javascript:;" class="weui_btn_dialog primary sure" style='color: #FEBC21;'>确定</a>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/zepto/zepto_1.1.6.js"></script>
+    <script type="text/javascript" src='js/zepto-master/src/touch.js'></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+    <script type="text/javascript">
+
+        var memberid = getParamByName("memberid", window.location);
+
+        $(function () {
+
+            $('#back').click(function () {
+                window.location = 'member.html?memberid=' + memberid;
+            });
+
+            var amountall = 0;
+            var config = 0;
+
+            function init() {
+                ajax2('sysmng.initTemplate.do?subSys=wesurvey&tplID=131&memberID=' + memberid, 'json', 'get', null, function (data) {
+                    $('.weui_dialog_alert').css('display', 'none');
+                    $('.deposit-amount-box .number span').html(data.objs[0].emoneySumWithdraw);
+                    amountall = data.objs[0].emoneySumWithdraw;
+                    $('.validatecode').val('');
+                    $('.input-money input').val('');
+                }, function (error) {
+                    console.log(error);
+                })
+            }
+
+            //获取
+            ajax2("sysmng.initTemplate.do?subSys=wesurvey&tplID=148&projectID=0", 'json', 'post', null, function(data) {
+                var setting = data.objs[0];
+                //if (setting.EmoneyConsumeAudit == 1) {
+                    config = setting.EmoneyConsumeAuditThreshold;
+                //}
+            },function(error){
+                alert(error);
+            });
+            //监听input值得变化设置按钮状态
+            $(".input-money").on("input", function () {
+                var _this = $(this).find("input");
+                if (_this.val() <= 0) {
+                    $('.deposit-btn').css({
+                        "background": "#FFDA85",
+                        "color": "#999",
+                        "pointer-events": "none"
+                    });
+                } else {
+                    if(config > 0 && (parseInt(_this.val()) >= parseInt(config) && parseInt(_this.val()) < 1000)){
+                        $('.code').css('display','block');
+                    }else{
+                        $('.code').css('display','none');
+                    }
+                    $('.deposit-btn').css({
+                        "background": "#FEBC21",
+                        "color": "#fff",
+                        "pointer-events": "all"
+                    });
+                }
+            });
+            //发送验证码
+            $('#getcode').on('click', function () {
+                var money = $('.input-money input').val();
+                if (money) {
+                    var submitData = {
+                        count:money,
+                        memberID:memberid
+                    }
+                    ajaxPost('sms/consume/create', submitData, null, function (data) {
+                        if(data.errors.length>0){
+                            $('.validatecode').val('').attr('placeholder',data.errors[0].msg.split("info=")[1]);
+                        }
+                    }, function (err) {
+                        alert(err);
+                    })
+                }
+            });
+
+            //提现超出总金额修改为可提现的最大金额
+            var amount = 0;
+            $(".input-money input").blur(function () {
+                amount = $(".input-money input").val();
+                if (amount > amountall) {
+                    amount = $(".input-money input").val(amountall);
+                }
+            });
+            //提现
+            $(".deposit-btn").on('tap', function () {
+                var code =  $('.validatecode').val();
+                amount = $(".input-money input").val();
+                var data = {
+                    amount:amount,
+                    smsCode:code
+                };
+                //data.amount = amount;
+                if (data.amount > 0 && amountall >= data.amount && data.amount < 1000) {
+                    ajax2('wesurvey.memberConsume.do?op=emoney&memberID=' + memberid, 'json', 'get', data, function (data) {
+                        if(data.consume && data.consume != 1){
+                            $('.validatecode').val('').attr('placeholder','验证码错误或超时');
+                        }else{
+                            $(".weui_dialog_alert").show().find('.weui_dialog_title').html("提现成功");
+                            $(".weui_dialog_alert").find('.weui_dialog_bd').html('您的提现申请已提交，审核通过后礼金将已红包的形式发送给您！');
+                            $('.weui_dialog_alert .sure').on('tap', function () {
+                                init();
+                            });
+                        }
+                    }, function (error) {
+                        console.log(error);
+                    })
+                } else {
+                    //超过1000不能提现
+                    $(".weui_dialog_alert").show().find('.weui_dialog_title').html("提现失败");
+                    $(".weui_dialog_alert").find('.weui_dialog_bd').html('单次提现不能超过1000元！');
+                    $('.weui_dialog_alert .sure').on('tap', function () {
+                        $('.weui_dialog_alert').css('display', 'none');
+                    });
+                }
+            })
+
+            init();
+        });
+        //@ sourceURL=dynamicScript-emoney-deposit.js
+    </script>
+</body>
+
+</html>

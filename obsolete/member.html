@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+    <title>个人中心</title>
+    <link rel="stylesheet" href="css/iconfont/myfont.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/member.css" />
+</head>
+
+<body>
+    <header>
+        <ul>
+            <li id="back" class="iconfont">&#xe662;<i>|</i></li>
+            <li>汽车调查－个人中心</li>
+            <li></li>
+        </ul>
+    </header>
+    <div class="per-bg summary">
+        <div class="per-box">
+            <div class="per-head"></div>
+        </div>
+        <div class="per-info">
+            <p class="shortname font-size-17">Name</p>
+            <p class="sign-in font-size-12"></p>
+        </div>
+        <div class="notice-box">
+            <div class="notice-body">
+                <i class="iconfont">&#xe659;</i>
+                <i class="red-point"></i>
+            </div>
+            <div class="amounts">
+                <span class="font-size-14">礼金</span>
+                <span class="font-size-14 emoney"></span>
+            </div>
+            <div class="integral">
+                <span class="font-size-14">积分</span>
+                <span class="font-size-14 point"></span>
+            </div>
+            <div class="card">
+                <span class="font-size-14">礼品卡</span>
+                <span class="font-size-14 giftcard"></span>
+            </div>
+        </div>
+        <div class="notice">
+            <span>通知</span>
+            <span class="notice-close">X</span>
+        </div>
+    </div>
+    <div class="down-box nav">
+
+        <div class="content-box">
+            <div class="square">
+                <a href="emoney_deposit.html" class="emoney-deposit">
+                    <div class="circle c1">
+                        <i class="iconfont">&#xe626;</i>
+                    </div>
+                    <span class="font-size-12">礼金提现</span>
+                </a>
+            </div>
+            <div class="square">
+                <a href="point_deposit.html" class="point-deposit">
+                    <div class="circle c2">
+                        <i class="iconfont">&#xe650;</i>
+                    </div>
+                    <span class="font-size-12">积分兑换</span>
+                </a>
+            </div>
+        </div>
+        <div class="content-box">
+            <div class="square">
+                <a href="emoney.html" class="emoney">
+                    <div class="circle c7">
+                        <i class="iconfont">&#xe64f;</i>
+                    </div>
+                    <span class="font-size-12">我的礼金</span>
+                </a>
+            </div>
+            <div class="square">
+                <a href="point.html" class="point">
+                    <div class="circle c8">
+                        <i class="iconfont">&#xe627;</i>
+                    </div>
+                    <span class="font-size-12">我的积分</span>
+                </a>
+            </div>
+        </div>
+        <div class="content-box">
+            <div class="square">
+                <a href="giftcard.html" class="giftcard">
+                    <div class="circle c3">
+                        <i class="iconfont" style="font-size:16px;">&#xe60e;</i>
+                    </div>
+                    <span class="font-size-12">我的礼品卡</span>
+                </a>
+            </div>
+            <div class="square">
+                <a href="profile.html" class="profile">
+                    <div class="circle c4">
+                        <i class="iconfont">&#xe628;</i>
+                    </div>
+                    <span class="font-size-12">个人信息</span>
+                </a>
+            </div>
+        </div>
+        <div class="content-box">
+            <div class="square">
+                <a href="history.html" class="history">
+                    <div class="circle c5">
+                        <i class="iconfont">&#xe629;</i>
+                    </div>
+                    <span class="font-size-12">我的答卷</span>
+                </a>
+            </div>
+            <div class="square">
+                <a href="javascript:;" class="vehicle">
+                    <div class="circle c6">
+                        <i class="iconfont">&#xe62a;</i>
+                    </div>
+                    <span class="font-size-12">我的车辆</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!--签到弹出框-->
+    <div class="public-mask">
+        <div class="public-alert-box">
+            <p class="alert-type font-size-14">签到成功</p>
+            <p class="alert-intro font-size-12" style="line-height: 20px;">
+                您已成功签到，系统随机赠送<span class="sign-type"></span></span><span class="sign-reward"></span>，自动存入您的<span class="sign-type"></span>账户。祝您答卷愉快！
+            </p>
+            <i class="iconfont close">&#xe663;</i>
+        </div>
+    </div>
+    <!--<div class="mask2">
+        <div class="sign-in-box">
+            <p class="type font-size-14">签到成功</p>
+            <p class="intro font-size-14">积分+1000</p>
+            <i class="iconfont close2">&#xe663;</i>
+        </div>
+    </div>-->
+</body>
+
+<!-- zepto  -->
+<script type="text/javascript" src="js/zepto/zepto_1.1.6.js"></script>
+<script src="js/zepto-master/src/fx_methods.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+
+<script type="text/javascript">
+    $(function() {
+
+        var vehicleid = getParamByName("vehicleid", window.location);
+        var memberid = getParamByName("memberid", window.location);
+        $('.point-deposit').attr('href', 'point_deposit.html?memberid=' + memberid);
+        $('.emoney-deposit').attr('href', 'emoney_deposit.html?memberid=' + memberid);
+        $('.point').attr('href', 'point.html?memberid=' + memberid);
+        $('.emoney').attr('href', 'emoney.html?memberid=' + memberid);
+        $('.giftcard').attr('href', 'giftcard.html?memberid=' + memberid);
+        $('.profile').attr('href', 'profile.html?memberid=' + memberid);
+        $('.history').attr('href', 'history.html?memberid=' + memberid);
+        // $('.vehicle').attr('href', 'vehicle.html?memberid=' + memberid);
+        $('#back').click(function() {
+            window.location = 'home.html?memberid=' + memberid;
+        });
+
+        var linkData = function(repID) {
+            var data = {
+                subSys: 'wesurvey',
+                repID: repID,
+                isQuery: '1',
+                dispType: '12',
+                perRows: '2000',
+            }
+            return data;
+        };
+        //请求车辆详细信息
+        $('.vehicle').on('click', function() {
+            //查询条件
+            var criteria = linkData(90);
+            criteria.selCndIDs = "memberID";
+            criteria.cnd_memberID = memberid;
+            ajax2('sysmng.jsonreport.do?', 'json', 'get', criteria, function(data) {
+                if (data.objs.length > 0) {
+                    var vehicleData = linkData(45);
+                    vehicleData.selCndIDs = "driverid";
+                    vehicleData.cnd_driverid = data.objs[0].id;
+                    ajax2('sysmng.jsonreport.do?', 'json', 'get', vehicleData, function(data) {
+                        window.location = 'vehicle.html?memberid=' + memberid + '&vehicleid=' + data.objs[0].vehicleID;
+                    }, function(error) {})
+
+                    // } else if (data.objs.length >= 1) {
+                    //     // window.location = 'vehicle.html?memberid=' + memberid + '&vehicleid=' + data.objs[0].id;
+                } else {
+                    window.location = 'vehicle.html?memberid=' + memberid + '&vehicleid=-1';
+                }
+            }, function(error) {
+                //
+            })
+        });
+
+        //请求会员汇总信息
+        var getMemberSummary = function() {
+            //查询条件
+            var criteria = {
+                subSys: 'wesurvey',
+                repID: '40',
+                isQuery: '1',
+                dispType: '12',
+                perRows: '2000',
+                selCndIDs: "id",
+                cnd_id: memberid
+            };
+            //
+
+            ajax2('sysmng.jsonreport.do?', 'json', 'get', criteria, function(data) {
+                if (data.objs && data.objs.length > 0) {
+                    //member对象
+                    var member = data.objs[0];
+                    //更新界面
+                    $('.summary .shortname').text(member.shortName);
+                    member.emoney == '' ? $('.summary .emoney').text("¥ 0") : $('.summary .emoney').text("¥" + member.emoney)
+                    $('.summary .giftcard').text(member.giftcard + "张");
+                    member.point == "" ? $('.summary .point').text("0") : $('.summary .point').text(member.point);
+                    // $('.summary .per-head').css("background-image", "url(" + app.resHost + member.imageUrl + ")");
+                }
+            }, function(error) {
+
+            })
+        };
+
+        //获取微信的基本信息
+        ajax2('wesurvey.AccessTokenOpenID.do?memberID=' + memberid, 'json', 'get', null, function(data) {
+            $(".per-head").css({
+                "background": "url(" + data.imageUrl + ")",
+                "background-size": "cover"
+            })
+        }, function(error) {})
+
+        //请求会员汇总信息
+        getMemberSummary();
+
+        //通知消失
+       /* $('.notice-close').css('display','block');
+        $('.notice-close').on('click', function(){
+           $(this).parent().hide();
+        });*/
+        /*setTimeout(function(){
+            $('.notice').css({
+                top:'24px',
+                opacity:'0.5'
+            }).hide();
+        },3000);*/
+
+        //签到
+        var state = 1;//普通查询,2代表签到状态
+        ajax2('wesurvey.checkIn.do?memberID=' + memberid + '&state=1', 'json', 'get', null, function(data){
+            if(data.isCheckIn == 'true'){
+                $('.per-info .sign-in').html('已签到');
+            }else{
+                $('.per-info .sign-in').html('我要签到 &gt;');
+            }
+        },function(){
+
+        });
+        $('.per-info .sign-in').on('click', function(){
+            //$('.public-mask').show();
+            $(this).html('已签到').css('color','#EF5752');
+            ajax2('wesurvey.checkIn.do?memberID=' + memberid + '&state=2', 'json', 'get', null, function(data) {
+                var rewardType = '';
+                if(data.rewardType == 1){
+                    rewardType = '礼金';
+                }else if(data.rewardType == 2){
+                    rewardType = '积分';
+                }
+                if(data.code == 1 && data.isCheckIn == 'true'){
+                    $('.public-mask').css('display','block');
+                    $('.public-mask .sign-type').html(rewardType);
+                    $('.public-mask .sign-reward').html(data.rewardAmount);
+                }
+            },function(error){
+                alert(error);
+            });
+        });
+        $('.public-mask .close').on('click', function(){
+            //$('.public-mask').hide();
+            $('.public-mask').css('display','none');
+        });
+        //2
+        /*$('.sign2-in').on('click', function(){
+            $(this).html('已签到').css('color','#EF5752').attr('disabled','disabled');
+            $('.mask2').show();
+        });
+        $('.close2').on('click', function(){
+            $('.mask2').hide();
+        });*/
+    });
+
+    //@ sourceURL=dynamicScript-member.js
+</script>
+
+</html>

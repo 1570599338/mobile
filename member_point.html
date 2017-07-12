@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
+    <title></title>
+    <link rel="stylesheet" href="css/iconfont/myfont.css" />
+    <link rel="stylesheet" href="css/weui-master/dist/style/weui.css"/>
+    <link rel="stylesheet" href="css/base.css"/>
+    <link rel="stylesheet" href="css/mySore.css"/>
+</head>
+<body>
+<header>
+    <ul>
+        <li id="back" class="iconfont">&#xe662;<i>|</i></li>
+        <li>我的积分</li>
+        <li></li>
+    </ul>
+</header>
+<div class="three-tab">
+    <div class="tab">
+        <div class="square">
+            <p class='square-title'>审核中</p>
+            <p class="middle">1000</p>
+            <p class="total">1000积分</p>
+        </div>
+    </div>
+    <div class="tab">
+        <div class="square">
+            <p class='square-title'>审核中</p>
+            <p class="middle">1000</p>
+            <p class="total">1000积分</p>
+        </div>
+    </div>
+    <div class="tab">
+        <div class="square">
+            <p class='square-title'>审核中</p>
+            <p class="middle">1000</p>
+            <p class="total">1000积分</p>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="content-box">
+        <div class="questions-box">
+            <div class="left-circle"></div>
+            <div class="intro-content">
+                <div class="left"></div>
+                <div class="right">
+                    <p>审核通过时间：2016-03-02    15:26:34 </p>
+                    <p>完成&lt;奥迪a4舒适度调查问卷&gt;</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<!--
+<script>
+    var lis=document.getElementsByClassName('three-tab')[0].children;
+    var sores=document.getElementsByClassName('sores');
+    sores[0].style.display='block';
+    for(var i=0;i<lis.length;i++){
+        lis[i].index=i;
+        lis[i].onclick=function(){
+            for(var j=0;j<lis.length;j++){
+                lis[j].className="";
+                sores[j].style.display='none';
+            }
+            this.className='active';
+            sores[this.index].style.display='block';
+        }
+    }
+</script>-->

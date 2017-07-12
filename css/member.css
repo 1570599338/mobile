@@ -1,0 +1,345 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    background: url(../img/bg-per-center3.jpg) no-repeat center 0;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    filter: alpha(opacity=30);
+}
+/*顶部*/
+.per-bg {
+    width: 100%;
+    height: 202px;
+    background: -webkit-radial-gradient(circle, rgb(255, 219, 52), rgba(255, 181, 36, 1), rgba(255, 142, 26, .9));
+}
+.per-bg .per-box{
+    margin:-8px auto 10px;
+}
+.per-bg .per-info,
+.per-bg .notice-box{
+    display: box;
+    /* OLD - Android 4.4- */
+    display: -webkit-box;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;
+    /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;
+    /* TWEENER - IE 10 */
+    display: -webkit-flex;
+    /* NEW - Chrome */
+    display: flex;
+    /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+.per-bg .notice-box{
+    width: 194px;
+    margin:auto;
+}
+.per-bg .per-info{
+    border:1px solid #fff;
+    border-top-left-radius:20px;
+    border-bottom-left-radius:20px;
+    border-top-right-radius:20px;
+    border-bottom-right-radius:20px;
+    margin:0 auto 6px;
+    width:200px;
+}
+.per-bg .per-info .shortname{
+    color:#fff;
+    text-align: center;
+    padding:4px 0;
+}
+
+.per-bg .per-info p,
+.per-bg .notice-box .amounts,
+.per-bg .notice-box .integral,
+.per-bg .notice-box .card{
+    -webkit-box-flex: 1;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: 1;
+    /* OLD - Firefox 19- */
+    width: 20%;
+    /* For old syntax, otherwise collapses. */
+    -webkit-flex: 1;
+    /* Chrome */
+    -ms-flex: 1;
+    /* IE 10 */
+    flex: 1;
+    /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    text-align: center;
+    border-right:1px solid #FFE758;
+    padding:0 4px;
+}
+.per-bg .per-info .sign-in{
+    text-align: center;
+    color:#EF5752;
+    padding:4px 0;
+    background: rgba(255,255,255,.2);
+    border:none;
+    border-left:1px solid #fff;
+    border-top-right-radius:20px;
+    border-bottom-right-radius:20px;
+}
+.per-bg .notice-box .card{
+    border:none;
+}
+/*头像*/
+.per-head {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background-color: #eee;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin:auto;
+}
+/*消息*/
+.notice-body{
+    text-align: right;
+    padding-top:10px;
+    padding-right:15px;
+}
+.notice-body .notice-href{
+    position: relative;
+}
+.notice-body .notice-href .red-point{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #EF5752;
+    position: absolute;
+    top:-8px;
+    right:-2px;
+}
+.per-bg .notice-box .amounts p,
+.per-bg .notice-box .integral p,
+.per-bg .notice-box .card p{
+    color:#fff;
+    font-weight: 700;
+}
+.per-bg .notice-box .amounts .emoney,
+.per-bg .notice-box .integral .point,
+.per-bg .notice-box .card .giftcard{
+    color:#EF5752;
+    line-height: 24px;
+}
+
+/*下面*/
+.content-box {
+    height: 100px;
+    margin-top: 7px;
+    display: box;
+    /* OLD - Android 4.4- */
+    display: -webkit-box;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;
+    /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;
+    /* TWEENER - IE 10 */
+    display: -webkit-flex;
+    /* NEW - Chrome */
+    display: flex;
+    /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    padding: 0 7px 0 0;
+}
+
+.content-box .square {
+    -webkit-box-flex: 1;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: 1;
+    /* OLD - Firefox 19- */
+    width: 20%;
+    /* For old syntax, otherwise collapses. */
+    -webkit-flex: 1;
+    /* Chrome */
+    -ms-flex: 1;
+    /* IE 10 */
+    flex: 1;
+    /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    width: 145px;
+    height: 100px;
+    background-color: rgba(255, 255, 255, .6);
+    margin-left: 7px;
+    text-align: center;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.content-box .square a {
+    display: block;
+    padding: 2px 0 19px;
+}
+
+.content-box .square .circle {
+    background-color: #FF7F00;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 18px auto 2px;
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+    box-shadow: 0 2px 3px #eee;
+}
+
+.content-box .square .circle .iconfont {
+    font-size: 20px;
+}
+
+.content-box .square span {
+    color: #333;
+}
+
+.down-box {
+    padding-bottom: 7px;
+}
+
+.down-box .content-box .c2 {
+    background-color: #FEBC21;
+}
+
+.down-box .content-box .c3 {
+    background-color: #EF5752;
+}
+
+.down-box .content-box .c4 {
+    background-color: #9DED1D;
+}
+
+.down-box .content-box .c5 {
+    background-color: #1ED8ED;
+}
+
+.down-box .content-box .c6 {
+    background-color: #FB7832;
+}
+
+.down-box .content-box .c7 {
+    background-color: #9D20FF;
+}
+
+.down-box .content-box .c8 {
+    background-color: #18819F;
+}
+/*顶部通知*/
+.notice{
+    position:absolute;
+    top:44px;
+    height:20px;
+    line-height: 20px;
+    background-color: #fff;
+    width: 100%;
+    text-align: center;
+    opacity: 1;
+    animation:moveTop 2s 1 ease;
+    display:none;
+}
+@-webkit-keyframes moveTop {
+    20%{
+        top:30px;
+        opacity:0.8;
+    }
+    60%{
+        top:10px;
+        opacity: 0.3;
+    }
+    100%{
+        top:0px;
+        opacity: 0;
+    }
+}
+.notice .notice-close{
+    position: absolute;
+    top:0;
+    right:12px;
+}
+/*签到*/
+/*汽车蒙板*/
+.summary .sign2-in{
+    position: absolute;
+    top:80px;
+    right:18px;
+    color:#fff;
+    font-weight: 300;
+}
+.mask2{
+    width: 100%;
+    height: 100%;
+    padding: 0 2%;
+    background: rgba(0, 0, 0, .8);
+    position: fixed;
+    z-index: 99;
+    top:0;
+    left:0;
+    display: none;
+}
+.mask2 .sign-in-box{
+    /*width:0%;*/
+    height: 100%;
+    background: url('../img/sign2.png') no-repeat center center;
+    background-size: contain;
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    margin:auto;
+    animation: comeIn 1s 1 ease;
+    animation-delay:0.5s;
+}
+.mask2 .sign-in-box .type,
+.mask2 .sign-in-box .intro{
+    position: absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    margin:auto;
+    text-align: center;
+    font-weight: 700;
+}
+.mask2 .sign-in-box .type{
+    color:#fff;
+    top:250px;
+}
+.mask2 .sign-in-box .intro{
+    color:#EF5752;
+    top:292px;
+}
+.mask2 .sign-in-box i{
+    font-weight: 700;
+    color:#fff;
+    position: absolute;
+    left:190px;
+    right:0;
+    bottom:0px;
+    top:174px;
+    text-align: center;
+    font-size:30px;
+}
+@-webkit-keyframes comeIn {
+    0%{
+        width:0%;
+    }
+    10%{
+        width:10%;
+    }
+    20%{
+        width:20%;
+    }
+    30%{
+        width: 30%;
+    }
+    40%{
+        width:40%;
+    }
+    60%{
+        width:60%;
+    }
+    80%{
+        width:80%;
+    }
+    100%{
+        width:100%;
+    }
+}
+/*end*/

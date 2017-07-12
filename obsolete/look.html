@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
+    <title></title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../css/base.css"/>
+    <link rel="stylesheet" href="../css/look.css"/>
+    <script src="../js/template.js"></script>
+    <script src="../js/zepto/zepto.js"></script>
+    <script src="../js/look.js"></script>
+</head>
+<body>
+<header>
+    <ul>
+        <li id="back">&lt;<i>|</i></li>
+        <li>查看问卷</li>
+        <li>. . .</li>
+    </ul>
+    <!--</header>-->
+    <div class="top">
+        <div id="question"></div>
+        <script id="test" type="text/html">
+            <div class="title">
+                <p><i class='fa fa-eye'></i>{{title}}</p>
+                <p class="time">答卷时间：{{time}}</p>
+            </div>
+            {{each questions as value i}}
+            <div class="ti">
+                <div class="tip">问卷报告</div>
+                <p>{{i+1}}、{{value.question}}{{question}}</p>
+                <p>您的答案：<i>{{value.answer}}</i></p>
+            </div>
+            {{/each}}
+        </script>
+    </div>
+    <div class="share">
+        <p><i class="fa fa-share-alt"></i>分享</p>
+        <div class="my-icon">
+            <ul class="share-icon">
+                <li>
+                    <span class="first fa-stack fa-lg" style="display: block;">
+                        <i class="fa fa-circle fa-stack-2x" style="color: #3EB237;"></i>
+                        <i class="fa fa-weixin fa-stack-1x" style="color:#fff;"></i>
+                    </span>
+                    <span class="icon-text">微信</span>
+                </li>
+                <li>
+                    <span class="fa-stack fa-lg" style="display: block;">
+                        <i class="fa fa-circle fa-stack-2x" style="color: #FEBC21;"></i>
+                        <i class="fa fa-qq fa-stack-1x" style="color:#fff;"></i>
+                    </span>
+                    <span class="icon-text">腾讯QQ</span>
+                </li>
+                <li>
+                    <span class="fa-stack fa-lg" style="display: block;">
+                        <i class="fa fa-circle fa-stack-2x" style="color: #00D900;"></i>
+                        <i class="fa fa-futbol-o fa-stack-1x" style="color:#fff;"></i>
+                    </span>
+                    <span class="icon-text">朋友圈</span>
+                </li>
+                <li>
+                    <span class="fa-stack fa-lg" style="display: block;">
+                        <i class="fa fa-circle fa-stack-2x" style="color: #E04D6A;"></i>
+                        <i class="fa fa-weibo fa-stack-1x" style="color:#fff;"></i>
+                    </span>
+                    <span class="icon-text">新浪微博</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--<div class="discuss">
+        <div class="dis-title">
+            <p><i></i>相关评论</p>
+            <p><a href="">我也来评论?</a></p>
+        </div>
+    </div>-->
+</header>
+</body>
+</html>
+<script>
+    var data={
+        title:'奥迪a4舒适度调查问卷',
+        time:'2016-03-01 12:07:23',
+        questions:[
+            {question:'您对奥迪a4正驾座可调范围满意度',answer:'较为满意'},
+            {question:'您对奥迪a4安全带舒适度满意度',answer:'满意'},
+            {question:'您对奥迪a4副驾座舒适度满意度',answer:'一般'},
+            {question:'您对奥迪a4平衡度满意度',answer:'不满意'}
+        ]
+    };
+    var html=template('test',data);
+    $('#question').html(html);
+</script>

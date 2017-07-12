@@ -1,0 +1,41 @@
+html{-webkit-text-size-adjust:none;}
+body{
+    background-color: #EEEEEE;
+    color:#333;
+}
+.exchange .weui_cell p.money{
+    border-bottom: 1px solid #06AFD8;
+    line-height: 40px;
+    width: 98%;
+    margin:auto;
+}
+.exchange .weui_cell .money input{
+    font-size:14px;
+    color:#999;
+}
+.exchange .weui_cell p i{
+    padding-left:10px;
+    color:#06AFD8;
+    padding-bottom: 2px;
+    padding-right:18px;
+}
+.top-font{
+    color:#333;
+}
+.top-right-font{
+    color:#FF7F00;
+    font-family:'方正粗谭黑简体','Microsoft YaHei',sans-serif;
+}
+.exchange .weui_cells{
+    font-size:12px;
+}
+.immediately{
+    width: 90%;
+    height: 40px;
+    background-color: #06AFD8;
+    color:#fff;
+    font-size:14px;
+    text-align: center;
+    line-height: 40px;
+    margin:0 auto 41px;
+}

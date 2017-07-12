@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
+    <title>汽车调查</title>
+    <link rel="stylesheet" href="css/iconfont/myfont.css"/>
+    <link rel="stylesheet" href="css/weui-master/dist/style/weui.css"/>
+    <link rel="stylesheet" href="css/base.css"/>
+    <link rel="stylesheet" href="css/statistical.css"/>
+</head>
+
+<body class="body">
+<header>
+    <ul>
+        <li id="back" class="iconfont">&#xe662;返回<i>|</i></li>
+        <li>题案统计</li>
+        <li></li>
+    </ul>
+</header>
+<div class="statistical-title">
+    <p>
+        <i class="iconfont" style="color:#FEBC21;font-size:20px;">&#xe623;</i>
+        <span class="templateName font-size-17"></span>
+    </p>
+    <p>
+        <!--<i class="iconfont comment-tip">&#xe632;</i>-->
+    </p>
+</div>
+<!--评论框-->
+<!--<div class="complete-box">
+    <div class="angle-com"></div>
+    <i class="iconfont">&#xe632;</i>
+    <input type="text" placeholder="请在此处输入您的评论"/>
+    <span>完成</span>
+</div>-->
+<div class="content-box">
+</div>
+<!--分享弹出框-->
+<div class="public-mask">
+    <div class="public-alert-box">
+        <p class="alert-type font-size-14">分享成功</p>
+        <p class="alert-intro font-size-12" style="line-height: 20px;">
+            您已成功分享，系统随机赠送<span class="reward-type"></span></span><span class="reward-amount"></span>，自动存入您的<span class="reward-type"></span>账户。祝您答卷愉快！
+        </p>
+        <i class="iconfont close">&#xe663;</i>
+    </div>
+</div>
+<!-- zepto  -->
+<!--<div class="go-top iconfont font-size-30">&#xe65d;</div>-->
+<div class="go-top"><i class="iconfont font-size-20">&#xe65c;</i></div>
+<script type="text/javascript" src="js/zepto/zepto_1.1.6.js"></script>
+<script type="text/javascript" src="js/echarts.min.js"></script>
+<script src="js/zepto-master/src/touch.js"></script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js "></script>
+<script type="text/javascript" src="js/main.js"></script>
+
+<script type="text/javascript">
+
+
+    $(function () {
+        var memberid = getParamByName("memberid", window.location);
+        var templateid = getParamByName("templateid", window.location);
+        var sampleid = getParamByName("sampleid", window.location);
+        var templateName = getParamByName("templateName", window.location);
+        var count = 0;
+        //回退
+        $('#back').on('click', function () {
+            window.location = "history.html?memberid=" + memberid;
+        });
+
+        //问卷名
+        $('.templateName').html(templateName);
+
+        //调用分享接口
+        var header = window.location.href.split('?')[0];
+        var newHref = header.substr(0, header.lastIndexOf('/') + 1);
+        var href = newHref + 'registration.html?templateid=' + templateid;
+        shareFun(href,memberid,'.body',templateid);
+
+        $('.comment-tip').on('tap',function(){
+            if($(this).hasClass('active')){
+                $(this).removeClass('active');
+                $('.complete-box').css('display','none');
+            }else{
+                if($(this).siblings('.share-tip').hasClass('active')){
+                    $(this).siblings('.share-tip').removeClass('active');
+                    $('.share-box').css('display','none');
+                    $('.complete-box').css('display','block');
+                    $(this).addClass('active');
+                    $('.angle-com').css({'top':'-26px','right':'6px'});
+                }else{
+                    $(this).addClass('active');
+                    $('.complete-box').css('display','block');
+                    $('.angle-com').css({'top':'-26px','right':'6px'});
+                }
+
+            }
+        });
+
+        //统计图
+        var chart = function(historyOptionEntities, questionList){
+            var colors = ['#FEBC21','#EF5752','#9DED1D','#FE9121','#1ED8ED','#8d4bbb','#75664d','#ca6924','#c32136','#4b5cc4'];
+            var flag = true;
+            //选项
+            var legendData = [];
+            var datas = [];
+            for(var i = 0;i<historyOptionEntities.length;i++){
+                var title = historyOptionEntities[i].title || historyOptionEntities[i].colTitle;
+                legendData.push(title);
+                var data = {
+                    value:historyOptionEntities[i].count,
+                    name: title,
+                    itemStyle:{
+                        normal:{
+                            color: colors[i%colors.length],
+                            labelLine: {show: true, length: 1}
+                        }
+                    }
+                }
+                datas.push(data);
+            }
+
+            var option = {
+                /*title: {
+                    text: questionList.number + questionList.title,
+                    subtext: '您的答案：' + yourAnswer,
+                    x: 'left'
+                },*/
+                legendData:legendData,
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                /*legend: {
+                    x: 'center',
+                    y: 'bottom',
+                    show:'false',
+                    //orient: 'vertical',
+                    icon: 'circle',
+                    textStyle:{
+                      color:'#999',//图例文字颜色
+                    },
+                    data: legendData
+                },*/
+                toolbox: {
+                    show: true,
+                    orient: 'vertical',
+                    y: 'center',
+                    feature: {
+                        mark: {show: true},
+                        dataView: {show: true, readOnly: false},
+                        magicType: {show: true, type: ['line', 'bar']},
+                        restore: {show: true},
+                        saveAsImage: {show: true}
+                    }
+                },
+                calculable: true,
+                series: [
+                    {
+                        minAngle: 5,
+                        name: '选项比例',
+                        type: 'pie',
+                        radius: [0, 100],
+                        center: ['50%', 150],
+                        roseType: 'radius',
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    show: true,
+                                    formatter: '{d}%'
+                                },
+                                labelLine: {
+                                    show: true
+                                }
+                            },
+                            emphasis: {
+                                label: {
+                                    show: true
+                                },
+                                labelLine: {
+                                    show: true
+                                }
+                            }
+                        },
+                        data: datas
+                    }
+                ]
+            };
+            var option2 = {
+                /*title: {
+                    text: '折线图堆叠'
+                },*/
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data:legendData
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                toolbox: {
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    /*splitLine:{show:true},*/
+                    lineStyle:{color:'red'},
+                    data: legendData
+                },
+                yAxis: {
+                    type: 'value',
+                    /*splitLine:{show:true},*/
+                    lineStyle:{color:'red'}
+                },
+                series: [
+                    {
+                        name:'选项',
+                        type:'line',
+                        stack: '总量',
+                        itemStyle:{
+                            normal:{
+                                lineStyle:{
+                                    color:'#FE9121',
+                                    width:2
+                                }
+                            }
+                        },
+                        data:datas
+                    }
+                ]
+            };
+            var option3 = {
+                tooltip : {
+                    trigger: 'axis'
+                },
+                /*legend: {
+                    data:['蒸发量','降水量']
+                },*/
+                toolbox: {
+                    show : true,
+                    feature : {
+                        mark : {show: true},
+                        dataView : {show: true, readOnly: false},
+                        magicType : {show: true, type: ['line', 'bar']},
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                calculable : true,
+                xAxis : [
+                    {
+                        type : 'category',
+                        data : legendData
+                    }
+                ],
+                yAxis : [
+                    {
+                        type : 'value',
+                        splitArea : {show : true}
+                    }
+                ],
+                series : [
+                    {
+                        name:'选项',
+                        type:'bar',
+                        data:datas
+                    }
+                ]
+            };
+
+            //count ++;
+            if (questionList.chartType == 1) {//饼图
+                return option;
+            } else if (questionList.chartType == 2) {//折线
+                return option2;
+            } else if (questionList.chartType == 3) {//柱状
+                return option3;
+            }
+            /*if(count % 3 == 0){
+                return option;
+            }else if(count % 3 == 1){
+                return option2;
+            }else{
+                return option3;
+            }*/
+            //return option;
+        }
+
+        //创建图例
+        var createLegend = function(option,pipChart,questionList){
+            //自创图例
+            var divLegends = $('<div style="width:90%;text-align:center;padding:0 5%;"></div>').appendTo($('#'+questionList.id));
+            $(option.legendData).each(function (i, l) {
+                var color = ['#FEBC21','#EF5752','#9DED1D','#FE9121','#1ED8ED','#8d4bbb','#75664d','#ca6924','#c32136','#4b5cc4'];
+                var labelLegend = $('<label class="legend">' +
+                        '<span class="label" style="background-color:' + color[i%color.length] + '"></span>' + l + '</label>');
+                divLegends.append(labelLegend);
+            });
+            //restore
+            pipChart.on('restore', function() {
+                divLegends.children('.legend').each(function (i, labelLegend) {
+                    $(labelLegend).removeClass('disabled');
+                });
+            });
+        }
+        //未作答
+        var notAnswer = function(yourAnswer) {
+            if(yourAnswer == '') {
+                yourAnswer = '<span style="font-style:italic;color:#EF5752;">(未作答此题)</span>';
+            }
+            return yourAnswer;
+        }
+        //未作答的灰色饼图
+        var grayPid = function(option){
+            var flag = true;
+            for(var k = 0;k<option.series.length;k++){
+                for(var l = 0;l<option.series[k].data.length;l++){
+                    if(option.series[k].data[l].value != 0){
+                        flag = false;
+                        return flag;
+                    }
+                }
+            }
+            return flag;
+        }
+        //处理各种题型
+        var deal = function(datas){
+            for(var i = 0;i<datas.historyQuestionEntityList.length;i++){
+                var questionList = datas.historyQuestionEntityList[i];
+                var content = '<div class="content" id="'+questionList.id+'">'+
+                        '<p class="title" class="font-size-14">'+questionList.number+'.'+questionList.title+'</p>'+
+                        '</div>';
+                $('.content-box').append(content);
+                //填空题无统计图
+                var yourAnswer = '';
+                if(questionList.type == QUESTION_TYPE_BLANK || questionList.type == QUESTION_TYPE_MULTIPLE_LINE_BLANK || questionList.type == QUESTION_TYPE_MULTIPLE_BLANK ){
+                    var answer = '<p class="answer">您的答案：<span class="answer-detail"><span style="font-style:italic;color:#EF5752;">(未作答此题)</span></span></p>';
+                    $('#'+questionList.id).append(answer);
+                    for(var j = 0;j<questionList.historyAnswerEntities.length;j++){
+                        yourAnswer += questionList.historyAnswerEntities[j].text;
+                    }
+                    $('#'+questionList.id).find('.answer-detail').html(notAnswer(yourAnswer));
+                }//矩阵题
+                else if(questionList.type == QUESTION_TYPE_MATRIX_SINGLE || questionList.type == QUESTION_TYPE_MATRIX_MULTIPLE || questionList.type == QUESTION_TYPE_MATRIX_SCORE) {
+                    //遍历每一行，并每行创建一个饼图
+                    for(var j = 0;j<questionList.historyOptionEntities.length;j++){
+                        var rowTitle = '<p style="text-indent: 2em;margin:2px 0 4px;">'+questionList.historyOptionEntities[j].title+'</p>';
+                        var answer = '<p class="answer" id="'+questionList.id+questionList.historyOptionEntities[j].code+'">您的答案：<span class="answer-detail"><span style="font-style:italic;color:#EF5752;">(未作答此题)</span></span></p>';
+                        var pipmain = '<div style="width:100%;min-height:350px;" id="pipmain_'+questionList.id+questionList.historyOptionEntities[j].id+'"></div>';
+                        $('#'+questionList.id).append(rowTitle).append(answer).append(pipmain);
+                        var pipChart=echarts.init(document.getElementById('pipmain_'+questionList.id+questionList.historyOptionEntities[j].id));
+                        var option = chart(questionList.historyOptionEntities[j].options, questionList);
+                        if(grayPid(option)){
+                            var pip = '<div class="gray-pip">此题暂无人作答</div>';
+                            $('#pipmain_'+questionList.id+questionList.historyOptionEntities[j].id).html(pip).css('min-height',180);
+                        }else{
+                            pipChart.setOption(option);
+                            createLegend(option,pipChart,questionList);
+                        }
+                    }
+                    //答案
+                    for(var j = 0;j<questionList.historyAnswerEntities.length;j++){
+                        var yourAnswer = '';
+                        for(var k = 0;k<questionList.historyAnswerEntities[j].answers.length;k++){
+                            if(questionList.historyAnswerEntities[j].answers[k].text == null || questionList.historyAnswerEntities[j].answers[k].text == '') {
+                                yourAnswer +=questionList.historyAnswerEntities[j].answers[k].colTitle;
+                            } else {
+                                yourAnswer +=questionList.historyAnswerEntities[j].answers[k].colTitle + '[' + questionList.historyAnswerEntities[j].answers[k].text + ']';
+                            }
+                        }
+                        var selector = '#'+questionList.id+questionList.historyAnswerEntities[j].code;
+                        $(selector).find('.answer-detail').html(notAnswer(yourAnswer));
+                    }
+                } else if(questionList.type == QUESTION_TYPE_DESC) {
+                }
+                //其它题型
+                else {
+                    var answer = '<p class="answer">您的答案：<span class="answer-detail"><span style="font-style:italic;color:#EF5752;">(未作答此题)</span></span></p>';
+                    var pipmain = '<div style="width:100%;min-height:350px;" id="pipmain_'+questionList.id+'"></div>';
+                    $('#'+questionList.id).append(answer).append(pipmain);
+
+                    var pipChart=echarts.init(document.getElementById('pipmain_'+questionList.id));
+
+                    for(var j = 0;j<questionList.historyAnswerEntities.length;j++){
+                        if(questionList.historyAnswerEntities[j].text == null || questionList.historyAnswerEntities[j].text == ''){
+                            yourAnswer += questionList.historyAnswerEntities[j].title;
+                        } else {
+                            yourAnswer += questionList.historyAnswerEntities[j].title + '[' + questionList.historyAnswerEntities[j].text + ']';
+                        }
+                    }
+                    $('#'+questionList.id).find('.answer-detail').html(notAnswer(yourAnswer));
+                    var option = chart(questionList.historyOptionEntities, questionList);
+                    if(grayPid(option)){
+                        var pip = '<div class="gray-pip">此题暂无人作答</div>';
+                        $('#pipmain_'+questionList.id).html(pip).css('min-height',180);
+                    }else{
+                        pipChart.setOption(option);
+                        createLegend(option,pipChart,questionList);
+                    }
+//                    pipChart.setOption(option);
+//                    //重写legend，自带的当图例过多时与图会重合
+//                    createLegend(option,pipChart,questionList);
+                }
+            }
+        }
+        //返回顶部按钮的显示与隐藏
+        $(window).on('scroll',function(){
+            if($(this).scrollTop() > 800){
+                $('.go-top').css('display','block');
+            }else{
+                $('.go-top').css('display','none');
+            }
+        });
+        //返回到顶部操作
+        $(".go-top").on("click", function () {
+            $("body").scrollTo({toT:0});
+        });
+
+        //请求数据
+        ajaxGet('sample/history?templateid='+templateid +'&sampleid='+sampleid,function (data) {
+            var datas = data.objs[0];
+            deal(datas);
+        }, function (err) {
+            alert(err);
+        });
+    });
+
+    //@ sourceURL=dynamicScript-statistical.js
+</script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.header {
+    position: absolute;
+    z-index: 5;
+    top: 0;
+}
+
+.dBody {
+    width: 100%;
+    overflow: auto;
+    top: 44px;
+    position: absolute;
+    z-index: 10;
+    bottom: 50px;
+}
+
+.dBody .two-tab {
+    display: box;
+    /* OLD - Android 4.4- */
+    display: -webkit-box;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;
+    /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;
+    /* TWEENER - IE 10 */
+    display: -webkit-flex;
+    /* NEW - Chrome */
+    display: flex;
+    /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+.dBody .two-tab li {
+    -webkit-box-flex: 1;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: 1;
+    /* OLD - Firefox 19- */
+    width: 20%;
+    /* For old syntax, otherwise collapses. */
+    -webkit-flex: 1;
+    /* Chrome */
+    -ms-flex: 1;
+    /* IE 10 */
+    flex: 1;
+    /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    text-align: center;
+    line-height: 30px;
+    border-bottom: 1px solid #ddd;
+    font-size: 17px;
+    color: #999;
+}
+
+.dBody .two-tab li:hover,
+.dBody .two-tab li.active {
+    background-color: #FEBC21;
+    color: #fff;
+}
+
+footer {
+    border-top: 1px solid #ddd;
+}
+
+
+/*以上为公共部分－自适应布局*/
+
+.search-info {
+    width: 90%;
+    margin: 14px auto 20px;
+    display: block;
+}
+
+.search-info i {
+    padding-left: 10px;
+    color: #FEBC21;
+}
+
+.search-info .label-name {
+    padding-left: 7px;
+    font-size: 14px;
+}
+
+.search-info .input-box {
+    border-bottom: 1px solid #FEBC21;
+    line-height: 41px;
+}
+
+.search-info .input-box input {
+    padding-left: 10px;
+}
+
+.dBody .submit {
+    width: 90%;
+    line-height: 40px;
+    text-align: center;
+    background-color: #FFDA85;
+    margin: 0 auto 6px;
+    font-size: 17px;
+    color: #999;
+    font-family: "方正正中黑简体", "Microsoft YaHei", "sans-serif";
+}
+
+.dBody a {
+    display: block;
+    color: #FE9121;
+    text-decoration: underline;
+    text-align: center;
+    /*font-size:10px;
+    transform: scale(0.83333333);
+    -webkit-transform-origin-x: 0;
+    margin-left:20%;*/
+}
+
+
+/*文本框*/
+
+.textarea {
+    display: block;
+    margin: 0 auto;
+    overflow: hidden;
+    width: 550px;
+    height: 18px;
+    line-height: 24px;
+    padding: 2px;
+    padding-left: 11px;
+    margin-top: -35px;
+    width: 74%;
+    margin-left: 46px;
+    margin-bottom: 10px;
+}
+
+textarea {
+    border: none;
+    border-left: 1.5px solid #FEBC21;
+    outline: 0 none;
+}
+
+
+/*更多信息*/
+
+.help-describe {
+    display: none;
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    font-style: oblique;
+    color: #999;
+}
+
+
+/*遮罩层*/
+
+.mask {
+    width: 98%;
+    height: 100%;
+    padding: 0 2%;
+    background: rgba(0, 0, 0, .8);
+    position: fixed;
+    z-index: 99;
+    display: none;
+}
+
+.mask .car {
+    width: 100px;
+    height: 40px;
+    background: url(../img/sucess_car.png) no-repeat center;
+    background-size: cover;
+    margin: 15% auto 30px;
+}
+
+.mask .tip-box {
+    margin-bottom: 20px;
+}
+
+.mask .tip-box p:first-child {
+    color: #fff;
+    font-size: 20px;
+    font-family: "方正正中黑简体", "Microsoft YaHei", "sans-serif";
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.mask .tip-box p:last-child {
+    color: #fff;
+    font-size: 12px;
+    font-family: '方正正纤黑简体', "Microsoft YaHei", sans-serif;
+    line-height: 20px;
+    text-align: center;
+}
+
+.mask p {
+    text-align: center;
+    color: #EE5752;
+    font-size: 14px;
+}
+
+.mask .share-box {
+    width: 100%;
+    height: 67px;
+    position: relative;
+    display: -webkit-box;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;
+    /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;
+    /* TWEENER - IE 10 */
+    display: -webkit-flex;
+    /* NEW - Chrome */
+    display: flex;
+    /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+.mask .share-box .share {
+    -webkit-box-flex: 1;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: 1;
+    /* OLD - Firefox 19- */
+    width: 20%;
+    /* For old syntax, otherwise collapses. */
+    -webkit-flex: 1;
+    /* Chrome */
+    -ms-flex: 1;
+    /* IE 10 */
+    flex: 1;
+    /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    margin-top: 18px;
+}
+
+.mask .share-box .share .wechart {
+    width: 60px;
+    height: 90px;
+    margin: auto;
+}
+
+.mask .share-box .share .wechart .wechart-bg {
+    width: 30px;
+    height: 30px;
+    margin: auto;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    color: #fff;
+    font-size: 18px;
+}
+
+.mask .share-box .share .wechart .wechart-bg i {
+    font-size: 18px;
+}
+
+.mask .share-box .share .wechart p {
+    text-align: center;
+    font-size: 12px;
+    line-height: 30px;
+    color: #fff;
+    font-family: '方正正纤黑简体', "Microsoft YaHei", sans-serif;
+}
+
+.mask .close {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    margin: auto;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    line-height: 31px;
+    margin-top: 12%;
+}
